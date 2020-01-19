@@ -1,0 +1,14 @@
+prefix=/home/waker/prj/deadbeef-staticdeps/lib-x86-64
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: libavfilter
+Description: FFmpeg audio/video filtering library
+Version: 6.31.100
+Requires: libavutil >= 55.17.103
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavfilter -lxcb -lxcb-shm -lxcb -lxcb-xfixes -lxcb-render -lxcb-shape -lxcb -lxcb-shape -lxcb -lX11 -lSDL -L/home/waker/prj/deadbeef-staticdeps/lib-x86-64/lib -lopus -lopencore-amrwb -lopencore-amrnb -lm -lz -pthread
+Libs.private: 
+Cflags: -I${includedir}

@@ -1,0 +1,16 @@
+prefix=/home/waker/prj/deadbeef-deps/lib-x86-64
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+system_bus_default_address=unix:path=/var/run/dbus/system_bus_socket
+sysconfdir=/home/waker/prj/deadbeef-deps/lib-x86-64/etc
+session_bus_services_dir=/home/waker/prj/deadbeef-deps/lib-x86-64/share/dbus-1/services
+system_bus_services_dir=/home/waker/prj/deadbeef-deps/lib-x86-64/share/dbus-1/system-services
+interfaces_dir=/home/waker/prj/deadbeef-deps/lib-x86-64/share/dbus-1/interfaces
+daemondir=/home/waker/prj/deadbeef-deps/lib-x86-64/bin
+
+Name: dbus
+Description: Free desktop message bus
+Version: 1.4.0
+Libs: -L${libdir} -ldbus-1 -lpthread 
+Cflags: -I${includedir}/dbus-1.0 -I${libdir}/dbus-1.0/include

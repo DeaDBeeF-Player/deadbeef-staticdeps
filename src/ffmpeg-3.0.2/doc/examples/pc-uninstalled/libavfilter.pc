@@ -1,0 +1,12 @@
+prefix=
+exec_prefix=
+libdir=${pcfiledir}/../../../libavfilter
+includedir=${pcfiledir}/../../..
+
+Name: libavfilter
+Description: FFmpeg audio/video filtering library
+Version: 6.31.100
+Requires: libavutil >= 55.17.103
+Conflicts:
+Libs: -L${libdir} -Wl,-rpath,${libdir} -lavfilter -lxcb -lxcb-shm -lxcb -lxcb-xfixes -lxcb-render -lxcb-shape -lxcb -lxcb-shape -lxcb -lX11 -lSDL -L/home/waker/prj/deadbeef-staticdeps/lib-x86-64/lib -lopus -lopencore-amrwb -lopencore-amrnb -lm -lz -pthread
+Cflags: -I${includedir}

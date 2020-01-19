@@ -1,0 +1,12 @@
+prefix=/home/waker/prj/deadbeef-deps/lib-x86-32/gtk-2.16.0
+exec_prefix=NONE
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: cairo-ps
+Description: PostScript backend for cairo graphics library
+Version: 1.6.0
+
+Requires: cairo 
+Libs: -lz 
+Cflags: -I${includedir}/cairo 

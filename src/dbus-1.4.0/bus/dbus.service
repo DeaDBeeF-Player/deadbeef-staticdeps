@@ -1,0 +1,10 @@
+[Unit]
+Description=D-Bus System Message Bus
+Requires=dbus.socket
+After=syslog.target
+
+[Service]
+ExecStartPre=/home/waker/prj/deadbeef-deps/lib-x86-64/bin/dbus-uuidgen --ensure
+ExecStartPre=-/bin/rm -f /var/run/dbus/pid
+ExecStart=/home/waker/prj/deadbeef-deps/lib-x86-64/bin/dbus-daemon --system --address=systemd: --nofork --systemd-activation
+ExecReload=/home/waker/prj/deadbeef-deps/lib-x86-64/bin/dbus-send --print-reply --system --type=method_call --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig

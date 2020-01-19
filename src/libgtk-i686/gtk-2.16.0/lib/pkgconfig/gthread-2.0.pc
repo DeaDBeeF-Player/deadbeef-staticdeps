@@ -1,0 +1,11 @@
+prefix=/home/waker/prj/deadbeef-deps/lib-x86-32/gtk-2.16.0
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: GThread
+Description: Thread support for GLib
+Requires: glib-2.0
+Version: 2.19.7
+Libs: -L${libdir} -lgthread-2.0 -pthread  -lrt
+Cflags: -pthread

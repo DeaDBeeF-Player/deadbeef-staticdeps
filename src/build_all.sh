@@ -1,0 +1,103 @@
+#!/bin/bash
+
+
+ORIGIN=`pwd`
+OUTPUT=$ORIGIN/../_build
+AP=$ORIGIN/../tools/apbuild
+
+export CC=$AP/apgcc
+export CXX=$AP/apgcc
+export APBUILD_STATIC_LIBGCC=1
+export APBUILD_CXX1=1
+export MAKEFLAGS="-j8"
+cd $AP
+./apinit || exit 1
+cd $ORIGIN
+
+#export ARCH=`uname -m | perl -ne 'chomp and print'`
+
+if [[ "$ARCH" == "i686" ]]; then
+    export PREFIX=$OUTPUT/lib-x86-32
+    export CFLAGS="-m32 -fPIC -I$PREFIX/include/i386-linux-gnu"
+    export LDFLAGS='-m32'
+    export PKG_CONFIG_PATH=$ORIGIN/lib-x86-32/lib/pkg-config
+    export LD_LIBRARY_PATH=$ORIGIN/lib-x86-32/lib
+    export CHOST="i686-unknown-linux-gnu"
+    export CONFIG_OPTS="--prefix=$PREFIX --build=i686-unknown-linux-gnu"
+elif [[ "$ARCH" == "x86_64" ]]; then
+    export PREFIX=$OUTPUT/lib-x86-64
+    GTK_ROOT_216="$ORIGIN/../_build/lib-x86-64/gtk-2.16.0/"
+    GTK_ROOT_310="$ORIGIN/../_build/lib-x86-64/gtk-3.10.8/"
+    export GLIB_CFLAGS="-I${GTK_ROOT_310}/usr/include/gio-unix-2.0/ -I${GTK_ROOT_310}/usr/include/glib-2.0 -I${GTK_ROOT_310}/lib/glib-2.0/usr/include -I${GTK_ROOT_310}/usr/lib/x86_64-linux-gnu -I${GTK_ROOT_310}/usr/lib/x86_64-linux-gnu/glib-2.0/include";
+    export GLIB_LIBS="-L${GTK_ROOT_310}/lib -L${GTK_ROOT_310}/usr/lib -L${GTK_ROOT_310}/usr/lib/x86_64-linux-gnu -lgobject-2.0 -lgthread-2.0 -lglib-2.0 -lgio-2.0";
+    export CFLAGS='-m64 -fPIC'
+    export LDFLAGS='-m64'
+    export PKG_CONFIG_PATH=$ORIGIN/lib-x86-64/lib/pkg-config
+    export LD_LIBRARY_PATH=$ORIGIN/lib-x86-64/lib
+    export CHOST="x86_64-unknown-linux-gnu"
+    export CONFIG_OPTS="--prefix=$PREFIX --build=x86_64-unknown-linux-gnu"
+else
+    echo unknown arch $ARCH
+    exit 1
+fi
+export INCLUDE=$PREFIX/include
+export LIB=$PREFIX/lib
+export CFLAGS="$CFLAGS -O2 -D_GNU_SOURCE -D_FORTIFY_SOURCE=0 -fPIC -I$INCLUDE"
+export LDFLAGS="$LDFLAGS -L$LIB"
+
+echo "Configure options: $CONFIG_OPTS"
+export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
+
+echo -----------------
+echo Copying libgtk-${ARCH}
+echo -----------------
+
+cp -r $ORIGIN/libgtk-${ARCH}/* $PREFIX/ || exit 1
+
+# quirks
+#   json-glib required host glib binaries for glib-mkenums and probably more
+#       because of that, host tools are used, but headers/libs from the target
+#   libzip is using cmake, and toolchain configuration works "by accident"
+
+libs="json-glib-0.14.2 expat-2.0.1 dbus-1.4.0 dbus-glib-0.100 zlib-1.2.5 libzip-1.5.2 libbs2b-3.1.0 alsa-lib-1.0.13 jpeg-8c libidn-1.19 libmad-0.15.1b libogg-1.3.2 libvorbis-1.3.4 libpng-1.5.2 libsamplerate-0.1.7 libsndfile-1.0.23 libxml2-2.7.8 opencore-amr-0.1.2 opus-1.1 opusfile-0.6 sqlite-autoconf-3080301 ffmpeg-3.0.2 libcdio-0.93 libcdio-paranoia-10.2+0.93+1 libcddb-1.3.2 flac-1.3.1 mpg123-1.22.4 jansson-2.7 fftw-3.3.4 openssl-1.0.2o faad2-2.7 wavpack-5.1.0 curl-7.59.0"
+
+mkdir -p $PREFIX
+for i in $libs ; do
+
+    cd "$i"
+    echo -----------------
+    echo Building $i
+    echo -----------------
+    echo $ARCH
+    echo $CFLAGS
+    echo $LDFLAGS
+    sh ./build.sh || exit 1
+    echo installing $i to $PREFIX
+    if [[ "$i" =~ "zlib-" ]] ; then
+        cp zlib.h $PREFIX/include/
+        cp zconf.h $PREFIX/include/
+        cp libz.a $PREFIX/lib/
+    else 
+        echo
+        make install || exit 1
+    fi
+
+    cd ..
+    echo -----------------
+    echo Finished building $i
+    echo -----------------
+
+done
+
+echo -----------------
+echo Cleaning up the build artifacts
+echo -----------------
+mv $PREFIX/lib/libzip/include/zipconf.h $PREFIX/include/ 2>&1 >/dev/null
+rm -rf $PREFIX/lib/libzip 2>&1 >/dev/null
+mv lib/dbus-1.0/include/dbus/dbus-arch-deps.h $PREFIX/include/dbus-1/dbus/ 2>&1 >/dev/null
+rm -rf $PREFIX/bin 2>&1 >/dev/null
+rm -rf $PREFIX/etc 2>&1 >/dev/null
+rm -rf $PREFIX/libexec 2>&1 >/dev/null
+rm -rf $PREFIX/man 2>&1 >/dev/null
+rm -rf $PREFIX/share 2>&1 >/dev/null
+rm $PREFIX/lib/*.la 2>&1 >/dev/null

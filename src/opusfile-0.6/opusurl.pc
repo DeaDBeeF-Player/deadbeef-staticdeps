@@ -1,0 +1,14 @@
+# opusurl installed pkg-config file
+
+prefix=/home/waker/prj/deadbeef-staticdeps/lib-x86-32
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: opusurl
+Description: High-level Opus decoding library, URL support
+Version: 0.6
+Requires: opusfile
+Requires.private: 
+Conflicts:
+Libs: -L${libdir} -lopusurl

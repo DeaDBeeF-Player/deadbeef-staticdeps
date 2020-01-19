@@ -1,0 +1,14 @@
+prefix=/home/waker/prj/deadbeef-staticdeps/lib-x86-32
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: libavformat
+Description: FFmpeg container format library
+Version: 57.25.100
+Requires: libavcodec >= 57.24.102, libavutil >= 55.17.103
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavformat -lxcb -lX11 -L/home/waker/prj/deadbeef-staticdeps/lib-x86-32/lib -lopus -lopencore-amrwb -lopencore-amrnb -lm -lz -pthread
+Libs.private: 
+Cflags: -I${includedir}

@@ -1,0 +1,11 @@
+prefix=/home/waker/prj/deadbeef-deps/lib-x86-32/gtk-2.16.0
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Pango Xft
+Description: Xft font support for Pango
+Version: 1.20.0
+Requires: pango pangoft2 xft
+Libs: -L${libdir} -lpangoxft-1.0
+Cflags: -I${includedir}/pango-1.0

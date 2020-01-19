@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.freedesktop.DBus.GLib.TestService
+Exec=/home/waker/prj/deadbeef-deps/dbus-glib-0.100/test/core/test-service-glib
