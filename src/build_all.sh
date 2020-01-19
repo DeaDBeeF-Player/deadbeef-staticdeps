@@ -58,6 +58,7 @@ cp -r $ORIGIN/libgtk-${ARCH}/* $PREFIX/ || exit 1
 #   json-glib required host glib binaries for glib-mkenums and probably more
 #       because of that, host tools are used, but headers/libs from the target
 #   libzip is using cmake, and toolchain configuration works "by accident"
+#   libdbus requires expat.h in the host include path - may cause undefined behavior
 
 libs="json-glib-0.14.2 expat-2.0.1 dbus-1.4.0 dbus-glib-0.100 zlib-1.2.5 libzip-1.5.2 libbs2b-3.1.0 alsa-lib-1.0.13 jpeg-8c libidn-1.19 libmad-0.15.1b libogg-1.3.2 libvorbis-1.3.4 libpng-1.5.2 libsamplerate-0.1.7 libsndfile-1.0.23 libxml2-2.7.8 opencore-amr-0.1.2 opus-1.1 opusfile-0.6 sqlite-autoconf-3080301 ffmpeg-3.0.2 libcdio-0.93 libcdio-paranoia-10.2+0.93+1 libcddb-1.3.2 flac-1.3.1 mpg123-1.22.4 jansson-2.7 fftw-3.3.4 openssl-1.0.2o faad2-2.7 wavpack-5.1.0 curl-7.59.0"
 
