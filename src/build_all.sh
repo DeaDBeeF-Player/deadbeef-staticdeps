@@ -6,9 +6,8 @@ OUTPUT=$ORIGIN/../_build
 AP=$ORIGIN/../tools/apbuild
 
 export CC=$AP/apgcc
-export CXX=$AP/apgcc
+export CXX=$AP/apg++
 export APBUILD_STATIC_LIBGCC=1
-export APBUILD_CXX1=1
 export MAKEFLAGS="-j8"
 cd $AP
 ./apinit || exit 1
@@ -43,6 +42,7 @@ fi
 export INCLUDE=$PREFIX/include
 export LIB=$PREFIX/lib
 export CFLAGS="$CFLAGS -O2 -D_GNU_SOURCE -D_FORTIFY_SOURCE=0 -fPIC -I$INCLUDE"
+export CXXFLAGS=$CFLAGS
 export LDFLAGS="$LDFLAGS -L$LIB"
 
 echo "Configure options: $CONFIG_OPTS"
@@ -73,8 +73,9 @@ for i in $libs ; do
     echo Building $i
     echo -----------------
     echo $ARCH
-    echo $CFLAGS
-    echo $LDFLAGS
+    echo CFLAGS=$CFLAGS
+    echo CXXFLAGS=$CFLAGS
+    echo LDFLAGS=$LDFLAGS
     sh ./build.sh || exit 1
     echo installing $i to $PREFIX
     if [[ "$i" =~ "zlib-" ]] ; then
