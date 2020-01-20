@@ -189,7 +189,8 @@ __exctype (_tolower);
 #endif /* Not __NO_CTYPE.  */
 
 
-#if 0 // glibc 2.26 removed xlocale.h
+#if 0
+// glibc 2.26 removed xlocale.h
 #ifdef __USE_GNU
 /* The concept of one static locale per category is not very well
    thought out.  Many applications will need to process its data using
