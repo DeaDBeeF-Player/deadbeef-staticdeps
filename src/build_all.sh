@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 ORIGIN=`pwd`
 OUTPUT=$ORIGIN/../_build
 AP=$ORIGIN/../tools/apbuild
