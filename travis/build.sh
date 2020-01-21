@@ -9,6 +9,10 @@ case "$TRAVIS_OS_NAME" in
         echo Copying GTK libs
         echo --------------------
         cp -r libgtk-x86_64 _build/
+        echo --------------------
+        echo Packing
+        echo --------------------
+        tar jcvf ddb-static-deps-latest.tar.bz2 _build/lib-x86-64
     ;;
 esac
 

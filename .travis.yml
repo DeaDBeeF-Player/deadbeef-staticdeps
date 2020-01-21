@@ -1,0 +1,17 @@
+language: c
+
+matrix:
+    include:
+        - os: linux
+          dist: trusty
+          sudo: required
+
+git:
+  submodules: false
+
+script:
+    - ./travis/build.sh
+
+after_success:
+    - ./travis/upload.sh
+

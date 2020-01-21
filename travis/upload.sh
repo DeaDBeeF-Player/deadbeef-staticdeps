@@ -9,6 +9,6 @@ SSHOPTS="ssh -o StrictHostKeyChecking=no"
 case "$TRAVIS_OS_NAME" in
     linux)
         echo Uploading linux artifacts...
-        rsync -e "$SSHOPTS" ddb-static-deps-latest.tar.bz2 waker,deadbeef@frs.sourceforge.net:/home/frs/project/d/de/deadbeef/staticdeps/ || exit 1
+        rsync -e "$SSHOPTS" _build/ddb-static-deps-latest.tar.bz2 waker,deadbeef@frs.sourceforge.net:/home/frs/project/d/de/deadbeef/staticdeps || exit 1
     ;;
 esac
