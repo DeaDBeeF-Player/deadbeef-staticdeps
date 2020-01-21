@@ -48,12 +48,6 @@ export LDFLAGS="$LDFLAGS -L$LIB"
 echo "Configure options: $CONFIG_OPTS"
 export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 
-echo -----------------
-echo Copying libgtk-${ARCH}
-echo -----------------
-
-cp -r $ORIGIN/libgtk-${ARCH}/* $PREFIX/ || exit 1
-
 # quirks
 #   json-glib required host glib binaries for glib-mkenums and probably more
 #       because of that, host tools are used, but headers/libs from the target
