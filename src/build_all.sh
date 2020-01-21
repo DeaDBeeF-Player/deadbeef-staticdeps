@@ -57,6 +57,7 @@ export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 #   libogg requires autoreconf to be run
 #   libopusfile fails to build examples, needs patching
 #   libidn required Makefile.in patching to remove docs, examples, etc
+#   libmp4ff.a is noinst, need to be copied manually
 
 libs="curl-7.59.0 opencore-amr-0.1.2 json-glib-0.14.2 expat-2.0.1 dbus-1.4.0 dbus-glib-0.100 zlib-1.2.5 libzip-1.5.2 alsa-lib-1.0.13 jpeg-8c libmad-0.15.1b libsndfile-1.0.23 libbs2b-3.1.0 libxml2-2.7.8 libogg-1.3.2 flac-1.3.3 mpg123-1.22.4 libvorbis-1.3.4 libpng-1.5.2 libsamplerate-0.1.9 opus-1.1 opusfile-0.6 sqlite-autoconf-3080301 libcdio-0.93 libcdio-paranoia-10.2+0.93+1 libcddb-1.3.2 ffmpeg-3.0.2 jansson-2.12 fftw-3.3.8 faad2-2.8.8 wavpack-5.1.0"
 
@@ -92,12 +93,11 @@ done
 echo -----------------
 echo Cleaning up the build artifacts
 echo -----------------
-mv $PREFIX/lib/libzip/include/zipconf.h $PREFIX/include/ 2>&1 >/dev/null
 rm -rf $PREFIX/lib/libzip 2>&1 >/dev/null
-mv lib/dbus-1.0/include/dbus/dbus-arch-deps.h $PREFIX/include/dbus-1/dbus/ 2>&1 >/dev/null
 rm -rf $PREFIX/bin 2>&1 >/dev/null
 rm -rf $PREFIX/etc 2>&1 >/dev/null
 rm -rf $PREFIX/libexec 2>&1 >/dev/null
 rm -rf $PREFIX/man 2>&1 >/dev/null
 rm -rf $PREFIX/share 2>&1 >/dev/null
 rm $PREFIX/lib/*.la 2>&1 >/dev/null
+find $PREFIX/lib -name "*.so*" -print0 | xargs -0 rm

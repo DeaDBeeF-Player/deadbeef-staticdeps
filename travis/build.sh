@@ -12,6 +12,13 @@ case "$TRAVIS_OS_NAME" in
         cd src || exit 1
         ARCH=x86_64 ./build_all.sh || exit 1
         cd .. || exit 1
+
+        echo --------------------
+        echo Copying prebuilt libs
+        echo --------------------
+        cp -r prebuilt/x86_64/include _build/lib-x86-64/ || exit 1
+        cp -r prebuilt/x86_64/lib _build/lib-x86-64/ || exit 1
+
         echo --------------------
         echo Packing
         echo --------------------
