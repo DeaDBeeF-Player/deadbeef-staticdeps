@@ -100,4 +100,8 @@ rm -rf $PREFIX/libexec 2>&1 >/dev/null
 rm -rf $PREFIX/man 2>&1 >/dev/null
 rm -rf $PREFIX/share 2>&1 >/dev/null
 rm $PREFIX/lib/*.la 2>&1 >/dev/null
-find $PREFIX/lib -name "*.so*" -print0 | xargs -0 rm
+find $PREFIX/lib -name "*.so*"  | while read i ; do
+    if [[ $i != *asound* ]]; then
+        rm "$i"
+    fi
+done
