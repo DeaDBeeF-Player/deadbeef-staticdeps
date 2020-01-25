@@ -8,4 +8,4 @@ before_install:
     - mkdir docker-artifacts
 
 script:
-    - docker run --rm -v ./docker-artifacts:/usr/src/staticdeps/_build staticdeps-travis
+    - docker run --rm -v ${TRAVIS_BUILD_DIR}/docker-artifacts:/usr/src/staticdeps/_build staticdeps-travis
