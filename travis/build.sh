@@ -22,7 +22,9 @@ case "$TRAVIS_OS_NAME" in
         echo --------------------
         echo Packing
         echo --------------------
-        tar jcvf _build/ddb-static-deps-latest.tar.bz2 _build/lib-x86-64 || exit 1
+        cd _build
+        tar jcvf ddb-static-deps-latest.tar.bz2 lib-x86-64 || exit 1
+        cd ..
     ;;
 esac
 
