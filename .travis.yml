@@ -9,3 +9,6 @@ before_install:
 
 script:
     - docker run --rm -v ${TRAVIS_BUILD_DIR}/docker-artifacts:/usr/src/staticdeps/_build staticdeps-travis
+
+after_success:
+    - ./travis/upload.sh
