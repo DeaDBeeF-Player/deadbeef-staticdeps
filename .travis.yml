@@ -5,10 +5,10 @@ git:
 
 before_install:
     - docker build -t staticdeps-travis -f docker/Dockerfile-travis .
-    - mkdir docker-artifacts
 
 script:
-    - docker run --rm -v ${TRAVIS_BUILD_DIR}/docker-artifacts:/usr/src/staticdeps/_build staticdeps-travis
+    - mkdir -p ${PWD}/docker-artifacts
+    - docker run --rm -v ${PWD}/docker-artifacts:/usr/src/staticdeps/_build staticdeps-travis
 
 after_success:
     - ./travis/upload.sh
