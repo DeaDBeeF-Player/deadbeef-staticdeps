@@ -26,8 +26,8 @@ elif [[ "$ARCH" == "x86_64" ]]; then
     export PREFIX=$OUTPUT/lib-x86-64
     GTK_ROOT_216="$ORIGIN/../_build/lib-x86-64/gtk-2.16.0/"
     GTK_ROOT_310="$ORIGIN/../_build/lib-x86-64/gtk-3.10.8/"
-    export GLIB_CFLAGS="-I${GTK_ROOT_310}/usr/include/gio-unix-2.0/ -I${GTK_ROOT_310}/usr/include/glib-2.0 -I${GTK_ROOT_310}/lib/glib-2.0/usr/include -I${GTK_ROOT_310}/usr/lib/x86_64-linux-gnu -I${GTK_ROOT_310}/usr/lib/x86_64-linux-gnu/glib-2.0/include";
-    export GLIB_LIBS="-L${GTK_ROOT_310}/lib -L${GTK_ROOT_310}/usr/lib -L${GTK_ROOT_310}/usr/lib/x86_64-linux-gnu -lgobject-2.0 -lgthread-2.0 -lglib-2.0 -lgio-2.0";
+    export GLIB_CFLAGS="-I${GTK_ROOT_310}/include/gio-unix-2.0/ -I${GTK_ROOT_310}/include/glib-2.0 -I${GTK_ROOT_310}/lib/glib-2.0/include -I${GTK_ROOT_310}/lib/x86_64-linux-gnu -I${GTK_ROOT_310}/lib/x86_64-linux-gnu/glib-2.0/include";
+    export GLIB_LIBS="-L${GTK_ROOT_310}/lib -L${GTK_ROOT_310}/lib -L${GTK_ROOT_310}/lib/x86_64-linux-gnu -lgobject-2.0 -lgthread-2.0 -lglib-2.0 -lgio-2.0";
     export CFLAGS='-m64 -fPIC'
     export LDFLAGS='-m64'
     export PKG_CONFIG_PATH=$ORIGIN/lib-x86-64/lib/pkg-config
