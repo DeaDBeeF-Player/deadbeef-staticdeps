@@ -59,7 +59,7 @@ export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 #   libidn required Makefile.in patching to remove docs, examples, etc
 #   libmp4ff.a is noinst, need to be copied manually
 
-libs="alsa-lib-1.0.25 curl-7.59.0 opencore-amr-0.1.2 json-glib-0.14.2 expat-2.0.1 dbus-1.4.0 dbus-glib-0.100 zlib-1.2.5 libzip-1.5.2 jpeg-8c libmad-0.15.1b libsndfile-1.0.23 libbs2b-3.1.0 libxml2-2.7.8 libogg-1.3.2 flac-1.3.3 mpg123-1.22.4 libvorbis-1.3.4 libpng-1.5.2 libsamplerate-0.1.9 opus-1.1 opusfile-0.6 sqlite-autoconf-3080301 libcdio-0.93 libcdio-paranoia-10.2+0.93+1 libcddb-1.3.2 ffmpeg-3.0.2 jansson-2.12 fftw-3.3.8 faad2-2.8.8 wavpack-5.1.0"
+libs="alsa-lib-1.0.25 curl-7.59.0 opencore-amr-0.1.2 json-glib-0.14.2 expat-2.0.1 dbus-1.4.0 dbus-glib-0.100 zlib-1.2.5 libzip-1.5.2 jpeg-8c libmad-0.15.1b libsndfile-1.0.23 libxml2-2.7.8 libogg-1.3.2 flac-1.3.3 mpg123-1.22.4 libvorbis-1.3.4 libpng-1.5.2 libsamplerate-0.1.9 opus-1.1 opusfile-0.6 sqlite-autoconf-3080301 libcdio-0.93 libcdio-paranoia-10.2+0.93+1 libcddb-1.3.2 ffmpeg-3.0.2 jansson-2.12 fftw-3.3.8 faad2-2.8.8 wavpack-5.1.0"
 
 mkdir -p $PREFIX
 for i in $libs ; do
