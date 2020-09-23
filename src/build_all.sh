@@ -90,6 +90,26 @@ for i in $libs ; do
 
 done
 
+# clang builds
+export APGCC_USE_CLANG=1
+mkdir -p $PREFIX/lib
+mkdir -p $PREFIX/include
+
+# libBlocksRuntime
+cd libBlocksRuntime-0.1
+sh ./build.sh || exit 1
+cp *.so* $PREFIX/lib/ || exit 1
+cp *.h $PREFIX/include/ || exit 1
+cd ..
+
+# libdispatch
+cd libdispatch-0~svn197
+sh ./build.sh || exit 1
+cp src/.libs/libdispatch.so* $PREFIX/lib/ || exit 1
+mkdir -p $PREFIX/include/dispatch || exit 1
+cp dispatch/*.h $PREFIX/include/dispatch/ || exit 1
+cd ..
+
 echo -----------------
 echo Cleaning up the build artifacts
 echo -----------------
@@ -101,7 +121,7 @@ rm -rf $PREFIX/man 2>&1 >/dev/null
 rm -rf $PREFIX/share 2>&1 >/dev/null
 rm $PREFIX/lib/*.la 2>&1 >/dev/null
 find $PREFIX/lib -name "*.so*"  | while read i ; do
-    if [[ $i != *asound* ]]; then
+    if [[ $i != *asound* && $i != *dispatch* && $i != *Blocks* ]]; then
         rm "$i"
     fi
 done

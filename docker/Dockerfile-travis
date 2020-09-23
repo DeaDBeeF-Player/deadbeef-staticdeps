@@ -4,7 +4,7 @@ RUN apt-get -qq update
 RUN apt-get install -y -qq software-properties-common
 RUN add-apt-repository ppa:george-edison55/cmake-3.x
 RUN apt-get -qq update
-RUN apt-get install -y -qq autopoint automake autoconf intltool libc6-dev-i386 libc6-dev yasm libglib2.0-bin perl wget g++-multilib zip bzip2 make libtool pkg-config cmake libglib2.0-dev libexpat-dev autogen texinfo
+RUN apt-get install -y -qq autopoint automake autoconf intltool libc6-dev yasm libglib2.0-bin perl wget g++-multilib zip bzip2 make libtool pkg-config cmake libglib2.0-dev libexpat-dev autogen texinfo clang libkqueue-dev
 
 WORKDIR /usr/src/staticdeps
 COPY ./src /usr/src/staticdeps/src
