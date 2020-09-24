@@ -3,7 +3,7 @@ FROM staticdeps-builder
 WORKDIR /usr/src/staticdeps
 COPY ./src /usr/src/staticdeps/src
 COPY ./prebuilt /usr/src/staticdeps/prebuilt
-COPY ./tools /usr/src/staticdeps/tools
+COPY ./External /usr/src/staticdeps/External
 COPY ./travis /usr/src/staticdeps/travis
 COPY ./libgtk-x86_64 /usr/src/staticdeps/libgtk-x86_64
 ENV TRAVIS_OS_NAME=linux
