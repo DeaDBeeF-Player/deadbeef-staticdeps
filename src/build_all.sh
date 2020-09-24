@@ -90,21 +90,34 @@ for i in $libs ; do
 
 done
 
-# clang builds
-export APGCC_USE_CLANG=1
 mkdir -p $PREFIX/lib
 mkdir -p $PREFIX/include
 
+# libkqueue -- still using gcc, since clang is too pedantic with warnings
+echo "---- building libkqueue"
+cd libkqueue-1.0.4
+# need to avoid custom cflags, to prevent _GNU_SOURCE redefinition warning
+CFLAGS="-m64 -O2 -D_FORTIFY_SOURCE=0 -fPIC -I$INCLUDE" sh ./build.sh || exit 1
+cp *.so* $PREFIX/lib/ || exit 1
+cp -r include $PREFIX/ || exit 1
+cd ..
+
+# clang builds
+export APGCC_USE_CLANG=1
+
 # libBlocksRuntime
+echo "---- building libBlocksRuntime"
 cd libBlocksRuntime-0.1
 sh ./build.sh || exit 1
 cp *.so* $PREFIX/lib/ || exit 1
-cp *.h $PREFIX/include/ || exit 1
+cp Block*.h $PREFIX/include/ || exit 1
 cd ..
 
 # libdispatch
+echo "---- building libdispatch"
 cd libdispatch-0~svn197
-sh ./build.sh || exit 1
+
+KQUEUE_CFLAGS="-I$PREFIX/include" KQUEUE_LIBS="-L$PREFIX/lib -lkqueue" sh ./build.sh || exit 1
 cp src/.libs/libdispatch.so* $PREFIX/lib/ || exit 1
 mkdir -p $PREFIX/include/dispatch || exit 1
 cp dispatch/*.h $PREFIX/include/dispatch/ || exit 1
@@ -121,7 +134,7 @@ rm -rf $PREFIX/man 2>&1 >/dev/null
 rm -rf $PREFIX/share 2>&1 >/dev/null
 rm $PREFIX/lib/*.la 2>&1 >/dev/null
 find $PREFIX/lib -name "*.so*"  | while read i ; do
-    if [[ $i != *asound* && $i != *dispatch* && $i != *Blocks* ]]; then
+    if [[ $i != *asound* && $i != *dispatch* && $i != *Blocks* && $i != *kqueue* ]]; then
         rm "$i"
     fi
 done
