@@ -1,7 +1,7 @@
 language: c
 
 git:
-    submodules: false
+    submodules: true
 
 before_install:
     - docker build -t staticdeps-travis -f docker/Dockerfile-travis .
