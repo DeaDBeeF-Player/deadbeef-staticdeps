@@ -2,7 +2,7 @@
 
 ORIGIN=`pwd`
 OUTPUT=$ORIGIN/../_build
-AP=$ORIGIN/../tools/apbuild
+AP=$ORIGIN/../External/apbuild
 
 export CC=$AP/apgcc
 export CXX=$AP/apg++
