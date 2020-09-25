@@ -98,7 +98,7 @@ echo "---- building libkqueue"
 cd libkqueue-1.0.4
 # need to avoid custom cflags, to prevent _GNU_SOURCE redefinition warning
 CFLAGS="-m64 -O2 -D_FORTIFY_SOURCE=0 -fPIC -I$INCLUDE" sh ./build.sh || exit 1
-cp *.so* $PREFIX/lib/ || exit 1
+cp -P *.so* $PREFIX/lib/ || exit 1
 cp -r include $PREFIX/ || exit 1
 cd ..
 
@@ -109,7 +109,9 @@ export APGCC_USE_CLANG=1
 echo "---- building libBlocksRuntime"
 cd libBlocksRuntime-0.1
 sh ./build.sh || exit 1
-cp *.so* $PREFIX/lib/ || exit 1
+# add missing symlink
+ln -s libBlocksRuntime.so.0.0 libBlocksRuntime.so.0
+cp -P *.so* $PREFIX/lib/ || exit 1
 cp Block*.h $PREFIX/include/ || exit 1
 cd ..
 
@@ -118,7 +120,7 @@ echo "---- building libdispatch"
 cd libdispatch-0~svn197
 
 KQUEUE_CFLAGS="-I$PREFIX/include" KQUEUE_LIBS="-L$PREFIX/lib -lkqueue" sh ./build.sh || exit 1
-cp src/.libs/libdispatch.so* $PREFIX/lib/ || exit 1
+cp -P src/.libs/libdispatch.so* $PREFIX/lib/ || exit 1
 mkdir -p $PREFIX/include/dispatch || exit 1
 cp dispatch/*.h $PREFIX/include/dispatch/ || exit 1
 cd ..
