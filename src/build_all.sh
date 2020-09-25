@@ -98,6 +98,7 @@ echo "---- building libkqueue"
 cd libkqueue-1.0.4
 # need to avoid custom cflags, to prevent _GNU_SOURCE redefinition warning
 CFLAGS="-m64 -O2 -D_FORTIFY_SOURCE=0 -fPIC -I$INCLUDE" sh ./build.sh || exit 1
+ln -s libkqueue.so.0.0 libkqueue.so.0
 cp -P *.so* $PREFIX/lib/ || exit 1
 cp -r include $PREFIX/ || exit 1
 cd ..
