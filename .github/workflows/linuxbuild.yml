@@ -1,0 +1,28 @@
+name: Build for Linux
+
+on: [ push, pull_request ]
+
+jobs:
+  build:
+    name: CI for Linux
+    runs-on: ubuntu-latest
+    container: ubuntu:14.04
+    steps:
+    - name: Install dependencies for Linux
+      run: |
+        apt-get -qq update
+        apt-get install -y -qq software-properties-common
+        add-apt-repository ppa:george-edison55/cmake-3.x
+        apt-get -qq update
+        apt-get install -y -qq autopoint automake autoconf intltool libc6-dev yasm libglib2.0-bin perl wget g++-multilib zip bzip2 make libtool pkg-config cmake libglib2.0-dev libexpat-dev autogen texinfo clang libkqueue-dev openssh-client rsync
+    - name: Checkout for Linux
+      uses: actions/checkout@v1
+      with:
+        submodules: true
+    - name: Build for Linux
+      run: TRAVIS_OS_NAME=linux travis/build.sh
+    - name: Upload for Linux
+      env:
+          gh_rsa_key: ${{ secrets.GH_ENCRYPTED_RSA_KEY }}
+          gh_rsa_iv: ${{ secrets.GH_ENCRYPTED_RSA_IV }}
+      run: TRAVIS_OS_NAME=linux travis/upload.sh

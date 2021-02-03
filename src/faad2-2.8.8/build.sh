@@ -1,3 +1,4 @@
+autoreconf -f -i
 ORIGIN=`pwd`
 CFLAGS="$CFLAGS -I${ORIGIN}/include"
 ./configure --enable-static $CONFIG_OPTS
