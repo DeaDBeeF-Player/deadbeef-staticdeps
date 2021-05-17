@@ -614,7 +614,7 @@ AC_CONFIG_FILES([ \
 	shave shave-libtool \
 	src/sndfile.h src/Makefile src/GSM610/Makefile src/G72x/Makefile \
 	src/version-metadata.rc \
-	man/Makefile examples/Makefile tests/Makefile regtest/Makefile \
+	examples/Makefile tests/Makefile regtest/Makefile \
 	M4/Makefile doc/Makefile Win32/Makefile Octave/Makefile \
 	programs/Makefile doc/libsndfile.css \
 	Makefile libsndfile.spec sndfile.pc \

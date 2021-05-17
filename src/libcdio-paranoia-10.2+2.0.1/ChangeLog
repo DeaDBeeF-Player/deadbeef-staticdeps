@@ -1,0 +1,695 @@
+2019-09-16  R. Bernstein <rocky@gnu.org>
+
+	* Makefile.am, NEWS => NEWS.md, configure.ac,
+	test/check_start_track_not_one.sh.in: Get ready for release
+	release-10.2+0.2.0.1
+
+2019-09-16  R. Bernstein <rocky@gnu.org>
+
+	* .circleci/config.yml: CircleCI acting up
+
+2019-09-16  R. Bernstein <rocky@gnu.org>
+
+	* src/cd-paranoia.c: Silence a compile warning
+
+2019-09-16  R. Bernstein <rocky@gnu.org>
+
+	* include/cdio/paranoia/Makefile.am, include/cdio/paranoia/toc.h,
+	lib/cdda_interface/toc.c: Correct names on toc.c defnitions and add
+	header Fixes #21
+
+2019-01-26  R. Bernstein <rocky@gnu.org>
+
+	* configure.ac: Get ready for release release-10.2+0.2.0.0
+
+2019-01-26  R. Bernstein <rocky@gnu.org>
+
+	* .gitignore, NEWS, configure.ac, doc/how-to-make-a-release.txt,
+	test/.gitignore: Get ready for release release-
+
+2019-01-12  R. Bernstein <rocky@gnu.org>
+
+	* test/check_start_track_not_one.sh.in: Remove CI debug
+
+2019-01-12  R. Bernstein <rocky@gnu.org>
+
+	* test/check_start_track_not_one.sh.in: Another CI attempt
+
+2019-01-12  R. Bernstein <rocky@gnu.org>
+
+	* test/check_start_track_not_one.sh.in: Correct CI test program dir
+
+2019-01-12  R. Bernstein <rocky@gnu.org>
+
+	* test/check_start_track_not_one.sh.in: CI testing
+
+2019-01-12  R. Bernstein <rocky@gnu.org>
+
+	* test/Makefile.am: 2nd CI attempt
+
+2019-01-12  R. Bernstein <rocky@gnu.org>
+
+	* test/Makefile.am, test/check_start_track_not_one.sh,
+	test/check_start_track_not_one.sh.in: check_start_track_no_one
+	should skip on too old LIBCDIO_VERSION
+
+2019-01-12  R. Bernstein <rocky@users.noreply.github.com>
+
+	* : Merge pull request #20 from vext01/start-track-num-not-one Deal with CDs where the start track number is not 1.
+
+2019-01-12  Edd Barrett <vext01@gmail.com>
+
+	* test/.gitignore, test/Makefile.am, test/get_libcdio_version.c: 
+	Skip the test if the libcdio version is too old.
+
+2018-12-28  Edd Barrett <vext01@gmail.com>
+
+	* configure.ac, test/.gitignore, test/Makefile.am,
+	test/start_track_not_one.sh.in: Test for CDs with start track > 1.  Here we test a CD image with tracks 7, 8 and 9.
+
+2018-12-15  Edd Barrett <vext01@gmail.com>
+
+	* lib/cdda_interface/common_interface.c: Fix endianess detection for
+	CDs with starting track >1.  From Thomas Schmitt -- Committing on his behalf.
+
+2018-12-15  Edd Barrett <vext01@gmail.com>
+
+	* src/cd-paranoia.c: Fix the display of tracks by cd-paranoia for
+	CDs with start track >1.  From Thomas Schmitt -- Committing on his behalf.
+
+2018-12-15  Edd Barrett <vext01@gmail.com>
+
+	* autogen.sh: OpenBSD: Make autogen.sh work.
+
+2018-12-09  Edd Barrett <vext01@gmail.com>
+
+	* lib/cdda_interface/cddap_interface.c, lib/cdda_interface/toc.c,
+	lib/paranoia/p_block.c, src/cd-paranoia.c: Track numbers may not
+	start at one.  Joint work with Thomas Schmitt.
+
+2018-09-24  R. Bernstein <rocky@users.noreply.github.com>
+
+	* : Merge pull request #19 from fturco/man-page Improve the man page
+
+2018-09-24  Francesco Turco <fturco@fastmail.fm>
+
+	* doc/en/cd-paranoia.1.in: fix typos in the man page
+
+2018-09-23  R. Bernstein <rocky@users.noreply.github.com>
+
+	* : Merge pull request #18 from fturco/readme Fix typo in README.md
+
+2018-07-28  R. Bernstein <rocky@users.noreply.github.com>
+
+	* : Merge pull request #16 from mskamp/master Do not attempt to call a NULL callback (issue #15)
+
+2018-06-26  R. Bernstein <rocky@gnu.org>
+
+	* circle.yml: Remove CircleCI 1.0
+
+2018-06-25  R. Bernstein <rocky@gnu.org>
+
+	* .circleci/config.yml, doc/how-to-make-a-release.txt: Try CircleCI
+	2.0
+
+2017-08-22  R. Bernstein <rocky@gnu.org>
+
+	* doc/how-to-make-a-release.txt: Get ready for release
+	release-10.2+0.94+2
+
+2017-08-22  R. Bernstein <rocky@gnu.org>
+
+	* .gitignore, NEWS, doc/how-to-make-a-release.txt: Get ready for
+	release release-10.2+0.94+1
+
+2017-08-21  R. Bernstein <rocky@users.noreply.github.com>
+
+	* : Merge pull request #11 from rocky/force-overread Adds --force-overread
+
+2017-06-12  Sergei Trofimovich <slyfox@gentoo.org>
+
+	* configure.ac: configure.ac: fix out-of-tree tests To reproduce the test failure one needs to run configure using
+	absolute path in a directory outside source tree. For example:     $ $(pwd)/../libcdio-paranoia/configure     $ make     $ make check This will cause 'native_abs_top_srcdir' to contain wrong path.  It happens because '[]' is an escape in autoconf.  As a the
+	    following configure.ac snippet: [\\/]* | ?:[\\/]* )  # Absolute
+	name.  gets translated into the following shell code:     \\/* | ?:\\/* )  # Absolute name.  The fix is to change quotes from '[]' for a short while.  Reported-by: eroen Reported-by: Paolo Pedroni Bug:
+	https://bugs.gentoo.org/546388 Signed-off-by: Sergei Trofimovich
+	<slyfox@gentoo.org>
+
+2017-05-09  R. Bernstein <rocky@gnu.org>
+
+	* configure.ac: Default enable_version_script is yes (enabled) Fixes http://savannah.gnu.org/bugs/?50978 ?
+
+2017-04-25  R. Bernstein <rocky@gnu.org>
+
+	* doc/en/cd-paranoia.1.in, src/cd-paranoia.c: Adds --force-overread Force overreading into the lead-out portion of the disc. This option
+	is only applicable when using the-O option with a positive sample
+	offset value. Many drives are not capable of reading into this
+	portion of the disc and attempting to do so on those drives will
+	produce read errors and possibly hard lockups.  See: https://gist.github.com/AnwarShah/560d77f7d7da52553f918f3ecb7401e3
+
+2017-03-26  R. Bernstein <rocky@gnu.org>
+
+	* configure.ac, doc/how-to-make-a-release.txt, example/paranoia.c: 
+	Lint paranoia.c now in 0.94-2git
+
+2017-03-25  R. Bernstein <rocky@gnu.org>
+
+	* .gitignore: More ignore
+
+2017-03-25  R. Bernstein <rocky@gnu.org>
+
+	* configure.ac, lib/cdda_interface/Makefile.am,
+	lib/cdda_interface/utils.c, lib/paranoia/Makefile.am: OSX (and other
+	OS) linting configure.ac, Makefile.am: Add --disable-ld-version-script to
+	configure utils.c: add header for gettimeofday
+
+2017-03-25  R. Bernstein <rocky@gnu.org>
+
+	* include/cdio/paranoia/paranoia.h,
+	lib/cdda_interface/scan_devices.c, src/cachetest.c,
+	src/cd-paranoia.c: Remove clang warnings...  paranoia.h: fix up callback enumeration to have "wrote" and
+	"finished"
+
+2017-03-25  R. Bernstein <rocky@gnu.org>
+
+	* lib/paranoia/overlap.c: labs for long abs doesn't truncate results
+
+2017-03-25  R. Bernstein <rocky@gnu.org>
+
+	* NEWS, THANKS, configure.ac, doc/how-to-make-a-release.txt,
+	test/data/.gitignore: Get ready for Release 10.2+0.94+1
+
+2017-03-19  Robert Kausch <robert.kausch@freac.org>
+
+	* : Add data file for multiple matches test
+
+2017-03-19  Robert Kausch <robert.kausch@freac.org>
+
+	* : Merge pull request #10 from
+	rocky/incorrect-track-bug-smallest-absolute-value-match Incorrect track bug smallest absolute value match
+
+2017-03-15  R. Bernstein <rocky@users.noreply.github.com>
+
+	* : Merge pull request #8 from
+	a10footsquirrel/incorrect-track-bug-smallest-absolute-value-match Use LONG_MAX as sentinel value and use min_offset to check if
+	errors/anomalies need to be reported
+
+2017-02-07  A10FootSquirrel <a10footsquirrel@gmail.com>
+
+	* lib/paranoia/paranoia.c: Use LONG_MAX as sentinel value and use
+	min_offset to check if errors/anomalies need to be reported
+
+2017-02-05  R. Bernstein <rocky@users.noreply.github.com>
+
+	* : Merge pull request #7 from
+	a10footsquirrel/incorrect-track-bug-smallest-absolute-value-match Fix failing test
+
+2017-02-04  R. Bernstein <rocky@gnu.org>
+
+	* lib/paranoia/paranoia.c: incorrect track: shortest absolute match See https://savannah.gnu.org/bugs/index.php?49831 This is the shortest absolute match patch.
+
+2016-11-29  Robert Kausch <robert.kausch@freac.org>
+
+	* lib/cdda_interface/Makefile.am: Use @LIBS@ figured out by autoconf
+	when linking (for -lrt on Linux).
+
+2015-10-04  rocky <rocky@gnu.org>
+
+	* circle.yml: Work around lack of git2cl in Circle
+
+2015-10-04  rocky <rocky@gnu.org>
+
+	* Makefile.am, README, README.md, circle.yml: Beef up README (now
+	README.md), circle check with distcheck.  Add Circle badge.
+
+2015-10-04  rocky <rocky@gnu.org>
+
+	* circle.yml: CircleCI take 5
+
+2015-10-04  rocky <rocky@gnu.org>
+
+	* circle.yml: CircleCI take 4
+
+2015-10-04  rocky <rocky@gnu.org>
+
+	* circle.yml: CircleCI take 3
+
+2015-10-04  rocky <rocky@gnu.org>
+
+	* circle.yml: CircleCI take 2
+
+2015-10-04  rocky <rocky@gnu.org>
+
+	* circle.yml: Try circleci integration
+
+2015-10-04  rocky <rocky@gnu.org>
+
+	* example/paranoia.c, src/cd-paranoia.c, src/header.c: Bump
+	copyright
+
+2015-10-04  rocky <rocky@gnu.org>
+
+	* example/paranoia.c, lib/cdda_interface/utils.c,
+	src/cd-paranoia.c, src/header.c: Re-silence recently added gcc
+	-Wunused-result warnings
+
+2015-10-04  R. Bernstein <rocky@users.noreply.github.com>
+
+	* : Merge pull request #4 from phonohawk/fix-byteswap-crash Fix NULL pointer dereference that occurs when byte swapping is
+	needed
+
+2014-10-26  R. Bernstein <rocky@gnu.org>
+
+	* src/cd-paranoia.c: Fix problem where end of span seems to default
+	to last track. Savannah bug 43444
+	(https://savannah.gnu.org/bugs/?43444). Fix changes removes change
+	to libcdio-parnoia which mismatched cdparanoia's code.
+
+2014-09-30  R. Bernstein <rocky@gnu.org>
+
+	* configure.ac: Bump release number
+
+2014-09-30  R. Bernstein <rocky@gnu.org>
+
+	* doc/how-to-make-a-release.txt: Add instructions for how to make a
+	release
+
+2014-09-29  R. Bernstein <rocky@gnu.org>
+
+	* NEWS, configure.ac, example/C++/Makefile.am, example/Makefile.am,
+	src/Makefile.am, test/Makefile.am: Releae 10.2+0.93+1
+
+2014-09-29  Robert Kausch <robert.kausch@freac.org>
+
+	* COPYING-GPL, Makefile.am: Fixed accidental commit of GPL2 copy.
+
+2014-09-26  R. Bernstein <rocky@gnu.org>
+
+	* COPYING-GPL, Makefile.am: Add COPYING-GPL remove COPYING-LGPL
+
+2014-09-26  Robert Kausch <robert.kausch@freac.org>
+
+	* COPYING, COPYING-GPL, COPYING-LGPL, configure.ac,
+	doc/Makefile.am, doc/en/Makefile.am, doc/ja/Makefile.am,
+	example/C++/Makefile.am, example/C++/paranoia.cpp,
+	example/C++/paranoia2.cpp, example/paranoia.c, example/paranoia2.c,
+	include/cdio/paranoia/cdda.h, include/cdio/paranoia/paranoia.h,
+	lib/cdda_interface/common_interface.c,
+	lib/cdda_interface/drive_exceptions.c,
+	lib/cdda_interface/drive_exceptions.h,
+	lib/cdda_interface/interface.c, lib/cdda_interface/scan_devices.c,
+	lib/cdda_interface/smallft.c, lib/cdda_interface/smallft.h,
+	lib/cdda_interface/test_interface.c, lib/cdda_interface/toc.c,
+	lib/cdda_interface/utils.c, lib/cdda_interface/utils.h,
+	lib/paranoia/Makefile.am, lib/paranoia/gap.c, lib/paranoia/gap.h,
+	lib/paranoia/isort.c, lib/paranoia/isort.h, lib/paranoia/overlap.c,
+	lib/paranoia/overlap.h, lib/paranoia/p_block.h,
+	lib/paranoia/paranoia.c, src/cachetest.c, src/cd-paranoia.c,
+	src/pod2c.pl, test/testparanoia.c, test/testutils.c: Updated license
+	to GPLv3 to match libcdio.
+
+2014-09-25  Robert Kausch <robert.kausch@freac.org>
+
+	* NEWS: New paranoia version is 10.2, not 10.1
+
+2014-09-25  R. Bernstein <rocky@gnu.org>
+
+	* test/testparanoia.c: Remove yet another gcc warning.
+
+2014-09-24  R. Bernstein <rocky@gnu.org>
+
+	* lib/cdda_interface/Makefile.am, lib/paranoia/Makefile.am: Typo in
+	variable name.
+
+2014-09-24  R. Bernstein <rocky@gnu.org>
+
+	* configure.ac, include/cdio/paranoia/cdda.h,
+	lib/cdda_interface/Makefile.am, lib/cdda_interface/interface.c,
+	lib/paranoia/Makefile.am, lib/paranoia/p_block.c, src/getopt.c: 
+	*/Makefile.am : Make sure we include libcdio libraries src/getopt.c:
+	same changes as in libcdio Reduce warnings from gcc.
+
+2014-09-24  R. Bernstein <rocky@gnu.org>
+
+	* lib/cdda_interface/Makefile.am, lib/paranoia/Makefile.am: Bump
+	shared-library number for release
+
+2014-09-24  R. Bernstein <rocky@gnu.org>
+
+	* .gitignore, NEWS, configure.ac, include/cdio/paranoia/cdda.h,
+	include/cdio/paranoia/paranoia.h,
+	include/cdio/paranoia/version.h.in, lib/cdda_interface/interface.c,
+	lib/cdda_interface/utils.c, lib/paranoia/paranoia.c,
+	src/Makefile.am, src/cd-paranoia.c, test/.gitignore,
+	test/cdda_interface/.gitignore, test/cdda_interface/Makefile.am: 
+	Reduce warnings. Preparation for 10.2+0.93+1
+
+2014-09-24  Robert Kausch <robert.kausch@freac.org>
+
+	* example/C++/paranoia2.cpp, example/paranoia2.c,
+	test/cdda_interface/toc.c.in: Use CDDA_MESSAGE_ constants in
+	examples and tests.
+
+2014-09-24  Robert Kausch <robert.kausch@freac.org>
+
+	* include/cdio/paranoia/cdda.h, lib/cdda_interface/interface.c,
+	lib/cdda_interface/libcdio_cdda.sym, test/testparanoia.c: Add
+	cdio_cddap_free_messages function.
+
+2014-09-16  R. Bernstein <rocky@gnu.org>
+
+	* : commit 93b6d0680e25fa2998915d99032f69beb20f46c6 Author: R.
+	Bernstein <rocky@gnu.org> Date:   Tue Sep 16 00:43:11 2014 -0400
+
+2014-09-16  R. Bernstein <rocky@gnu.org>
+
+	* doc/FAQ.txt, doc/Makefile.am: Remove FAQ.txt since we are unclear
+	about the free-ness of that Remove test/testuils which should not
+	have been in git.
+
+2014-06-18  R. Bernstein <rocky@users.noreply.github.com>
+
+	* : Merge pull request #2 from rocky/static-analysis Static analysis
+
+2014-06-14  R. Bernstein <rocky@gnu.org>
+
+	* src/cd-paranoia.c: Oops forgot to up a snprintf limit.
+
+2014-06-14  R. Bernstein <rocky@gnu.org>
+
+	* src/cd-paranoia.c, src/utils.h, test/Makefile.am: Redo batch file
+	processing. This is a bit incompatible with cdparanoia, but it looks
+	like that wasn't right. It's also one way to deal with Coverty
+	warning 68055 Out-of-bounds access.
+
+2014-06-13  Robert Kausch <robert.kausch@freac.org>
+
+	* src/getopt.c, src/getopt.h, src/getopt1.c, src/getopt_int.h: 
+	Updated getopt to the version included with glibc 2.19.
+
+2014-06-13  Robert Kausch <robert.kausch@freac.org>
+
+	* lib/cdda_interface/utils.c, src/cd-paranoia.c: Fixed
+	errors/warnings reported by static analysis.
+
+2014-06-06  Robert Kausch <robert.kausch@freac.org>
+
+	* configure.ac: configure.ac: align supported systems with libcdio This adds recognition of Darwin 10 to 14 (OS X 10.6 to 10.10),
+	FreeBSD 9 and 10 as well as OpenBSD.
+
+2014-06-05  R. Bernstein <rocky@gnu.org>
+
+	* lib/cdda_interface/toc.c: Correct my grammar.
+
+2014-06-05  Robert Kausch <robert.kausch@freac.org>
+
+	* lib/cdda_interface/toc.c, test/cdda_interface/toc.c.in: 
+	lib/cdda_interface/toc.c: fixed pregap and first track handling.  It was broken in commit c94fcc7b04... which removed special handling
+	of track 0 (representing the pregap/hidden track one) always
+	returning error -401 in that case. Instead, the pregap code was
+	moved to a block handling the first track (track 1).  Testing can be further improved by adding tests on images with
+	pregap.
+
+2014-06-05  R. Bernstein <rocky@gnu.org>
+
+	* THANKS: Add Robert Kausch
+
+2014-06-04  R. Bernstein <rocky@gnu.org>
+
+	* configure.ac, src/cachetest.c, src/cachetest.h, src/cd-paranoia.c: 
+	Add the O_BINARY flag to open() calls on Windows. This is required
+	to prevent Windows from translating 0x0A to 0x0D0A when writing and
+	vice versa when reading binary files.  Remove the -mwindows linker option. This option is used to create
+	non-console binaries on Windows and is the complement of -mconsole.
+	Using it on console applications makes them run detached from the
+	console so you won't see any output. The libcdio configure script
+	did not have this problem.  Forgot to add cachetest programs on previous commit.
+
+2014-06-04  R. Bernstein <rocky@gnu.org>
+
+	* AUTHORS, configure.ac, doc/en/cd-paranoia.1.in,
+	include/cdio/paranoia/cdda.h, include/cdio/paranoia/paranoia.h,
+	lib/cdda_interface/cddap_interface.c,
+	lib/cdda_interface/interface.c,
+	lib/cdda_interface/libcdio_cdda.sym,
+	lib/cdda_interface/test_interface.c, lib/cdda_interface/utils.c,
+	lib/cdda_interface/utils.h, lib/paranoia/libcdio_paranoia.sym,
+	lib/paranoia/p_block.c, lib/paranoia/p_block.h,
+	lib/paranoia/paranoia.c, src/Makefile.am, src/cd-paranoia.c,
+	src/usage-copy.h, src/usage.txt.in, src/version.h: From Robert
+	Kausch: add the cache management code.
+	https://savannah.gnu.org/patch/index.php?8459 * timed reads necessary for drive cache analysis, * analysis code and the -A option for cd-paranoia.  Everything was tested and all tests pass (with two additional
+	patches I'll submit in separate tickets) on Linux, Windows, OS X,
+	FreeBSD, NetBSD and OpenBSD.
+
+2014-06-03  R. Bernstein <rocky@gnu.org>
+
+	* doc/en/cd-paranoia.1.in, include/cdio/paranoia/cdda.h,
+	include/cdio/paranoia/paranoia.h, lib/cdda_interface/interface.c,
+	lib/cdda_interface/libcdio_cdda.sym,
+	lib/cdda_interface/test_interface.c, lib/cdda_interface/utils.c,
+	lib/paranoia/libcdio_paranoia.sym, lib/paranoia/paranoia.c,
+	src/cd-paranoia.c, src/report.c, src/report.h, src/usage-copy.h,
+	src/usage.txt.in, src/version.h: From Rubert Kausch: update
+	libcdio-paranoia to cdparanoia 10.2 minus the cache management
+	specific changes. https://savannah.gnu.org/patch/index.php?8459
+
+2014-06-03  R. Bernstein <rocky@gnu.org>
+
+	* lib/cdda_interface/scsi_interface.c: From Robert Kausch: remove
+	scsi_interface.c which is not used in libcdio-paranoia.
+	https://savannah.gnu.org/patch/index.php?8453
+
+2014-06-03  R. Bernstein <rocky@gnu.org>
+
+	* lib/paranoia/gap.c, lib/paranoia/overlap.c,
+	lib/paranoia/paranoia.c, src/buffering_write.c, src/version.h: From
+	Robert Kausch upgrade libcdio-paranoia to cdparanoia version 10.1
+
+2013-07-23  R. Bernstein <rocky@gnu.org>
+
+	* configure.ac: AC_SUBST(mkdir_p) covered by AC_PROG_MKDIR_P
+
+2013-07-23  R. Bernstein <rocky@gnu.org>
+
+	* configure.ac, doc/ja/Makefile.am, src/cd-paranoia.c: Use MKDIR_P
+	instead of mkdir_p for compability with modern autotools wrt #47732
+
+2013-05-15  R. Bernstein <rocky@gnu.org>
+
+	* .gitignore, configure.ac, doc/doxygen/.gitignore,
+	lib/cdda_interface/cddap_interface.c, lib/cdda_interface/toc.c,
+	src/cd-paranoia.c, test/Makefile.am,
+	test/cdda_interface/.gitignore, test/cdda_interface/Makefile.am,
+	test/cdda_interface/toc.c.in: Alighn paranoia's TOC functions with
+	cdio's. bug #38421 (can't handle a CD-ROM with 99 tracks). More
+	tests should be added.
+
+2012-12-24  R. Bernstein <rocky@gnu.org>
+
+	* NEWS, configure.ac, doc/en/cd-paranoia.1.in,
+	include/cdio/paranoia/version.h.in, src/cd-paranoia.c: Get ready for
+	release. cd-paranoia.c: remove --search -s option since that doesn't
+	do anything. Doxygen fixes.
+
+2012-11-04  Adrian Reber <adrian@lisas.de>
+
+	* lib/paranoia/gap.c, lib/paranoia/gap.h, lib/paranoia/isort.c,
+	lib/paranoia/isort.h, lib/paranoia/overlap.c,
+	lib/paranoia/overlap.h, lib/paranoia/p_block.h,
+	lib/paranoia/paranoia.c: Fixup license headers (again) Like said in previous commit, but this time for real: After the libcdio - libcdio-paranoia split many license headers were
+	wrong. The original cdparanoia library is LGPLv2+ and the binaries
+	are GPLv2+. This changes all GPLv3 headers from the libcdio split
+	back to GPLv2+ and the files in lib/paranoia to LGPLv2+.
+
+2012-11-04  R. Bernstein <rocky@gnu.org>
+
+	* THANKS: Add Adrian Reber
+
+2012-11-03  Adrian Reber <adrian@lisas.de>
+
+	* doc/en/Makefile.am, doc/ja/Makefile.am, example/C++/Makefile.am,
+	example/C++/paranoia.cpp, example/C++/paranoia2.cpp,
+	example/paranoia.c, example/paranoia2.c, lib/paranoia/Makefile.am,
+	lib/paranoia/isort.h, src/pod2c.pl, test/testparanoia.c: Fixup
+	license headers After the libcdio - libcdio-paranoia split many license headers were
+	wrong. The original cdparanoia library is LGPLv2+ and the binaries
+	are GPLv2+. This changes all GPLv3 headers from the libcdio split
+	back to GPLv2+ and the files in lib/paranoia to LGPLv2+.
+
+2012-10-29  R. Bernstein <rocky@gnu.org>
+
+	* Makefile.am, configure.ac, libcdio_cdda.pc.in,
+	libcdio_paranoia.pc.in, src/getopt.h: Add COPYING-GPL and
+	COPYING-LGPL to tarball. Update src/getopt.h with newer sources. Add
+	libcdio reuires to pkconfig files.
+
+2012-10-28  R. Bernstein <rocky@gnu.org>
+
+	* configure.ac, include/cdio/paranoia/Makefile.am: Makefile.am:
+	install headers in cdio/paranoia. configure.ac: version now in 91git
+
+2012-10-27  R. Bernstein <rocky@gnu.org>
+
+	* INSTALL, NEWS: Get ready for release 10.2+0.90
+
+2012-10-27  R. Bernstein <rocky@gnu.org>
+
+	* doc/doxygen/Doxyfile.in, lib/paranoia/paranoia.c,
+	make-check-filter.rb: Doxygen fixes.
+
+2012-10-21  R. Bernstein <rocky@gnu.org>
+
+	* Makefile.am, configure.ac, example/Makefile.am,
+	example/paranoia.c, example/paranoia2.c, make-check-filter.rb,
+	src/Makefile.am, src/cd-paranoia.c, src/header.c, src/report.c,
+	test/testparanoia.c: cdio/*.h -> cdio/paranoia/. Add Makefile
+	check-short change version number.
+
+2012-03-18  R. Bernstein <rocky@gnu.org>
+
+	* include/cdio/paranoia/cdda.h, include/cdio/paranoia/paranoia.h,
+	test/check_paranoia.sh.in: Make "make distcheck" work again.  Remove
+	leading underscores in C preprocessor #define's as per CERT Secure
+	coding recommendations.
+
+2012-03-06  R. Bernstein <rocky@gnu.org>
+
+	* example/C++/paranoia.cpp, example/C++/paranoia2.cpp,
+	example/paranoia.c, example/paranoia2.c: Merge in a couple of
+	patches to headers in some example programs.
+
+2012-02-20  R. Bernstein <rocky@gnu.org>
+
+	* lib/paranoia/paranoia.c: Little typo
+
+2012-02-19  rocky <rocky@gnu.org>
+
+	* doc/Makefile.am, example/C++/Makefile.am, src/Makefile.am,
+	test/Makefile.am: Make "make dist" work.
+
+2012-02-19  rocky <rocky@gnu.org>
+
+	* example/C++/paranoia.cpp, lib/cdda_interface/Makefile.am,
+	lib/cdda_interface/common_interface.c,
+	lib/cdda_interface/drive_exceptions.c,
+	lib/cdda_interface/drive_exceptions.h,
+	lib/cdda_interface/interface.c, lib/cdda_interface/scan_devices.c,
+	lib/cdda_interface/scsi_interface.c, lib/cdda_interface/smallft.c,
+	lib/cdda_interface/smallft.h, lib/cdda_interface/test_interface.c,
+	lib/cdda_interface/toc.c, lib/cdda_interface/utils.c,
+	lib/cdda_interface/utils.h, lib/paranoia/gap.c, lib/paranoia/gap.h,
+	lib/paranoia/isort.c, lib/paranoia/overlap.c,
+	lib/paranoia/overlap.h, lib/paranoia/p_block.h,
+	lib/paranoia/paranoia.c, src/cd-paranoia.c: Reinstate GPL v2+
+	copying.
+
+2012-02-19  rocky <rocky@gnu.org>
+
+	* configure.ac, example/C++/.gitignore, example/C++/Makefile.am,
+	example/C++/paranoia.cpp, example/C++/paranoia2.cpp,
+	example/Makefile.am: Add C++ examples.
+
+2012-02-19  rocky <rocky@gnu.org>
+
+	* example/Makefile.am, example/paranoia.c, src/cd-paranoia.c: 
+	cd-paranoia.c: Prevent a failure of "make check" when stderr is not
+	a tty. Patch from Debian Distribution and N. Boullis.  Makefile.am:
+	typo.  paranoia.c: bail when getting no cd drives.
+
+2011-11-06  rocky <rocky@gnu.org>
+
+	* doc/doxygen/Doxyfile.in: First working Doxyfile
+
+2011-11-06  rocky <rocky@gnu.org>
+
+	* doc/doxygen/Doxyfile.in, include/cdio/paranoia/version.h.in: Set
+	autoconf version numbers correct and get in version.h and Doxygen
+
+2011-11-06  rocky <rocky@gnu.org>
+
+	* configure.ac, doc/doxygen/Doxyfile.in: Fix up paranoia version
+	string.
+
+2011-11-06  rocky <rocky@gnu.org>
+
+	* doc/en/cd-paranoia.1.in, example/Makefile.am,
+	include/cdio/paranoia/cdda.h, include/cdio/paranoia/paranoia.h,
+	lib/cdda_interface/Makefile.am,
+	lib/cdda_interface/common_interface.h,
+	lib/cdda_interface/interface.c,
+	lib/cdda_interface/libcdio_cdda.sym, lib/paranoia/p_block.c,
+	lib/paranoia/p_block.h, lib/paranoia/paranoia.c,
+	libcdio_cdda.pc.in, libcdio_paranoia.pc.in, src/Makefile.am,
+	test/Makefile.am: Revert branch merge. I need to understand git
+	better
+
+2011-11-06  rocky <rocky@gnu.org>
+
+	* doc/doxygen/Doxyfile.in: Update doxygen
+
+2011-11-06  rocky <rocky@gnu.org>
+
+	* : commit acf37884498cd6e3e11ee9876538c40ecc93aaad Author: R.
+	Bernstein <rocky@gnu.org> Date:   Sat Nov 5 22:03:19 2011 -0400
+
+2011-11-05  R. Bernstein <rocky@gnu.org>
+
+	* configure.ac, lib/cdda_interface/Makefile.am,
+	lib/cdda_interface/cddap_interface.c,
+	lib/cdda_interface/common_interface.h,
+	lib/cdda_interface/interface.c, lib/cdda_interface/low_interface.h,
+	lib/cdda_interface/toc.c, lib/paranoia/Makefile.am,
+	lib/paranoia/p_block.c, test/.gitignore, test/Makefile.am,
+	test/data/.gitignore: Some fixes because code is split off. Some
+	copyright changes. Administrivia.
+
+2011-11-05  R. Bernstein <rocky@gnu.org>
+
+	* configure.ac, doc/en/cd-paranoia.1.in, example/Makefile.am,
+	include/cdio/paranoia/cdda.h, include/cdio/paranoia/paranoia.h,
+	lib/cdda_interface/Makefile.am,
+	lib/cdda_interface/cddap_interface.c,
+	lib/cdda_interface/common_interface.h,
+	lib/cdda_interface/interface.c,
+	lib/cdda_interface/libcdio_cdda.sym,
+	lib/cdda_interface/low_interface.h, lib/cdda_interface/toc.c,
+	lib/paranoia/Makefile.am, lib/paranoia/p_block.c,
+	lib/paranoia/p_block.h, lib/paranoia/paranoia.c,
+	libcdio_cdda.pc.in, libcdio_paranoia.pc.in, src/Makefile.am,
+	test/.gitignore, test/Makefile.am, test/data/.gitignore: Attempt to
+	merge Blake Jone's patches for 10.2.
+
+2011-11-05  R. Bernstein <rocky@gnu.org>
+
+	* .gitignore, example/.gitignore, example/README, m4/.gitignore,
+	test/Makefile.am, test/check_paranoia.sh.in, test/data/.gitignore,
+	test/data/Makefile.am, test/data/cdda.cue: All tests now work.
+
+2011-11-05  r <rocky@gnu.org>
+
+	* configure.ac, example/.gitignore,
+	include/cdio/paranoia/.gitignore, lib/cdda_interface/utils.c,
+	lib/paranoia/.gitignore, lib/paranoia/gap.c,
+	lib/paranoia/overlap.c, lib/paranoia/p_block.c,
+	lib/paranoia/p_block.h, lib/paranoia/paranoia.c: Program compiles
+	now. Not all of the tests that should run run though.
+
+2011-11-05  r <rocky@gnu.org>
+
+	* .gitignore, COPYING, INSTALL, NEWS, README, configure.ac,
+	doc/.gitignore, doc/doxygen/.gitignore, doc/doxygen/Doxyfile.in,
+	doc/doxygen/run_doxygen, example/.gitignore, include/.gitignore,
+	include/cdio/.gitignore, include/cdio/Makefile.am,
+	include/cdio/paranoia/.gitignore,
+	include/cdio/paranoia/Makefile.am, include/cdio/{ =>
+	paranoia}/cdda.h, include/cdio/{ => paranoia}/paranoia.h,
+	include/cdio/paranoia/version.h.in, lib/.gitignore, src/Makefile.am: 
+	autoreconf (or autogen.sh) and configure now don't error out.
+	configure is not quite correct though.
+
+2011-11-05  r <rocky@gnu.org>
+
+	* Initial guess at files to copy over. Expect lots of changes to get
+	this working.
+

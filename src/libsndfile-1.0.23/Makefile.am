@@ -6,8 +6,8 @@ if BUILD_OCTAVE_MOD
 octave_dir = Octave
 endif
 
-SUBDIRS = M4 man doc Win32 src $(octave_dir)
-DIST_SUBDIRS = M4 man doc Win32 src Octave
+SUBDIRS = M4 Win32 src $(octave_dir)
+DIST_SUBDIRS = M4 man Win32 src Octave
 
 EXTRA_DIST = libsndfile.spec.in sndfile.pc.in
 
