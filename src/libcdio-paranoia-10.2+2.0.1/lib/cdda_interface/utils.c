@@ -175,13 +175,7 @@ gettime(struct timespec *ts) {
   int ret = -1;
   if (!ts) return ret;
 
-#if defined(HAVE_CLOCK_GETTIME)
-  /* Use clock_gettime if available, preferably using the monotonic clock.
-   */
-  static clockid_t clock = (clockid_t)-1;
-  if ((int)clock == -1) clock = (clock_gettime(CLOCK_MONOTONIC, ts) < 0 ? CLOCK_REALTIME : CLOCK_MONOTONIC);
-  ret = clock_gettime(clock, ts);
-#elif defined(WIN32)
+#if defined(WIN32)
   /* clock() returns wall time (not CPU time) on Windows, so we can use it here.
    */
   clock_t time = clock();
