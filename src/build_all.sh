@@ -59,7 +59,7 @@ export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 #   libidn required Makefile.in patching to remove docs, examples, etc
 #   libmp4ff.a is noinst, need to be copied manually
 
-libs="libsndfile-1.0.23 libcdio-2.1.0 libcdio-paranoia-10.2+2.0.1 alsa-lib-1.0.25 curl-7.59.0 opencore-amr-0.1.2 json-glib-0.14.2 expat-2.0.1 dbus-1.4.0 dbus-glib-0.100 zlib-1.2.5 libzip-1.5.2 jpeg-8c libmad-0.15.1b libxml2-2.7.8 libogg-1.3.2 flac-1.3.3 mpg123-1.22.4 libvorbis-1.3.4 libpng-1.5.2 libsamplerate-0.1.9 opus-1.1 opusfile-0.6 sqlite-autoconf-3080301 libcddb-1.3.2 ffmpeg-3.0.2 jansson-2.12 fftw-3.3.8 faad2-2.8.8 wavpack-5.1.0"
+libs="libsndfile-1.0.23 libcdio-2.1.0 libcdio-paranoia-10.2+2.0.1 alsa-lib-1.0.25 mbedtls-2.7.19 curl-7.79.1 opencore-amr-0.1.2 json-glib-0.14.2 expat-2.0.1 dbus-1.4.0 dbus-glib-0.100 zlib-1.2.5 libzip-1.5.2 jpeg-8c libmad-0.15.1b libxml2-2.7.8 libogg-1.3.2 flac-1.3.3 mpg123-1.22.4 libvorbis-1.3.4 libpng-1.5.2 libsamplerate-0.1.9 opus-1.1 opusfile-0.6 sqlite-autoconf-3080301 libcddb-1.3.2 ffmpeg-3.0.2 jansson-2.12 fftw-3.3.8 faad2-2.8.8 wavpack-5.1.0"
 
 mkdir -p $PREFIX
 for i in $libs ; do
@@ -136,8 +136,6 @@ rm -rf $PREFIX/libexec 2>&1 >/dev/null
 rm -rf $PREFIX/man 2>&1 >/dev/null
 rm -rf $PREFIX/share 2>&1 >/dev/null
 rm $PREFIX/lib/*.la 2>&1 >/dev/null
-find $PREFIX/lib -name "*.so*"  | while read i ; do
-    if [[ $i != *asound* && $i != *dispatch* && $i != *Blocks* && $i != *kqueue* ]]; then
-        rm "$i"
-    fi
-done
+
+# delete unwanted shared libs
+find $PREFIX/lib -type f -name "*.so*" ! -name "*asound*" ! -name "*dispatch*" ! -name "*Blocks*" ! -name "*kqueue*" ! -name "*libcurl*" ! -name "*libmbed*" -exec rm {} +
