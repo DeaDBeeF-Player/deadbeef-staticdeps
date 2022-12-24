@@ -59,7 +59,7 @@ export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 #   libidn required Makefile.in patching to remove docs, examples, etc
 #   libmp4ff.a is noinst, need to be copied manually
 
-libs="libsndfile-1.0.28 libcdio-2.1.0 libcdio-paranoia-10.2+2.0.1 alsa-lib-1.0.25 mbedtls-2.7.19 curl-7.79.1 opencore-amr-0.1.2 json-glib-0.14.2 expat-2.0.1 dbus-1.4.0 dbus-glib-0.100 zlib-1.2.5 libzip-1.5.2 jpeg-8c libmad-0.15.1b libxml2-2.7.8 libogg-1.3.2 flac-1.3.3 mpg123-1.22.4 libvorbis-1.3.4 libpng-1.5.2 libsamplerate-0.1.9 opus-1.1 opusfile-0.6 sqlite-autoconf-3080301 libcddb-1.3.2 ffmpeg-4.4 jansson-2.12 fftw-3.3.8 faad2-2.8.8 wavpack-5.1.0"
+libs="swift-corelibs-libdispatch-swift-5.5-RELEASE libsndfile-1.0.28 libcdio-2.1.0 libcdio-paranoia-10.2+2.0.1 alsa-lib-1.0.25 mbedtls-2.7.19 curl-7.79.1 json-glib-0.14.2 expat-2.0.1 dbus-1.4.0 dbus-glib-0.100 zlib-1.2.5 libzip-1.5.2 jpeg-8c libmad-0.15.1b libxml2-2.7.8 mpg123-1.22.4 libogg-1.3.2 libvorbis-1.3.4 flac-1.3.3 libpng-1.5.2 libsamplerate-0.1.9 opus-1.1 opusfile-0.6 sqlite-autoconf-3080301 libcddb-1.3.2 opencore-amr-0.1.2 ffmpeg-4.4 jansson-2.12 fftw-3.3.8 faad2-2.8.8 wavpack-5.1.0"
 
 mkdir -p $PREFIX
 for i in $libs ; do
@@ -94,37 +94,37 @@ mkdir -p $PREFIX/lib
 mkdir -p $PREFIX/include
 
 # libkqueue -- still using gcc, since clang is too pedantic with warnings
-echo "---- building libkqueue"
-cd libkqueue-1.0.4
-# need to avoid custom cflags, to prevent _GNU_SOURCE redefinition warning
-CFLAGS="-m64 -O2 -D_FORTIFY_SOURCE=0 -fPIC -I$INCLUDE" sh ./build.sh || exit 1
-ln -s libkqueue.so.0.0 libkqueue.so.0
-cp -P *.so* $PREFIX/lib/ || exit 1
-cp -r include $PREFIX/ || exit 1
-cd ..
+#echo "---- building libkqueue"
+#cd libkqueue-1.0.4
+## need to avoid custom cflags, to prevent _GNU_SOURCE redefinition warning
+#CFLAGS="-m64 -O2 -D_FORTIFY_SOURCE=0 -fPIC -I$INCLUDE" sh ./build.sh || exit 1
+#ln -s libkqueue.so.0.0 libkqueue.so.0
+#cp -P *.so* $PREFIX/lib/ || exit 1
+#cp -r include $PREFIX/ || exit 1
+#cd ..
 
 # clang builds
-export APGCC_USE_CLANG=1
+#export APGCC_USE_CLANG=1
 
 # libBlocksRuntime
-echo "---- building libBlocksRuntime"
-cd libBlocksRuntime-0.1
-sh ./build.sh || exit 1
-# add missing symlink
-ln -s libBlocksRuntime.so.0.0 libBlocksRuntime.so.0
-cp -P *.so* $PREFIX/lib/ || exit 1
-cp Block*.h $PREFIX/include/ || exit 1
-cd ..
+#echo "---- building libBlocksRuntime"
+#cd libBlocksRuntime-0.1
+#sh ./build.sh || exit 1
+## add missing symlink
+#ln -s libBlocksRuntime.so.0.0 libBlocksRuntime.so.0
+#cp -P *.so* $PREFIX/lib/ || exit 1
+#cp Block*.h $PREFIX/include/ || exit 1
+#cd ..
 
 # libdispatch
-echo "---- building libdispatch"
-cd libdispatch-0~svn197
-
-KQUEUE_CFLAGS="-I$PREFIX/include" KQUEUE_LIBS="-L$PREFIX/lib -lkqueue" sh ./build.sh || exit 1
-cp -P src/.libs/libdispatch.so* $PREFIX/lib/ || exit 1
-mkdir -p $PREFIX/include/dispatch || exit 1
-cp dispatch/*.h $PREFIX/include/dispatch/ || exit 1
-cd ..
+#echo "---- building libdispatch"
+#cd libdispatch-0~svn197
+#
+#KQUEUE_CFLAGS="-I$PREFIX/include" KQUEUE_LIBS="-L$PREFIX/lib -lkqueue" sh ./build.sh || exit 1
+#cp -P src/.libs/libdispatch.so* $PREFIX/lib/ || exit 1
+#mkdir -p $PREFIX/include/dispatch || exit 1
+#cp dispatch/*.h $PREFIX/include/dispatch/ || exit 1
+#cd ..
 
 echo -----------------
 echo Cleaning up the build artifacts

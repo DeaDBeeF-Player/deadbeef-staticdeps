@@ -1,0 +1,4 @@
+#!/bin/bash
+cmake -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++  .
+make clean
+make VERBOSE=1
