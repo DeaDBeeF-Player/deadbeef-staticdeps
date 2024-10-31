@@ -6,14 +6,17 @@
     --disable-videotoolbox\
     --disable-dxva2 --enable-hwaccels\
     --disable-encoders --disable-muxers --disable-indevs --disable-outdevs\
-    --disable-devices --disable-filters --disable-parsers --enable-parser=ac3\
-    --enable-demuxer=ac3 --disable-bsfs --disable-bzlib --disable-protocols\
-    --disable-decoders --disable-decoder=libopus --disable-libopus\
-    --enable-decoder=wmapro --disable-decoder=wmav1 --disable-decoder=wmav2\
-    --enable-decoder=wmavoice --disable-decoder=alac --enable-decoder=ac3\
-    --enable-decoder=amrnb --disable-demuxers --enable-demuxer=asf\
-    --disable-demuxer=mov --enable-demuxer=oma --enable-demuxer=ac3\
-    --enable-demuxer=amr --disable-demuxer=ogg\
+    --disable-devices --disable-filters\
+    --disable-bsfs --disable-bzlib --disable-protocols\
+    --disable-libopus\
+    --disable-decoders  --disable-demuxers --disable-parsers\
+    --enable-decoder=wmapro\
+    --enable-decoder=wmavoice\
+    --enable-parser=ac3 --enable-demuxer=ac3 --enable-decoder=ac3\
+    --enable-demuxer=eac3 --enable-decoder=eac3\
+    --enable-decoder=amrnb --enable-demuxer=asf\
+    --enable-demuxer=oma\
+    --enable-demuxer=amr\
     --enable-demuxer=tak --enable-decoder=tak\
     --enable-decoder=dsd_lsbf --enable-decoder=dsd_lsbf_planar\
     --enable-decoder=dsd_msbf --enable-decoder=dsd_msbf_planar\
