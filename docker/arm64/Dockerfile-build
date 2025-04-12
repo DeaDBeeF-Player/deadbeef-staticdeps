@@ -1,0 +1,11 @@
+FROM staticdeps-builder-arm64
+
+WORKDIR /usr/src/staticdeps
+COPY ./src /usr/src/staticdeps/src
+COPY ./prebuilt /usr/src/staticdeps/prebuilt
+COPY ./External /usr/src/staticdeps/External
+COPY ./travis /usr/src/staticdeps/travis
+COPY ./libgtk-aarch64 /usr/src/staticdeps/libgtk-aarch64
+ENV TRAVIS_OS_NAME=linux
+
+CMD [ "bash", "travis/build.sh" ]

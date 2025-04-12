@@ -1,0 +1,4 @@
+FROM ubuntu:24.10
+
+RUN apt-get -qq update
+RUN apt-get install -y -qq software-properties-common autopoint automake autoconf intltool libc6-dev yasm libglib2.0-bin perl wget zip bzip2 make libtool pkg-config cmake libglib2.0-dev libexpat-dev autogen clang

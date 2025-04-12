@@ -23,17 +23,35 @@ if [[ "$ARCH" == "i686" ]]; then
     export CHOST="i686-unknown-linux-gnu"
     export CONFIG_OPTS="--prefix=$PREFIX --build=i686-unknown-linux-gnu"
 elif [[ "$ARCH" == "x86_64" ]]; then
-    export PREFIX=$OUTPUT/lib-x86-64
-    GTK_ROOT_216="$ORIGIN/../_build/lib-x86-64/gtk-2.16.0/"
-    GTK_ROOT_310="$ORIGIN/../_build/lib-x86-64/gtk-3.10.8/"
-    export GLIB_CFLAGS="-I${GTK_ROOT_310}/include/gio-unix-2.0/ -I${GTK_ROOT_310}/include/glib-2.0 -I${GTK_ROOT_310}/lib/glib-2.0/include -I${GTK_ROOT_310}/lib/x86_64-linux-gnu -I${GTK_ROOT_310}/lib/x86_64-linux-gnu/glib-2.0/include";
-    export GLIB_LIBS="-L${GTK_ROOT_310}/lib -L${GTK_ROOT_310}/lib -L${GTK_ROOT_310}/lib/x86_64-linux-gnu -lgobject-2.0 -lgthread-2.0 -lglib-2.0 -lgio-2.0";
+    DDB_ARCHNAME='x86-64'
+    TOOLCHAIN_ARCH='x86_64-linux-gnu'
+    LIBPATH="lib-$DDB_ARCHNAME"
+    export CHOST="x86_64-unknown-linux-gnu"
+    export PREFIX=$OUTPUT/$LIBPATH
+    GTK_ROOT_216="$ORIGIN/../_build/$LIBPATH/gtk-2.16.0/"
+    GTK_ROOT_310="$ORIGIN/../_build/$LIBPATH/gtk-3.10.8/"
+    export GLIB_CFLAGS="-I${GTK_ROOT_310}/include/gio-unix-2.0/ -I${GTK_ROOT_310}/include/glib-2.0 -I${GTK_ROOT_310}/lib/glib-2.0/include -I${GTK_ROOT_310}/lib/$TOOLCHAIN_ARCH -I${GTK_ROOT_310}/lib/$TOOLCHAIN_ARCH/glib-2.0/include";
+    export GLIB_LIBS="-L${GTK_ROOT_310}/lib -L${GTK_ROOT_310}/lib -L${GTK_ROOT_310}/lib/$TOOLCHAIN_ARCH -lgobject-2.0 -lgthread-2.0 -lglib-2.0 -lgio-2.0";
     export CFLAGS='-m64 -fPIC'
     export LDFLAGS='-m64'
-    export PKG_CONFIG_PATH=$ORIGIN/lib-x86-64/lib/pkg-config
-    export LD_LIBRARY_PATH=$ORIGIN/lib-x86-64/lib
-    export CHOST="x86_64-unknown-linux-gnu"
-    export CONFIG_OPTS="--prefix=$PREFIX --build=x86_64-unknown-linux-gnu"
+    export PKG_CONFIG_PATH=$ORIGIN/$LIBPATH/lib/pkg-config
+    export LD_LIBRARY_PATH=$ORIGIN/$LIBPATH/lib
+    export CONFIG_OPTS="--prefix=$PREFIX --build=$CHOST"
+elif [[ "$ARCH" == "aarch64" ]]; then
+    DDB_ARCHNAME='arm64'
+    TOOLCHAIN_ARCH='aarch64-linux-gnu'
+    LIBPATH="lib-$DDB_ARCHNAME"
+    export CHOST="aarch64-unknown-linux-gnu"
+    export PREFIX=$OUTPUT/$LIBPATH
+    GTK_ROOT_216="$ORIGIN/../_build/$LIBPATH/gtk-2.16.0/"
+    GTK_ROOT_310="$ORIGIN/../_build/$LIBPATH/gtk-3.10.8/"
+    export GLIB_CFLAGS="-I${GTK_ROOT_310}/include/gio-unix-2.0/ -I${GTK_ROOT_310}/include/glib-2.0 -I${GTK_ROOT_310}/lib/glib-2.0/include -I${GTK_ROOT_310}/lib/$TOOLCHAIN_ARCH -I${GTK_ROOT_310}/lib/$TOOLCHAIN_ARCH/glib-2.0/include";
+    export GLIB_LIBS="-L${GTK_ROOT_310}/lib -L${GTK_ROOT_310}/lib -L${GTK_ROOT_310}/lib/$TOOLCHAIN_ARCH -lgobject-2.0 -lgthread-2.0 -lglib-2.0 -lgio-2.0";
+    export CFLAGS='-m64 -fPIC'
+    export LDFLAGS='-m64'
+    export PKG_CONFIG_PATH=$ORIGIN/$LIBPATH/lib/pkg-config
+    export LD_LIBRARY_PATH=$ORIGIN/$LIBPATH/lib
+    export CONFIG_OPTS="--prefix=$PREFIX --build=$CHOST"
 else
     echo unknown arch $ARCH
     exit 1
