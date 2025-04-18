@@ -23,6 +23,8 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/main/a/at-spi2-atk/libatk-bridge2.
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/c/cairo/libcairo-gobject2_1.13.0~20140204-0ubuntu1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/p/pango1.0/libpangoxft-1.0-0_1.36.3-1ubuntu1_amd64.deb
 wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gdk-pixbuf/libgdk-pixbuf2.0-dev_2.30.7-0ubuntu1.6_amd64.deb
+wget -c http://mirrors.edge.kernel.org/ubuntu/pool/main/libf/libffi/libffi-dev_3.2.1-4_amd64.deb
+wget -c http://mirrors.edge.kernel.org/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-4_amd64.deb
 
 for i in *.deb ; do
 	ar x $i
@@ -56,6 +58,8 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/main/a/at-spi2-atk/libatk-bridge2.
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/c/cairo/libcairo-gobject2_1.13.0~20140204-0ubuntu1_i386.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/p/pango1.0/libpangoxft-1.0-0_1.36.3-1ubuntu1_i386.deb
 wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gdk-pixbuf/libgdk-pixbuf2.0-dev_2.30.7-0ubuntu1.6_i386.deb
+wget -c http://mirrors.edge.kernel.org/ubuntu/pool/main/libf/libffi/libffi-dev_3.2.1-4_i386.deb
+wget -c http://mirrors.edge.kernel.org/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-4_i386.deb
 
 for i in *.deb ; do
 	ar x $i

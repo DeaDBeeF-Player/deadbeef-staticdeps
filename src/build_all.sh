@@ -156,4 +156,4 @@ rm -rf $PREFIX/share 2>&1 >/dev/null
 rm $PREFIX/lib/*.la 2>&1 >/dev/null
 
 # delete unwanted shared libs
-find $PREFIX/lib -type f -name "*.so*" ! -name "*asound*" ! -name "*dispatch*" ! -name "*Blocks*" ! -name "*kqueue*" ! -name "*libcurl*" ! -name "*libmbed*" -exec rm {} +
+find $PREFIX/lib -type f -name "*.so*" ! -name "*asound*" ! -name "*dispatch*" ! -name "*Blocks*" ! -name "*kqueue*" ! -name "*libcurl*" ! -name "*libmbed*" ! -name "*libcddb*" ! -name "*sndfile*" ! -name "*faad*" ! -name "*opencore*" ! -name "*libz*" ! -name "*libzip*" ! -name "*libav*" ! -name "*libopus*" ! -name "*dbus*" ! -name "*libexpat*" ! -name "*libmad*" ! -name "*libmpg123" ! -name "*wavpack*" ! -name "*samplerate*" -exec rm {} +
