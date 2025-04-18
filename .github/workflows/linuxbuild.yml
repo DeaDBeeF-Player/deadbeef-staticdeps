@@ -20,8 +20,14 @@ jobs:
         submodules: true
     - name: Build for Linux
       run: TRAVIS_OS_NAME=linux travis/build.sh
-    - name: Upload for Linux
+    - name: Upload to sf.net
       env:
           gh_ed25519_key: ${{ secrets.GH_ENCRYPTED_ED25519_KEY }}
           gh_ed25519_iv: ${{ secrets.GH_ENCRYPTED_ED25519_IV }}
       run: TRAVIS_OS_NAME=linux travis/upload.sh
+    - name: Upload Github artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ddb-static-deps-latest.tar.bz2
+        path: _build/ddb-static-deps-latest.tar.bz2
+        if-no-files-found: error
