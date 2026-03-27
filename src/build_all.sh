@@ -9,7 +9,12 @@ export CXX=$AP/apg++
 export APBUILD_STATIC_LIBGCC=1
 export MAKEFLAGS="-j8"
 cd $AP
+# Run the lines below to generate the new apsymbols.h
+#./buildlist.aarch64 || exit 1
+#cp ./apsymbols.h.aarch64 $OUTPUT/lib-aarch64/
+#exit 0
 ./apinit || exit 1
+cat apsymbols.h
 cd $ORIGIN
 
 #export ARCH=`uname -m | perl -ne 'chomp and print'`
@@ -38,17 +43,18 @@ elif [[ "$ARCH" == "x86_64" ]]; then
     export LD_LIBRARY_PATH=$ORIGIN/$LIBPATH/lib
     export CONFIG_OPTS="--prefix=$PREFIX --build=$CHOST"
 elif [[ "$ARCH" == "aarch64" ]]; then
-    DDB_ARCHNAME='arm64'
+    DDB_ARCHNAME='aarch64'
     TOOLCHAIN_ARCH='aarch64-linux-gnu'
     LIBPATH="lib-$DDB_ARCHNAME"
     export CHOST="aarch64-unknown-linux-gnu"
     export PREFIX=$OUTPUT/$LIBPATH
     GTK_ROOT_216="$ORIGIN/../_build/$LIBPATH/gtk-2.16.0/"
-    GTK_ROOT_310="$ORIGIN/../_build/$LIBPATH/gtk-3.10.8/"
+    GTK_ROOT_310="$ORIGIN/../_build/$LIBPATH/gtk-3.24.50/"
     export GLIB_CFLAGS="-I${GTK_ROOT_310}/include/gio-unix-2.0/ -I${GTK_ROOT_310}/include/glib-2.0 -I${GTK_ROOT_310}/lib/glib-2.0/include -I${GTK_ROOT_310}/lib/$TOOLCHAIN_ARCH -I${GTK_ROOT_310}/lib/$TOOLCHAIN_ARCH/glib-2.0/include";
     export GLIB_LIBS="-L${GTK_ROOT_310}/lib -L${GTK_ROOT_310}/lib -L${GTK_ROOT_310}/lib/$TOOLCHAIN_ARCH -lgobject-2.0 -lgthread-2.0 -lglib-2.0 -lgio-2.0";
-    export CFLAGS='-m64 -fPIC'
-    export LDFLAGS='-m64'
+
+    export CFLAGS='-fPIC'
+    export LDFLAGS=''
     export PKG_CONFIG_PATH=$ORIGIN/$LIBPATH/lib/pkg-config
     export LD_LIBRARY_PATH=$ORIGIN/$LIBPATH/lib
     export CONFIG_OPTS="--prefix=$PREFIX --build=$CHOST"
@@ -91,7 +97,11 @@ for i in $libs ; do
     echo CFLAGS=$CFLAGS
     echo CXXFLAGS=$CFLAGS
     echo LDFLAGS=$LDFLAGS
-    sh ./build.sh || exit 1
+    sh ./build.sh || {
+        echo "Build failed"
+        cp ./config.log $PREFIX/
+        exit 1
+    }
     echo installing $i to $PREFIX
     if [[ "$i" =~ "zlib-" ]] ; then
         cp zlib.h $PREFIX/include/
