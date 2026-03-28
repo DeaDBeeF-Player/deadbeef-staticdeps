@@ -10,11 +10,10 @@ export APBUILD_STATIC_LIBGCC=1
 export MAKEFLAGS="-j8"
 cd $AP
 # Run the lines below to generate the new apsymbols.h
-#./buildlist.aarch64 || exit 1
+./buildlist.aarch64 || exit 1
 #cp ./apsymbols.h.aarch64 $OUTPUT/lib-aarch64/
 #exit 0
 ./apinit || exit 1
-cat apsymbols.h
 cd $ORIGIN
 
 #export ARCH=`uname -m | perl -ne 'chomp and print'`
@@ -49,7 +48,7 @@ elif [[ "$ARCH" == "aarch64" ]]; then
     export CHOST="aarch64-unknown-linux-gnu"
     export PREFIX=$OUTPUT/$LIBPATH
     GTK_ROOT_216="$ORIGIN/../_build/$LIBPATH/gtk-2.16.0/"
-    GTK_ROOT_310="$ORIGIN/../_build/$LIBPATH/gtk-3.24.50/"
+    GTK_ROOT_310="$ORIGIN/../_build/$LIBPATH/gtk-3.10.8/"
     export GLIB_CFLAGS="-I${GTK_ROOT_310}/include/gio-unix-2.0/ -I${GTK_ROOT_310}/include/glib-2.0 -I${GTK_ROOT_310}/lib/glib-2.0/include -I${GTK_ROOT_310}/lib/$TOOLCHAIN_ARCH -I${GTK_ROOT_310}/lib/$TOOLCHAIN_ARCH/glib-2.0/include";
     export GLIB_LIBS="-L${GTK_ROOT_310}/lib -L${GTK_ROOT_310}/lib -L${GTK_ROOT_310}/lib/$TOOLCHAIN_ARCH -lgobject-2.0 -lgthread-2.0 -lglib-2.0 -lgio-2.0";
 

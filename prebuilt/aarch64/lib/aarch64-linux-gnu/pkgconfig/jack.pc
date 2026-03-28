@@ -3,10 +3,9 @@ exec_prefix=/usr
 libdir=/usr/lib/aarch64-linux-gnu
 includedir=/usr/include
 server_libs=-L/usr/lib/aarch64-linux-gnu -ljackserver
-jack_implementation=jack2
 
 Name: jack
 Description: the Jack Audio Connection Kit: a low-latency synchronous callback-based media server
-Version: 1.9.22
-Libs: -L${libdir} -ljack
-Cflags: -I${includedir}
+Version: 1.9.12
+Libs: -L/usr/lib/aarch64-linux-gnu -ljack
+Cflags: -I/usr/include

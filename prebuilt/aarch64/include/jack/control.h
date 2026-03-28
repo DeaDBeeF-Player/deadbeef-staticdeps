@@ -120,32 +120,19 @@ jackctl_wait_signals(
     jackctl_sigmask_t * signals);
 
 /**
- * \bold THIS FUNCTION IS DEPRECATED AND SHOULD NOT BE USED IN
- *  NEW JACK PROJECTS
- *
- * @deprecated Please use jackctl_server_create2().
- */
-jackctl_server_t *
-jackctl_server_create(
-    bool (* on_device_acquire)(const char * device_name),
-    void (* on_device_release)(const char * device_name));
-
-/**
  * Call this function to create server object.
  *
  * @param on_device_acquire - Optional callback to be called before device is acquired. If false is returned, device usage will fail
  * @param on_device_release - Optional callback to be called after device is released.
- * @param on_device_reservation_loop - Optional callback to be called when looping/idling the reservation.
  *
  * @return server object handle, NULL if creation of server object
  * failed. Successfully created server object must be destroyed with
  * paired call to ::jackctl_server_destroy
  */
 jackctl_server_t *
-jackctl_server_create2(
+jackctl_server_create(
     bool (* on_device_acquire)(const char * device_name),
-    void (* on_device_release)(const char * device_name),
-    void (* on_device_reservation_loop)(void));
+    void (* on_device_release)(const char * device_name));
 
 /**
  * Call this function to destroy server object.
@@ -646,7 +633,7 @@ jack_log(
 	const char *format,
 	...);
 
-/**@}*/
+/* @} */
 
 #if 0
 { /* Adjust editor indent */

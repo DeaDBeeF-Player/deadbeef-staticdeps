@@ -7,7 +7,7 @@ case "$TRAVIS_OS_NAME" in
         echo Copying GTK libs
         echo --------------------
 #        cp -r libgtk-aarch64/gtk-2.16.0 _build/lib-aarch64/ || exit 1
-        cp -r libgtk-aarch64/gtk-3.24.50 _build/lib-aarch64/ || exit 1
+        cp -r libgtk-aarch64/gtk-3.10.8 _build/lib-aarch64/ || exit 1
 
         cd src || exit 1
         ARCH=aarch64 ./build_all.sh || exit 1
