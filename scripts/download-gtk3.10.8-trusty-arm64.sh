@@ -54,6 +54,9 @@ download_pkg() {
 
 # --- packages (same list you had) ---
 
+download_pkg libgtk2.0-0
+download_pkg libgtk2.0-dev
+
 download_pkg libgtk-3-0
 download_pkg libgtk-3-dev
 
