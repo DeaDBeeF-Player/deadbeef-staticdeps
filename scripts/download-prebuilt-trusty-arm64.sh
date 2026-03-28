@@ -75,13 +75,6 @@ download_pkg libstdc++6
 download_pkg libstdc++6-4.7-dev
 download_pkg libgcc1
 download_pkg libgcc-4.7-dev
-# pipewire is not available in trusty
-#download_pkg libpipewire-0.3-0t64
-#download_pkg libpipewire-0.3-dev
-#download_pkg libspa-0.2-dev
-#download_pkg libspa-0.2-bluetooth
-#download_pkg libspa-0.2-libcamera
-#download_pkg libspa-0.2-modules
 
 # --- extract ---
 
@@ -101,3 +94,7 @@ for i in *.deb; do
 
     rm -f debian-binary control.tar.* || true
 done
+
+# --- remove C++ headers ---
+
+rm -rf 'include/c++'
