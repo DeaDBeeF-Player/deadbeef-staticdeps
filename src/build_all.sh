@@ -10,7 +10,7 @@ export APBUILD_STATIC_LIBGCC=1
 export MAKEFLAGS="-j8"
 cd $AP
 # Run the lines below to generate the new apsymbols.h
-./buildlist.aarch64 || exit 1
+#./buildlist.aarch64 || exit 1
 #cp ./apsymbols.h.aarch64 $OUTPUT/lib-aarch64/
 #exit 0
 ./apinit || exit 1
