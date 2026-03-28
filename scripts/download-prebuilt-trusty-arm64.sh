@@ -55,6 +55,7 @@ download_pkg() {
 
 download_pkg libx11-6
 download_pkg libx11-dev
+download_pkg x11proto-core-dev
 download_pkg libxcursor1
 download_pkg libxcursor-dev
 download_pkg libxext6
