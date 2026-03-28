@@ -46,7 +46,7 @@ typedef struct _GtkLinkButtonPrivate	GtkLinkButtonPrivate;
 /**
  * GtkLinkButton:
  *
- * The #GtkLinkButton-struct contains only
+ * The <structname>GtkLinkButton</structname> structure contains only
  * private data and should be accessed using the provided API.
  */
 struct _GtkLinkButton
@@ -61,7 +61,7 @@ struct _GtkLinkButton
  * GtkLinkButtonClass:
  * @activate_link: class handler for the #GtkLinkButton::activate-link signal
  *
- * The #GtkLinkButtonClass contains only
+ * The <structname>GtkLinkButtonClass</structname> structure contains only
  * private data.
  */
 struct _GtkLinkButtonClass

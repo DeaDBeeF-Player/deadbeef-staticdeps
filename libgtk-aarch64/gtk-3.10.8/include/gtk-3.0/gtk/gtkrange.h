@@ -59,8 +59,8 @@ struct _GtkRangeClass
   GtkWidgetClass parent_class;
 
   /* what detail to pass to GTK drawing functions */
-  G_GNUC_DEPRECATED gchar *slider_detail;
-  G_GNUC_DEPRECATED gchar *stepper_detail;
+  gchar *slider_detail;
+  gchar *stepper_detail;
 
   void (* value_changed)    (GtkRange     *range);
   void (* adjust_bounds)    (GtkRange     *range,
@@ -78,15 +78,11 @@ struct _GtkRangeClass
                              GtkScrollType scroll,
                              gdouble       new_value);
 
-   void (* get_range_size_request) (GtkRange       *range,
-                                    GtkOrientation  orientation,
-                                    gint           *minimum,
-                                    gint           *natural);
-
   /* Padding for future expansion */
   void (*_gtk_reserved1) (void);
   void (*_gtk_reserved2) (void);
   void (*_gtk_reserved3) (void);
+  void (*_gtk_reserved4) (void);
 };
 
 
@@ -117,10 +113,10 @@ void               gtk_range_set_slider_size_fixed         (GtkRange      *range
 GDK_AVAILABLE_IN_ALL
 gboolean           gtk_range_get_slider_size_fixed         (GtkRange      *range);
 
-GDK_DEPRECATED_IN_3_20
+GDK_AVAILABLE_IN_ALL
 void               gtk_range_set_min_slider_size           (GtkRange      *range,
                                                             gint           min_size);
-GDK_DEPRECATED_IN_3_20
+GDK_AVAILABLE_IN_ALL
 gint               gtk_range_get_min_slider_size           (GtkRange      *range);
 
 GDK_AVAILABLE_IN_ALL
@@ -177,6 +173,22 @@ void               gtk_range_set_round_digits              (GtkRange      *range
 GDK_AVAILABLE_IN_ALL
 gint                gtk_range_get_round_digits              (GtkRange      *range);
 
+/* internal API */
+gdouble            _gtk_range_get_wheel_delta              (GtkRange       *range,
+                                                            GdkEventScroll *event);
+void               _gtk_range_set_has_origin               (GtkRange      *range,
+                                                            gboolean       has_origin);
+gboolean           _gtk_range_get_has_origin               (GtkRange      *range);
+void               _gtk_range_set_stop_values              (GtkRange      *range,
+                                                            gdouble       *values,
+                                                            gint           n_values);
+gint               _gtk_range_get_stop_positions           (GtkRange      *range,
+                                                            gint         **values);
+void               _gtk_range_set_steppers                 (GtkRange      *range,
+                                                            gboolean       has_a,
+                                                            gboolean       has_b,
+                                                            gboolean       has_c,
+                                                            gboolean       has_d);
 
 G_END_DECLS
 

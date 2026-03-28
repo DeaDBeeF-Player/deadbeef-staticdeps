@@ -52,14 +52,8 @@ struct _GtkAppChooserDialog {
   GtkAppChooserDialogPrivate *priv;
 };
 
-/**
- * GtkAppChooserDialogClass:
- * @parent_class: The parent class.
- */
 struct _GtkAppChooserDialogClass {
   GtkDialogClass parent_class;
-
-  /*< private >*/
 
   /* padding for future class expansion */
   gpointer padding[16];

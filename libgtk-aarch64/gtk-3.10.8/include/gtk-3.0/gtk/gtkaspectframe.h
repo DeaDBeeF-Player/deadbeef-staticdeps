@@ -54,15 +54,9 @@ struct _GtkAspectFrame
   GtkAspectFramePrivate *priv;
 };
 
-/**
- * GtkAspectFrameClass:
- * @parent_class: The parent class.
- */
 struct _GtkAspectFrameClass
 {
   GtkFrameClass parent_class;
-
-  /*< private >*/
 
   /* Padding for future expansion */
   void (*_gtk_reserved1) (void);

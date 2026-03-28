@@ -80,7 +80,7 @@
 
 /* This is a "semi-private" header; it is intended for
  * use by the text widget, and the text canvas item,
- * but that’s all. We may have to install it so the
+ * but that's all. We may have to install it so the
  * canvas item can use it, but users are not supposed
  * to use it.
  */
@@ -131,9 +131,6 @@ struct _GtkTextLayout
   /* gint top_edge; */
 
   GtkTextBuffer *buffer;
-
-  gint left_padding;
-  gint right_padding;
 
   /* Default style used if no tags override it */
   GtkTextAttributes *default_style;
@@ -345,16 +342,16 @@ void gtk_text_layout_get_line_at_y     (GtkTextLayout     *layout,
                                         gint               y,
                                         gint              *line_top);
 GDK_AVAILABLE_IN_ALL
-gboolean gtk_text_layout_get_iter_at_pixel (GtkTextLayout     *layout,
-                                            GtkTextIter       *iter,
-                                            gint               x,
-                                            gint               y);
+void gtk_text_layout_get_iter_at_pixel (GtkTextLayout     *layout,
+                                        GtkTextIter       *iter,
+                                        gint               x,
+                                        gint               y);
 GDK_AVAILABLE_IN_ALL
-gboolean gtk_text_layout_get_iter_at_position (GtkTextLayout     *layout,
-                                               GtkTextIter       *iter,
-                                               gint              *trailing,
-                                               gint               x,
-                                               gint               y);
+void gtk_text_layout_get_iter_at_position (GtkTextLayout     *layout,
+					   GtkTextIter       *iter,
+					   gint              *trailing,
+					   gint               x,
+					   gint               y);
 GDK_AVAILABLE_IN_ALL
 void gtk_text_layout_invalidate        (GtkTextLayout     *layout,
                                         const GtkTextIter *start,

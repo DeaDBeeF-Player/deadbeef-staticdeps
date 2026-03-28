@@ -40,8 +40,8 @@ G_BEGIN_DECLS
  * A function that is called to serialize the content of a text buffer.
  * It must return the serialized form of the content.
  *
- * Returns: (nullable): a newly-allocated array of guint8 which contains
- * the serialized data, or %NULL if an error occurred
+ * Returns: a newly-allocated array of guint8 which contains the serialized
+ *   data, or %NULL if an error occurred
  */
 typedef guint8 * (* GtkTextBufferSerializeFunc)   (GtkTextBuffer     *register_buffer,
                                                    GtkTextBuffer     *content_buffer,
@@ -55,7 +55,7 @@ typedef guint8 * (* GtkTextBufferSerializeFunc)   (GtkTextBuffer     *register_b
  * @register_buffer: the #GtkTextBuffer the format is registered with
  * @content_buffer: the #GtkTextBuffer to deserialize into
  * @iter: insertion point for the deserialized text
- * @data: (array length=length): data to deserialize
+ * @data: data to deserialize
  * @length: length of @data
  * @create_tags: %TRUE if deserializing may create tags
  * @user_data: user data that was specified when registering the format

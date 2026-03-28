@@ -48,8 +48,7 @@ struct _GtkCellAccessible
 struct _GtkCellAccessibleClass
 {
   GtkAccessibleClass parent_class;
-  void (*update_cache) (GtkCellAccessible *cell,
-                        gboolean           emit_signal);
+  void (*update_cache) (GtkCellAccessible *cell);
 };
 
 GDK_AVAILABLE_IN_ALL

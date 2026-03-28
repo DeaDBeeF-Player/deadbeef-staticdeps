@@ -53,15 +53,9 @@ struct _GtkTearoffMenuItem
   GtkTearoffMenuItemPrivate *priv;
 };
 
-/**
- * GtkTearoffMenuItemClass:
- * @parent_class: The parent class.
- */
 struct _GtkTearoffMenuItemClass
 {
   GtkMenuItemClass parent_class;
-
-  /*< private >*/
 
   /* Padding for future expansion */
   void (*_gtk_reserved1) (void);

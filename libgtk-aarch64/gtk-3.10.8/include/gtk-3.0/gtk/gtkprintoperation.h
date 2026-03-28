@@ -81,7 +81,7 @@ typedef enum {
 
 /**
  * GtkPrintOperationResult:
- * @GTK_PRINT_OPERATION_RESULT_ERROR: An error has occurred.
+ * @GTK_PRINT_OPERATION_RESULT_ERROR: An error has occured.
  * @GTK_PRINT_OPERATION_RESULT_APPLY: The print settings should be stored.
  * @GTK_PRINT_OPERATION_RESULT_CANCEL: The print operation has been canceled,
  *     the print settings should not be stored.
@@ -125,33 +125,9 @@ struct _GtkPrintOperation
   GtkPrintOperationPrivate *priv;
 };
 
-/**
- * GtkPrintOperationClass:
- * @parent_class: The parent class.
- * @done: Signal emitted when the print operation run has finished
- *    doing everything required for printing.
- * @begin_print: Signal emitted after the user has finished changing
- *    print settings in the dialog, before the actual rendering starts.
- * @paginate: Signal emitted after the “begin-print” signal, but
- *    before the actual rendering starts.
- * @request_page_setup: Emitted once for every page that is printed,
- *    to give the application a chance to modify the page setup.
- * @draw_page: Signal emitted for every page that is printed.
- * @end_print: Signal emitted after all pages have been rendered.
- * @status_changed: Emitted at between the various phases of the print
- *    operation.
- * @create_custom_widget: Signal emitted when displaying the print dialog.
- * @custom_widget_apply: Signal emitted right before “begin-print” if
- *    you added a custom widget in the “create-custom-widget” handler.
- * @preview: Signal emitted when a preview is requested from the
- *    native dialog.
- * @update_custom_widget: Emitted after change of selected printer.
- */
 struct _GtkPrintOperationClass
 {
   GObjectClass parent_class;
-
-  /*< public >*/
 
   void     (*done)               (GtkPrintOperation *operation,
                                   GtkPrintOperationResult result);
@@ -183,8 +159,6 @@ struct _GtkPrintOperationClass
                                     GtkWidget         *widget,
                                     GtkPageSetup      *setup,
                                     GtkPrintSettings  *settings);
-
-  /*< private >*/
 
   /* Padding for future expansion */
   void (*_gtk_reserved1) (void);

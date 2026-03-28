@@ -5,8 +5,8 @@ includedir=${prefix}/include
 
 Name: cairo-script
 Description: script surface backend for cairo graphics library
-Version: 1.15.10
+Version: 1.13.1
 
 Requires: cairo 
-Libs: -lz 
+Libs:  
 Cflags: -I${includedir}/cairo 

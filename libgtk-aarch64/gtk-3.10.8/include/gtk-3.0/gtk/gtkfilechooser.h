@@ -64,14 +64,14 @@ typedef enum
  * @GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM: The file chooser will present
  *  its stock dialog to confirm about overwriting an existing file.
  * @GTK_FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME: The file chooser will
- *  terminate and accept the user’s choice of a file name.
+ *  terminate and accept the user's choice of a file name.
  * @GTK_FILE_CHOOSER_CONFIRMATION_SELECT_AGAIN: The file chooser will
  *  continue running, so as to let the user select another file name.
  *
  * Used as a return value of handlers for the
  * #GtkFileChooser::confirm-overwrite signal of a #GtkFileChooser. This
  * value determines whether the file chooser will present the stock
- * confirmation dialog, accept the user’s choice of a filename, or
+ * confirmation dialog, accept the user's choice of a filename, or
  * let the user choose another filename.
  *
  * Since: 2.8
@@ -303,23 +303,6 @@ gboolean gtk_file_chooser_remove_shortcut_folder_uri (GtkFileChooser *chooser,
 						      GError        **error);
 GDK_AVAILABLE_IN_ALL
 GSList *gtk_file_chooser_list_shortcut_folder_uris   (GtkFileChooser *chooser);
-
-GDK_AVAILABLE_IN_3_22
-void        gtk_file_chooser_add_choice              (GtkFileChooser  *chooser,
-                                                      const char      *id,
-                                                      const char      *label,
-                                                      const char     **options,
-                                                      const char     **option_labels);
-GDK_AVAILABLE_IN_3_22
-void        gtk_file_chooser_remove_choice           (GtkFileChooser  *chooser,
-                                                      const char      *id);
-GDK_AVAILABLE_IN_3_22
-void        gtk_file_chooser_set_choice              (GtkFileChooser  *chooser,
-                                                      const char      *id,
-                                                      const char      *option);
-GDK_AVAILABLE_IN_3_22
-const char *gtk_file_chooser_get_choice              (GtkFileChooser  *chooser,
-                                                      const char      *id);
 
 G_END_DECLS
 

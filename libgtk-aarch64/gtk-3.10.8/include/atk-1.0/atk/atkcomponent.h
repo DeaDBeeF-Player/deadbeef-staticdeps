@@ -17,12 +17,12 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __ATK_COMPONENT_H__
-#define __ATK_COMPONENT_H__
-
 #if defined(ATK_DISABLE_SINGLE_INCLUDES) && !defined (__ATK_H_INSIDE__) && !defined (ATK_COMPILATION)
 #error "Only <atk/atk.h> can be included directly."
 #endif
+
+#ifndef __ATK_COMPONENT_H__
+#define __ATK_COMPONENT_H__
 
 #include <atk/atkobject.h>
 #include <atk/atkutil.h>
@@ -56,8 +56,9 @@ typedef struct _AtkComponentIface  AtkComponentIface;
  * atk_component_add_focus_handler() and
  * atk_component_remove_focus_handler()
  *
- * Deprecated: 2.9.4: Deprecated with atk_component_add_focus_handler()
- * and atk_component_remove_focus_handler(). See those
+ * Deprecated: This type is deprecated since ATK version 2.9.4. as
+ * atk_component_add_focus_handler() and
+ * atk_component_remove_focus_handler() are deprecated. See those
  * methods for more information.
  */
 typedef void (*AtkFocusHandler) (AtkObject* object, gboolean focus_in);
@@ -82,7 +83,6 @@ struct _AtkRectangle
   gint height;
 };
 
-ATK_AVAILABLE_IN_ALL
 GType atk_rectangle_get_type (void);
 
 #define ATK_TYPE_RECTANGLE (atk_rectangle_get_type ())
@@ -92,10 +92,6 @@ GType atk_rectangle_get_type (void);
  * @add_focus_handler: This virtual function is deprecated since 2.9.4
  * and it should not be overriden. See
  * atk_component_add_focus_handler() for more information.
- * @get_position: This virtual function is deprecated since 2.12 and
- * it should not be overriden. Use @get_extents instead.
- * @get_size: This virtual function is deprecated since 2.12 and it
- * should not be overriden. Use @get_extents instead.
  * @remove_focus_handler: This virtual function is deprecated since
  * 2.9.4 and it should not be overriden. See
  * atk_component_remove_focus_handler() for more information.
@@ -158,65 +154,52 @@ struct _AtkComponentIface
   gdouble                  (* get_alpha)        (AtkComponent   *component);
 };
 
-ATK_AVAILABLE_IN_ALL
 GType atk_component_get_type (void);
 
 /* convenience functions */
-ATK_DEPRECATED_IN_2_10
+G_DEPRECATED
 guint                atk_component_add_focus_handler      (AtkComponent    *component,
                                                            AtkFocusHandler handler);
-ATK_AVAILABLE_IN_ALL
 gboolean              atk_component_contains               (AtkComponent    *component,
                                                             gint            x,
                                                             gint            y,
                                                             AtkCoordType    coord_type);
-ATK_AVAILABLE_IN_ALL
 AtkObject*            atk_component_ref_accessible_at_point(AtkComponent    *component,
                                                             gint            x,
                                                             gint            y,
                                                             AtkCoordType    coord_type);
-ATK_AVAILABLE_IN_ALL
 void                  atk_component_get_extents            (AtkComponent    *component,
                                                             gint            *x,
                                                             gint            *y,
                                                             gint            *width,
                                                             gint            *height,
                                                             AtkCoordType    coord_type);
-ATK_DEPRECATED_IN_2_12_FOR(atk_component_get_extents)
 void                  atk_component_get_position           (AtkComponent    *component,
                                                             gint            *x,
                                                             gint            *y,
                                                             AtkCoordType    coord_type);
-ATK_DEPRECATED_IN_2_12_FOR(atk_component_get_extents)
 void                  atk_component_get_size               (AtkComponent    *component,
                                                             gint            *width,
                                                             gint            *height);
-ATK_AVAILABLE_IN_ALL
 AtkLayer              atk_component_get_layer              (AtkComponent    *component);
-ATK_AVAILABLE_IN_ALL
 gint                  atk_component_get_mdi_zorder         (AtkComponent    *component);
-ATK_AVAILABLE_IN_ALL
 gboolean              atk_component_grab_focus             (AtkComponent    *component);
-ATK_DEPRECATED_IN_2_10
+G_DEPRECATED
 void                  atk_component_remove_focus_handler   (AtkComponent    *component,
                                                             guint           handler_id);
-ATK_AVAILABLE_IN_ALL
 gboolean              atk_component_set_extents            (AtkComponent    *component,
                                                             gint            x,
                                                             gint            y,
                                                             gint            width,
                                                             gint            height,
                                                             AtkCoordType    coord_type);
-ATK_AVAILABLE_IN_ALL
 gboolean              atk_component_set_position           (AtkComponent    *component,
                                                             gint            x,
                                                             gint            y,
                                                             AtkCoordType    coord_type);
-ATK_AVAILABLE_IN_ALL
 gboolean              atk_component_set_size               (AtkComponent    *component,
                                                             gint            width,
                                                             gint            height);
-ATK_AVAILABLE_IN_ALL
 gdouble               atk_component_get_alpha              (AtkComponent    *component);
 
 G_END_DECLS

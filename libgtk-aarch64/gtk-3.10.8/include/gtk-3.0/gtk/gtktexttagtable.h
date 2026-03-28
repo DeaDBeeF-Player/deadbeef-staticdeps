@@ -33,11 +33,6 @@
 
 G_BEGIN_DECLS
 
-/**
- * GtkTextTagTableForeach:
- * @tag: the #GtkTextTag
- * @data: (closure): data passed to gtk_text_tag_table_foreach()
- */
 typedef void (* GtkTextTagTableForeach) (GtkTextTag *tag, gpointer data);
 
 #define GTK_TYPE_TEXT_TAG_TABLE            (gtk_text_tag_table_get_type ())
@@ -78,7 +73,7 @@ GType          gtk_text_tag_table_get_type (void) G_GNUC_CONST;
 GDK_AVAILABLE_IN_ALL
 GtkTextTagTable *gtk_text_tag_table_new      (void);
 GDK_AVAILABLE_IN_ALL
-gboolean         gtk_text_tag_table_add      (GtkTextTagTable        *table,
+void             gtk_text_tag_table_add      (GtkTextTagTable        *table,
                                               GtkTextTag             *tag);
 GDK_AVAILABLE_IN_ALL
 void             gtk_text_tag_table_remove   (GtkTextTagTable        *table,

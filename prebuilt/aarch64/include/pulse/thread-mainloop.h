@@ -18,7 +18,9 @@
   General Public License for more details.
 
   You should have received a copy of the GNU Lesser General Public License
-  along with PulseAudio; if not, see <http://www.gnu.org/licenses/>.
+  along with PulseAudio; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+  USA.
 ***/
 
 #include <pulse/mainloop-api.h>
@@ -164,7 +166,7 @@ PA_C_DECL_BEGIN
  * access this data safely, we must extend our example a bit:
  *
  * \code
- * static int * volatile drain_result = NULL;
+ * static int *drain_result;
  *
  * static void my_drain_callback(pa_stream*s, int success, void *userdata) {
  *     pa_threaded_mainloop *m;
@@ -185,7 +187,7 @@ PA_C_DECL_BEGIN
  *     o = pa_stream_drain(s, my_drain_callback, m);
  *     assert(o);
  *
- *     while (drain_result == NULL)
+ *     while (pa_operation_get_state(o) == PA_OPERATION_RUNNING)
  *         pa_threaded_mainloop_wait(m);
  *
  *     pa_operation_unref(o);
@@ -224,7 +226,7 @@ PA_C_DECL_BEGIN
  * that they can be called at any time. The threaded main loop API provides
  * the locking mechanism to handle concurrent accesses, but nothing else.
  * Applications will have to handle communication from the callback to the
- * main program through their own mechanisms.
+ * main program through its own mechanisms.
  *
  * The callbacks that are completely asynchronous are:
  *
@@ -270,7 +272,7 @@ void pa_threaded_mainloop_stop(pa_threaded_mainloop *m);
  * are executed with this lock held. */
 void pa_threaded_mainloop_lock(pa_threaded_mainloop *m);
 
-/** Unlock the event loop object, inverse of pa_threaded_mainloop_lock(). */
+/** Unlock the event loop object, inverse of pa_threaded_mainloop_lock() */
 void pa_threaded_mainloop_unlock(pa_threaded_mainloop *m);
 
 /** Wait for an event to be signalled by the event loop thread. You
@@ -285,7 +287,7 @@ void pa_threaded_mainloop_unlock(pa_threaded_mainloop *m);
 void pa_threaded_mainloop_wait(pa_threaded_mainloop *m);
 
 /** Signal all threads waiting for a signalling event in
- * pa_threaded_mainloop_wait(). If wait_for_accept is non-zero, do
+ * pa_threaded_mainloop_wait(). If wait_for_release is non-zero, do
  * not return before the signal was accepted by a
  * pa_threaded_mainloop_accept() call. While waiting for that condition
  * the event loop object is unlocked. */
@@ -308,9 +310,6 @@ pa_mainloop_api* pa_threaded_mainloop_get_api(pa_threaded_mainloop*m);
 
 /** Returns non-zero when called from within the event loop thread. \since 0.9.7 */
 int pa_threaded_mainloop_in_thread(pa_threaded_mainloop *m);
-
-/** Sets the name of the thread. \since 5.0 */
-void pa_threaded_mainloop_set_name(pa_threaded_mainloop *m, const char *name);
 
 PA_C_DECL_END
 

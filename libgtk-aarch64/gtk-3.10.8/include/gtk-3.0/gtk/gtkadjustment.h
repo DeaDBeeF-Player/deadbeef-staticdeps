@@ -48,7 +48,7 @@ typedef struct _GtkAdjustmentClass    GtkAdjustmentClass;
 /**
  * GtkAdjustment:
  *
- * The #GtkAdjustment-struct contains only private fields and
+ * The #GtkAdjustment struct contains only private fields and
  * should not be directly accessed.
  */
 struct _GtkAdjustment
@@ -83,9 +83,9 @@ GtkAdjustment*   gtk_adjustment_new             (gdouble          value,
                                                  gdouble          page_increment,
                                                  gdouble          page_size);
 
-GDK_DEPRECATED_IN_3_18
+GDK_AVAILABLE_IN_ALL
 void       gtk_adjustment_changed               (GtkAdjustment   *adjustment);
-GDK_DEPRECATED_IN_3_18
+GDK_AVAILABLE_IN_ALL
 void       gtk_adjustment_value_changed         (GtkAdjustment   *adjustment);
 GDK_AVAILABLE_IN_ALL
 void       gtk_adjustment_clamp_page            (GtkAdjustment   *adjustment,

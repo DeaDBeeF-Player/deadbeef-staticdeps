@@ -17,12 +17,12 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __ATK_HYPERTEXT_H__
-#define __ATK_HYPERTEXT_H__
-
 #if defined(ATK_DISABLE_SINGLE_INCLUDES) && !defined (__ATK_H_INSIDE__) && !defined (ATK_COMPILATION)
 #error "Only <atk/atk.h> can be included directly."
 #endif
+
+#ifndef __ATK_HYPERTEXT_H__
+#define __ATK_HYPERTEXT_H__
 
 #include <atk/atkobject.h>
 #include <atk/atkhyperlink.h>
@@ -61,15 +61,11 @@ struct _AtkHypertextIface
   void         (* link_selected)            (AtkHypertext       *hypertext,
                                              gint               link_index);
 };
-ATK_AVAILABLE_IN_ALL
 GType atk_hypertext_get_type (void);
 
-ATK_AVAILABLE_IN_ALL
 AtkHyperlink* atk_hypertext_get_link       (AtkHypertext *hypertext,
                                             gint          link_index);
-ATK_AVAILABLE_IN_ALL
 gint          atk_hypertext_get_n_links    (AtkHypertext *hypertext);
-ATK_AVAILABLE_IN_ALL
 gint          atk_hypertext_get_link_index (AtkHypertext *hypertext,
                                             gint          char_index);
 

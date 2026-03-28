@@ -41,17 +41,12 @@ typedef struct _GdkTimeCoord GdkTimeCoord;
  * @GDK_SOURCE_PEN: the device is a stylus of a graphics tablet or similar device.
  * @GDK_SOURCE_ERASER: the device is an eraser. Typically, this would be the other end
  *                     of a stylus on a graphics tablet.
- * @GDK_SOURCE_CURSOR: the device is a graphics tablet “puck” or similar device.
+ * @GDK_SOURCE_CURSOR: the device is a graphics tablet "puck" or similar device.
  * @GDK_SOURCE_KEYBOARD: the device is a keyboard.
  * @GDK_SOURCE_TOUCHSCREEN: the device is a direct-input touch device, such
  *     as a touchscreen or tablet. This device type has been added in 3.4.
  * @GDK_SOURCE_TOUCHPAD: the device is an indirect touch device, such
  *     as a touchpad. This device type has been added in 3.4.
- * @GDK_SOURCE_TRACKPOINT: the device is a trackpoint. This device type has been
- *     added in 3.22
- * @GDK_SOURCE_TABLET_PAD: the device is a "pad", a collection of buttons,
- *     rings and strips found in drawing tablets. This device type has been
- *     added in 3.22.
  *
  * An enumeration describing the type of an input device in general terms.
  */
@@ -63,17 +58,15 @@ typedef enum
   GDK_SOURCE_CURSOR,
   GDK_SOURCE_KEYBOARD,
   GDK_SOURCE_TOUCHSCREEN,
-  GDK_SOURCE_TOUCHPAD,
-  GDK_SOURCE_TRACKPOINT,
-  GDK_SOURCE_TABLET_PAD
+  GDK_SOURCE_TOUCHPAD
 } GdkInputSource;
 
 /**
  * GdkInputMode:
  * @GDK_MODE_DISABLED: the device is disabled and will not report any events.
- * @GDK_MODE_SCREEN: the device is enabled. The device’s coordinate space
+ * @GDK_MODE_SCREEN: the device is enabled. The device's coordinate space
  *                   maps to the entire screen.
- * @GDK_MODE_WINDOW: the device is enabled. The device’s coordinate space
+ * @GDK_MODE_WINDOW: the device is enabled. The device's coordinate space
  *                   is mapped to a single window. The manner in which this window
  *                   is chosen is undefined, but it will typically be the same
  *                   way in which the focus window for key events is determined.
@@ -88,6 +81,33 @@ typedef enum
 } GdkInputMode;
 
 /**
+ * GdkAxisUse:
+ * @GDK_AXIS_IGNORE: the axis is ignored.
+ * @GDK_AXIS_X: the axis is used as the x axis.
+ * @GDK_AXIS_Y: the axis is used as the y axis.
+ * @GDK_AXIS_PRESSURE: the axis is used for pressure information.
+ * @GDK_AXIS_XTILT: the axis is used for x tilt information.
+ * @GDK_AXIS_YTILT: the axis is used for y tilt information.
+ * @GDK_AXIS_WHEEL: the axis is used for wheel information.
+ * @GDK_AXIS_LAST: a constant equal to the numerically highest axis value.
+ *
+ * An enumeration describing the way in which a device
+ * axis (valuator) maps onto the predefined valuator
+ * types that GTK+ understands.
+ */
+typedef enum
+{
+  GDK_AXIS_IGNORE,
+  GDK_AXIS_X,
+  GDK_AXIS_Y,
+  GDK_AXIS_PRESSURE,
+  GDK_AXIS_XTILT,
+  GDK_AXIS_YTILT,
+  GDK_AXIS_WHEEL,
+  GDK_AXIS_LAST
+} GdkAxisUse;
+
+/**
  * GdkDeviceType:
  * @GDK_DEVICE_TYPE_MASTER: Device is a master (or virtual) device. There will
  *                          be an associated focus indicator on the screen.
@@ -95,7 +115,7 @@ typedef enum
  * @GDK_DEVICE_TYPE_FLOATING: Device is a physical device, currently not attached to
  *                            any virtual device.
  *
- * Indicates the device type. See [above][GdkDeviceManager.description]
+ * Indicates the device type. See <link linkend="GdkDeviceManager.description">above</link>
  * for more information about the meaning of these device types.
  */
 typedef enum {
@@ -112,9 +132,9 @@ typedef enum {
 /**
  * GdkTimeCoord:
  * @time: The timestamp for this event.
- * @axes: the values of the device’s axes.
+ * @axes: the values of the device's axes.
  *
- * A #GdkTimeCoord stores a single event in a motion history.
+ * The #GdkTimeCoord structure stores a single event in a motion history.
  */
 struct _GdkTimeCoord
 {
@@ -226,7 +246,7 @@ GList *      gdk_device_list_slave_devices    (GdkDevice     *device);
 GDK_AVAILABLE_IN_ALL
 GdkDeviceType gdk_device_get_device_type (GdkDevice *device);
 
-GDK_DEPRECATED_IN_3_20_FOR(gdk_seat_grab)
+GDK_AVAILABLE_IN_ALL
 GdkGrabStatus gdk_device_grab        (GdkDevice        *device,
                                       GdkWindow        *window,
                                       GdkGrabOwnership  grab_ownership,
@@ -235,7 +255,7 @@ GdkGrabStatus gdk_device_grab        (GdkDevice        *device,
                                       GdkCursor        *cursor,
                                       guint32           time_);
 
-GDK_DEPRECATED_IN_3_20_FOR(gdk_seat_ungrab)
+GDK_AVAILABLE_IN_ALL
 void          gdk_device_ungrab      (GdkDevice        *device,
                                       guint32           time_);
 
@@ -245,25 +265,12 @@ void          gdk_device_warp        (GdkDevice        *device,
                                       gint              x,
                                       gint              y);
 
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 gboolean gdk_device_grab_info_libgtk_only (GdkDisplay  *display,
                                            GdkDevice   *device,
                                            GdkWindow  **grab_window,
                                            gboolean    *owner_events);
 
-GDK_AVAILABLE_IN_3_12
-GdkWindow *gdk_device_get_last_event_window (GdkDevice *device);
-
-GDK_AVAILABLE_IN_3_16
-const gchar *gdk_device_get_vendor_id       (GdkDevice *device);
-GDK_AVAILABLE_IN_3_16
-const gchar *gdk_device_get_product_id      (GdkDevice *device);
-
-GDK_AVAILABLE_IN_3_20
-GdkSeat     *gdk_device_get_seat            (GdkDevice *device);
-
-GDK_AVAILABLE_IN_3_22
-GdkAxisFlags gdk_device_get_axes            (GdkDevice *device);
 
 G_END_DECLS
 

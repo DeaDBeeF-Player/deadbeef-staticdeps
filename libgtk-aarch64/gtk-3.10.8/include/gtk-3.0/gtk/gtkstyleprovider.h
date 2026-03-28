@@ -25,7 +25,7 @@
 #include <glib-object.h>
 #include <gtk/gtkenums.h>
 #include <gtk/deprecated/gtkiconfactory.h>
-#include <gtk/deprecated/gtkstyleproperties.h>
+#include <gtk/gtkstyleproperties.h>
 #include <gtk/gtktypes.h>
 
 G_BEGIN_DECLS
@@ -40,11 +40,6 @@ G_BEGIN_DECLS
  *
  * The priority used for default style information
  * that is used in the absence of themes.
- *
- * Note that this is not very useful for providing default
- * styling for custom style classes - themes are likely to
- * override styling provided at this priority with
- * catch-all `* {...}` rules.
  */
 #define GTK_STYLE_PROVIDER_PRIORITY_FALLBACK      1
 
@@ -79,7 +74,7 @@ G_BEGIN_DECLS
  * GTK_STYLE_PROVIDER_PRIORITY_USER:
  *
  * The priority used for the style information from
- * `~/.gtk-3.0.css`.
+ * <filename>~/.gtk-3.0.css</filename>.
  *
  * You should not use priorities higher than this, to
  * give the user the last word.
@@ -97,10 +92,7 @@ typedef struct _GtkStyleProvider GtkStyleProvider; /* dummy typedef */
  */
 struct _GtkStyleProviderIface
 {
-  /*< private >*/
   GTypeInterface g_iface;
-
-  /*< public >*/
 
   GtkStyleProperties * (* get_style) (GtkStyleProvider *provider,
                                       GtkWidgetPath    *path);

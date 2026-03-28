@@ -49,43 +49,27 @@ struct _GtkListBox
   GtkContainer parent_instance;
 };
 
-/**
- * GtkListBoxClass:
- * @parent_class: The parent class.
- * @row_selected: Class handler for the #GtkListBox::row-selected signal
- * @row_activated: Class handler for the #GtkListBox::row-activated signal
- * @activate_cursor_row: Class handler for the #GtkListBox::activate-cursor-row signal
- * @toggle_cursor_row: Class handler for the #GtkListBox::toggle-cursor-row signal
- * @move_cursor: Class handler for the #GtkListBox::move-cursor signal
- * @selected_rows_changed: Class handler for the #GtkListBox::selected-rows-changed signal
- * @select_all: Class handler for the #GtkListBox::select-all signal
- * @unselect_all: Class handler for the #GtkListBox::unselect-all signal
- */
 struct _GtkListBoxClass
 {
   GtkContainerClass parent_class;
 
-  /*< public >*/
-
-  void (*row_selected)        (GtkListBox      *box,
+  void (*row_selected)        (GtkListBox      *list_box,
                                GtkListBoxRow   *row);
-  void (*row_activated)       (GtkListBox      *box,
+  void (*row_activated)       (GtkListBox      *list_box,
                                GtkListBoxRow   *row);
-  void (*activate_cursor_row) (GtkListBox      *box);
-  void (*toggle_cursor_row)   (GtkListBox      *box);
-  void (*move_cursor)         (GtkListBox      *box,
+  void (*activate_cursor_row) (GtkListBox      *list_box);
+  void (*toggle_cursor_row)   (GtkListBox      *list_box);
+  void (*move_cursor)         (GtkListBox      *list_box,
                                GtkMovementStep  step,
                                gint             count);
-  void (*selected_rows_changed) (GtkListBox    *box);
-  void (*select_all)            (GtkListBox    *box);
-  void (*unselect_all)          (GtkListBox    *box);
-
-  /*< private >*/
 
   /* Padding for future expansion */
   void (*_gtk_reserved1) (void);
   void (*_gtk_reserved2) (void);
   void (*_gtk_reserved3) (void);
+  void (*_gtk_reserved4) (void);
+  void (*_gtk_reserved5) (void);
+  void (*_gtk_reserved6) (void);
 };
 
 #define GTK_TYPE_LIST_BOX_ROW            (gtk_list_box_row_get_type ())
@@ -100,20 +84,11 @@ struct _GtkListBoxRow
   GtkBin parent_instance;
 };
 
-/**
- * GtkListBoxRowClass:
- * @parent_class: The parent class.
- * @activate: 
- */
 struct _GtkListBoxRowClass
 {
   GtkBinClass parent_class;
 
-  /*< public >*/
-
   void (* activate) (GtkListBoxRow *row);
-
-  /*< private >*/
 
   /* Padding for future expansion */
   void (*_gtk_reserved1) (void);
@@ -169,26 +144,6 @@ typedef void (*GtkListBoxUpdateHeaderFunc) (GtkListBoxRow *row,
                                             GtkListBoxRow *before,
                                             gpointer       user_data);
 
-/**
- * GtkListBoxCreateWidgetFunc:
- * @item: (type GObject): the item from the model for which to create a widget for
- * @user_data: (closure): user data
- *
- * Called for list boxes that are bound to a #GListModel with
- * gtk_list_box_bind_model() for each item that gets added to the model.
- *
- * Versions of GTK+ prior to 3.18 called gtk_widget_show_all() on the rows
- * created by the GtkListBoxCreateWidgetFunc, but this forced all widgets
- * inside the row to be shown, and is no longer the case. Applications should
- * be updated to show the desired row widgets.
- *
- * Returns: (transfer full): a #GtkWidget that represents @item
- *
- * Since: 3.16
- */
-typedef GtkWidget * (*GtkListBoxCreateWidgetFunc) (gpointer item,
-                                                   gpointer user_data);
-
 GDK_AVAILABLE_IN_3_10
 GType      gtk_list_box_row_get_type      (void) G_GNUC_CONST;
 GDK_AVAILABLE_IN_3_10
@@ -203,118 +158,74 @@ gint       gtk_list_box_row_get_index     (GtkListBoxRow *row);
 GDK_AVAILABLE_IN_3_10
 void       gtk_list_box_row_changed       (GtkListBoxRow *row);
 
-GDK_AVAILABLE_IN_3_14
-gboolean   gtk_list_box_row_is_selected   (GtkListBoxRow *row);
-
-GDK_AVAILABLE_IN_3_14
-void       gtk_list_box_row_set_selectable (GtkListBoxRow *row,
-                                            gboolean       selectable);
-GDK_AVAILABLE_IN_3_14
-gboolean   gtk_list_box_row_get_selectable (GtkListBoxRow *row);
-
-
-GDK_AVAILABLE_IN_3_14
-void       gtk_list_box_row_set_activatable (GtkListBoxRow *row,
-                                             gboolean       activatable);
-GDK_AVAILABLE_IN_3_14
-gboolean   gtk_list_box_row_get_activatable (GtkListBoxRow *row);
 
 GDK_AVAILABLE_IN_3_10
 GType          gtk_list_box_get_type                     (void) G_GNUC_CONST;
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_prepend                      (GtkListBox                    *box,
+void           gtk_list_box_prepend                      (GtkListBox                    *list_box,
                                                           GtkWidget                     *child);
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_insert                       (GtkListBox                    *box,
+void           gtk_list_box_insert                       (GtkListBox                    *list_box,
                                                           GtkWidget                     *child,
                                                           gint                           position);
 GDK_AVAILABLE_IN_3_10
-GtkListBoxRow* gtk_list_box_get_selected_row             (GtkListBox                    *box);
+GtkListBoxRow* gtk_list_box_get_selected_row             (GtkListBox                    *list_box);
 GDK_AVAILABLE_IN_3_10
-GtkListBoxRow* gtk_list_box_get_row_at_index             (GtkListBox                    *box,
+GtkListBoxRow* gtk_list_box_get_row_at_index             (GtkListBox                    *list_box,
                                                           gint                           index_);
 GDK_AVAILABLE_IN_3_10
-GtkListBoxRow* gtk_list_box_get_row_at_y                 (GtkListBox                    *box,
+GtkListBoxRow* gtk_list_box_get_row_at_y                 (GtkListBox                    *list_box,
                                                           gint                           y);
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_select_row                   (GtkListBox                    *box,
+void           gtk_list_box_select_row                   (GtkListBox                    *list_box,
                                                           GtkListBoxRow                 *row);
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_set_placeholder              (GtkListBox                    *box,
+void           gtk_list_box_set_placeholder              (GtkListBox                    *list_box,
                                                           GtkWidget                     *placeholder);
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_set_adjustment               (GtkListBox                    *box,
+void           gtk_list_box_set_adjustment               (GtkListBox                    *list_box,
                                                           GtkAdjustment                 *adjustment);
 GDK_AVAILABLE_IN_3_10
-GtkAdjustment *gtk_list_box_get_adjustment               (GtkListBox                    *box);
-
-typedef void (* GtkListBoxForeachFunc) (GtkListBox      *box,
-                                        GtkListBoxRow   *row,
-                                        gpointer         user_data);
-
-GDK_AVAILABLE_IN_3_14
-void           gtk_list_box_selected_foreach             (GtkListBox                    *box,
-                                                          GtkListBoxForeachFunc          func,
-                                                          gpointer                       data);
-GDK_AVAILABLE_IN_3_14
-GList         *gtk_list_box_get_selected_rows            (GtkListBox                    *box);
-GDK_AVAILABLE_IN_3_14
-void           gtk_list_box_unselect_row                 (GtkListBox                    *box,
-                                                          GtkListBoxRow                 *row);
-GDK_AVAILABLE_IN_3_14
-void           gtk_list_box_select_all                   (GtkListBox                    *box);
-GDK_AVAILABLE_IN_3_14
-void           gtk_list_box_unselect_all                 (GtkListBox                    *box);
-
+GtkAdjustment *gtk_list_box_get_adjustment               (GtkListBox                    *list_box);
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_set_selection_mode           (GtkListBox                    *box,
+void           gtk_list_box_set_selection_mode           (GtkListBox                    *list_box,
                                                           GtkSelectionMode               mode);
 GDK_AVAILABLE_IN_3_10
-GtkSelectionMode gtk_list_box_get_selection_mode         (GtkListBox                    *box);
+GtkSelectionMode gtk_list_box_get_selection_mode         (GtkListBox                    *list_box);
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_set_filter_func              (GtkListBox                    *box,
+void           gtk_list_box_set_filter_func              (GtkListBox                    *list_box,
                                                           GtkListBoxFilterFunc           filter_func,
                                                           gpointer                       user_data,
                                                           GDestroyNotify                 destroy);
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_set_header_func              (GtkListBox                    *box,
+void           gtk_list_box_set_header_func              (GtkListBox                    *list_box,
                                                           GtkListBoxUpdateHeaderFunc     update_header,
                                                           gpointer                       user_data,
                                                           GDestroyNotify                 destroy);
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_invalidate_filter            (GtkListBox                    *box);
+void           gtk_list_box_invalidate_filter            (GtkListBox                    *list_box);
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_invalidate_sort              (GtkListBox                    *box);
+void           gtk_list_box_invalidate_sort              (GtkListBox                    *list_box);
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_invalidate_headers           (GtkListBox                    *box);
+void           gtk_list_box_invalidate_headers           (GtkListBox                    *list_box);
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_set_sort_func                (GtkListBox                    *box,
+void           gtk_list_box_set_sort_func                (GtkListBox                    *list_box,
                                                           GtkListBoxSortFunc             sort_func,
                                                           gpointer                       user_data,
                                                           GDestroyNotify                 destroy);
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_set_activate_on_single_click (GtkListBox                    *box,
+void           gtk_list_box_set_activate_on_single_click (GtkListBox                    *list_box,
                                                           gboolean                       single);
 GDK_AVAILABLE_IN_3_10
-gboolean       gtk_list_box_get_activate_on_single_click (GtkListBox                    *box);
+gboolean       gtk_list_box_get_activate_on_single_click (GtkListBox                    *list_box);
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_drag_unhighlight_row         (GtkListBox                    *box);
+void           gtk_list_box_drag_unhighlight_row         (GtkListBox                    *list_box);
 GDK_AVAILABLE_IN_3_10
-void           gtk_list_box_drag_highlight_row           (GtkListBox                    *box,
+void           gtk_list_box_drag_highlight_row           (GtkListBox                    *list_box,
                                                           GtkListBoxRow                 *row);
 GDK_AVAILABLE_IN_3_10
 GtkWidget*     gtk_list_box_new                          (void);
 
-
-GDK_AVAILABLE_IN_3_16
-void           gtk_list_box_bind_model                   (GtkListBox                   *box,
-                                                          GListModel                   *model,
-                                                          GtkListBoxCreateWidgetFunc    create_widget_func,
-                                                          gpointer                      user_data,
-                                                          GDestroyNotify                user_data_free_func);
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC(GtkListBox, g_object_unref)
-G_DEFINE_AUTOPTR_CLEANUP_FUNC(GtkListBoxRow, g_object_unref)
 
 G_END_DECLS
 

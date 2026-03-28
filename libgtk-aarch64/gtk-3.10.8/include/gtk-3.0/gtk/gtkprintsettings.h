@@ -38,13 +38,6 @@ typedef void  (*GtkPrintSettingsFunc)  (const gchar *key,
 					gpointer     user_data);
 
 typedef struct _GtkPageRange GtkPageRange;
-/**
- * GtkPageRange:
- * @start: start of page range.
- * @end: end of page range.
- *
- * See also gtk_print_settings_set_page_ranges().
- */
 struct _GtkPageRange
 {
   gint start;
@@ -169,7 +162,7 @@ void              gtk_print_settings_set_int                 (GtkPrintSettings  
 /**
  * GTK_PRINT_SETTINGS_OUTPUT_DIR:
  *
- * The key used by the “Print to file” printer to store the
+ * The key used by the "Print to file" printer to store the
  * directory to which the output should be written.
  *
  * Since: 3.6
@@ -179,7 +172,7 @@ void              gtk_print_settings_set_int                 (GtkPrintSettings  
 /**
  * GTK_PRINT_SETTINGS_OUTPUT_BASENAME:
  *
- * The key used by the “Print to file” printer to store the file
+ * The key used by the "Print to file" printer to store the file
  * name of the output without the path to the directory and the
  * file extension.
  *
@@ -190,17 +183,17 @@ void              gtk_print_settings_set_int                 (GtkPrintSettings  
 /**
  * GTK_PRINT_SETTINGS_OUTPUT_FILE_FORMAT:
  *
- * The key used by the “Print to file” printer to store the format
- * of the output. The supported values are “PS” and “PDF”.
+ * The key used by the "Print to file" printer to store the format
+ * of the output. The supported values are "PS" and "PDF".
  */
 #define GTK_PRINT_SETTINGS_OUTPUT_FILE_FORMAT  "output-file-format"
 
 /**
  * GTK_PRINT_SETTINGS_OUTPUT_URI:
  *
- * The key used by the “Print to file” printer to store the URI
+ * The key used by the "Print to file" printer to store the URI
  * to which the output should be written. GTK+ itself supports
- * only “file://” URIs.
+ * only "file://" URIs.
  */
 #define GTK_PRINT_SETTINGS_OUTPUT_URI          "output-uri"
 
@@ -343,12 +336,6 @@ const gchar *         gtk_print_settings_get_output_bin        (GtkPrintSettings
 GDK_AVAILABLE_IN_ALL
 void                  gtk_print_settings_set_output_bin        (GtkPrintSettings   *settings,
 								const gchar        *output_bin);
-
-GDK_AVAILABLE_IN_3_22
-GVariant             *gtk_print_settings_to_gvariant           (GtkPrintSettings   *settings);
-GDK_AVAILABLE_IN_3_22
-GtkPrintSettings     *gtk_print_settings_new_from_gvariant     (GVariant           *variant);
-
 
 G_END_DECLS
 

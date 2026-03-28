@@ -18,7 +18,9 @@
   General Public License for more details.
 
   You should have received a copy of the GNU Lesser General Public License
-  along with PulseAudio; if not, see <http://www.gnu.org/licenses/>.
+  along with PulseAudio; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+  USA.
 ***/
 
 #include <inttypes.h>
@@ -171,34 +173,6 @@
  * \li Sink input - pa_context_kill_sink_input()
  * \li Source output - pa_context_kill_source_output()
  *
- * It is strongly recommended that all volume changes are done as a direct
- * result of user input. With automated requests, such as those resulting
- * from misguided attempts of crossfading, PulseAudio can store the stream
- * volume at an inappropriate moment and restore it later. Besides, such
- * attempts lead to OSD popups in some desktop environments.
- *
- * As a special case of the general rule above, it is recommended that your
- * application leaves the task of saving and restoring the volume of its
- * streams to PulseAudio and does not attempt to do it by itself. PulseAudio
- * really knows better about events such as stream moving or headphone
- * plugging that would make the volume stored by the application inapplicable
- * to the new configuration.
- *
- * Another important case where setting a sink input volume may be a bad idea
- * is related to interpreters that interpret potentially untrusted scripts.
- * PulseAudio relies on your application not making malicious requests (such
- * as repeatedly setting the volume to 100%). Thus, script interpreters that
- * represent a security boundary must sandbox volume-changing requests coming
- * from their scripts. In the worst case, it may be necessary to apply the
- * script-requested volume to the script-produced sounds by altering the
- * samples in the script interpreter and not touching the sink or sink input
- * volume as seen by PulseAudio.
- *
- * If an application changes any volume, it should also listen to changes of
- * the same volume originating from outside the application (e.g., from the
- * system mixer application) and update its user interface accordingly. Use
- * \ref subscribe to get such notifications.
- *
  * \subsection module_subsec Modules
  *
  * Server modules can be remotely loaded and unloaded using
@@ -324,7 +298,7 @@ typedef struct pa_source_info {
     pa_cvolume volume;                  /**< Volume of the source */
     int mute;                           /**< Mute switch of the sink */
     uint32_t monitor_of_sink;           /**< If this is a monitor source, the index of the owning sink, otherwise PA_INVALID_INDEX. */
-    const char *monitor_of_sink_name;   /**< Name of the owning sink, or NULL. */
+    const char *monitor_of_sink_name;   /**< Name of the owning sink, or PA_INVALID_INDEX. */
     pa_usec_t latency;                  /**< Length of filled record buffer of this source. */
     const char *driver;                 /**< Driver name */
     pa_source_flags_t flags;            /**< Flags */
@@ -469,7 +443,9 @@ pa_operation* pa_context_kill_client(pa_context *c, uint32_t idx, pa_context_suc
 
 /** @{ \name Cards */
 
-/** \deprecated Superseded by pa_card_profile_info2 \since 0.9.15 */
+/** Stores information about a specific profile of a card.  Please
+ * note that this structure can be extended as part of evolutionary
+ * API updates at any time in any new release. \since 0.9.15 */
 typedef struct pa_card_profile_info {
     const char *name;                   /**< Name of this profile */
     const char *description;            /**< Description of this profile */
@@ -477,23 +453,6 @@ typedef struct pa_card_profile_info {
     uint32_t n_sources;                 /**< Number of sources this profile would create */
     uint32_t priority;                  /**< The higher this value is, the more useful this profile is as a default. */
 } pa_card_profile_info;
-
-/** Stores information about a specific profile of a card. Please
- * note that this structure can be extended as part of evolutionary
- * API updates at any time in any new release. \since 5.0 */
-typedef struct pa_card_profile_info2 {
-    const char *name;                   /**< Name of this profile */
-    const char *description;            /**< Description of this profile */
-    uint32_t n_sinks;                   /**< Number of sinks this profile would create */
-    uint32_t n_sources;                 /**< Number of sources this profile would create */
-    uint32_t priority;                  /**< The higher this value is, the more useful this profile is as a default. */
-    int available;
-    /**< Is this profile available? If this is zero, meaning "unavailable",
-     * then it makes no sense to try to activate this profile. If this is
-     * non-zero, it's still not a guarantee that activating the profile will
-     * result in anything useful, it just means that the server isn't aware of
-     * any reason why the profile would definitely be useless. \since 5.0 */
-} pa_card_profile_info2;
 
 /** Stores information about a specific port of a card.  Please
  * note that this structure can be extended as part of evolutionary
@@ -505,10 +464,9 @@ typedef struct pa_card_port_info {
     int available;                      /**< A #pa_port_available enum, indicating availability status of this port. */
     int direction;                      /**< A #pa_direction enum, indicating the direction of this port. */
     uint32_t n_profiles;                /**< Number of entries in profile array */
-    pa_card_profile_info** profiles;    /**< \deprecated Superseded by profiles2 */
+    pa_card_profile_info** profiles;    /**< Array of pointers to available profiles, or NULL. Array is terminated by an entry set to NULL. */
     pa_proplist *proplist;              /**< Property list */
     int64_t latency_offset;             /**< Latency offset of the port that gets added to the sink/source latency when the port is active. \since 3.0 */
-    pa_card_profile_info2** profiles2;  /**< Array of pointers to available profiles, or NULL. Array is terminated by an entry set to NULL. \since 5.0 */
 } pa_card_port_info;
 
 /** Stores information about cards. Please note that this structure
@@ -520,13 +478,11 @@ typedef struct pa_card_info {
     uint32_t owner_module;               /**< Index of the owning module, or PA_INVALID_INDEX. */
     const char *driver;                  /**< Driver name */
     uint32_t n_profiles;                 /**< Number of entries in profile array */
-    pa_card_profile_info* profiles;      /**< \deprecated Superseded by profiles2 */
-    pa_card_profile_info* active_profile; /**< \deprecated Superseded by active_profile2 */
+    pa_card_profile_info* profiles;      /**< Array of available profile, or NULL. Array is terminated by an entry with name set to NULL. Number of entries is stored in n_profiles. */
+    pa_card_profile_info* active_profile; /**< Pointer to active profile in the array, or NULL. */
     pa_proplist *proplist;               /**< Property list */
     uint32_t n_ports;                    /**< Number of entries in port array */
     pa_card_port_info **ports;           /**< Array of pointers to ports, or NULL. Array is terminated by an entry set to NULL. */
-    pa_card_profile_info2** profiles2;    /**< Array of pointers to available profiles, or NULL. Array is terminated by an entry set to NULL. \since 5.0 */
-    pa_card_profile_info2* active_profile2; /**< Pointer to active profile in the array, or NULL. \since 5.0 */
 } pa_card_info;
 
 /** Callback prototype for pa_context_get_card_info_...() \since 0.9.15 */

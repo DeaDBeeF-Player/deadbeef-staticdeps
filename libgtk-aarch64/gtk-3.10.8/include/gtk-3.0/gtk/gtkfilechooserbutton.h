@@ -47,20 +47,12 @@ struct _GtkFileChooserButton
   GtkFileChooserButtonPrivate *priv;
 };
 
-/**
- * GtkFileChooserButtonClass:
- * @parent_class: The parent class.
- * @file_set: Signal emitted when the user selects a file.
- */
 struct _GtkFileChooserButtonClass
 {
+  /*< private >*/
   GtkBoxClass parent_class;
 
-  /*< public >*/
-
   void (* file_set) (GtkFileChooserButton *fc);
-
-  /*< private >*/
 
   /* Padding for future expansion */
   void (*__gtk_reserved1);
@@ -87,9 +79,9 @@ gint                  gtk_file_chooser_button_get_width_chars  (GtkFileChooserBu
 GDK_AVAILABLE_IN_ALL
 void                  gtk_file_chooser_button_set_width_chars  (GtkFileChooserButton *button,
 								gint                  n_chars);
-GDK_DEPRECATED_IN_3_20_FOR(gtk_widget_get_focus_on_click)
+GDK_AVAILABLE_IN_ALL
 gboolean              gtk_file_chooser_button_get_focus_on_click (GtkFileChooserButton *button);
-GDK_DEPRECATED_IN_3_20_FOR(gtk_widget_set_focus_on_click)
+GDK_AVAILABLE_IN_ALL
 void                  gtk_file_chooser_button_set_focus_on_click (GtkFileChooserButton *button,
                                                                   gboolean              focus_on_click);
 

@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: cairo-xcb-shm
 Description: XCB/SHM functions for cairo graphics library
-Version: 1.15.10
+Version: 1.13.1
 
 Requires: cairo xcb-shm
 Libs:  

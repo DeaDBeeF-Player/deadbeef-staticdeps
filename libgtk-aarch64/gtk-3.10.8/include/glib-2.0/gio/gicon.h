@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -45,14 +45,13 @@ typedef struct _GIconIface GIconIface;
  * GIconIface:
  * @g_iface: The parent interface.
  * @hash: A hash for a given #GIcon.
- * @equal: Checks if two #GIcons are equal.
+ * @equal: Checks if two #GIcon<!-- -->s are equal.
  * @to_tokens: Serializes a #GIcon into tokens. The tokens must not
  * contain any whitespace. Don't implement if the #GIcon can't be
  * serialized (Since 2.20).
  * @from_tokens: Constructs a #GIcon from tokens. Set the #GError if
  * the tokens are malformed. Don't implement if the #GIcon can't be
  * serialized (Since 2.20).
- * @serialize: Serializes a #GIcon into a #GVariant. Since: 2.38
  *
  * GIconIface is used to implement GIcon types for various
  * different systems. See #GThemedIcon and #GLoadableIcon for

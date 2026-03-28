@@ -30,8 +30,6 @@
 #include <gdk/gdktypes.h>
 #include <gdk/gdkevents.h>
 #include <gdk/gdkdevicemanager.h>
-#include <gdk/gdkseat.h>
-#include <gdk/gdkmonitor.h>
 
 G_BEGIN_DECLS
 
@@ -52,7 +50,7 @@ const gchar * gdk_display_get_name         (GdkDisplay *display);
 
 GDK_DEPRECATED_IN_3_10
 gint        gdk_display_get_n_screens      (GdkDisplay  *display);
-GDK_DEPRECATED_IN_3_20
+GDK_AVAILABLE_IN_ALL
 GdkScreen * gdk_display_get_screen         (GdkDisplay  *display,
                                             gint         screen_num);
 GDK_AVAILABLE_IN_ALL
@@ -125,7 +123,7 @@ void             gdk_display_warp_pointer          (GdkDisplay             *disp
                                                     gint                   y);
 #endif /* GDK_MULTIDEVICE_SAFE */
 
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 GdkDisplay *gdk_display_open_default_libgtk_only (void);
 
 GDK_AVAILABLE_IN_ALL
@@ -161,39 +159,17 @@ GDK_AVAILABLE_IN_ALL
 gboolean gdk_display_supports_shapes           (GdkDisplay    *display);
 GDK_AVAILABLE_IN_ALL
 gboolean gdk_display_supports_input_shapes     (GdkDisplay    *display);
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 gboolean gdk_display_supports_composite        (GdkDisplay    *display);
 GDK_AVAILABLE_IN_ALL
 void     gdk_display_notify_startup_complete   (GdkDisplay    *display,
                                                 const gchar   *startup_id);
 
-GDK_DEPRECATED_IN_3_20_FOR(gdk_display_get_default_seat)
+GDK_AVAILABLE_IN_ALL
 GdkDeviceManager * gdk_display_get_device_manager (GdkDisplay *display);
 
 GDK_AVAILABLE_IN_ALL
 GdkAppLaunchContext *gdk_display_get_app_launch_context (GdkDisplay *display);
-
-GDK_AVAILABLE_IN_3_20
-GdkSeat * gdk_display_get_default_seat (GdkDisplay *display);
-
-GDK_AVAILABLE_IN_3_20
-GList   * gdk_display_list_seats       (GdkDisplay *display);
-
-GDK_AVAILABLE_IN_3_22
-int          gdk_display_get_n_monitors        (GdkDisplay *display);
-GDK_AVAILABLE_IN_3_22
-GdkMonitor * gdk_display_get_monitor           (GdkDisplay *display,
-                                                int         monitor_num);
-GDK_AVAILABLE_IN_3_22
-GdkMonitor * gdk_display_get_primary_monitor   (GdkDisplay *display);
-GDK_AVAILABLE_IN_3_22
-GdkMonitor * gdk_display_get_monitor_at_point  (GdkDisplay *display,
-                                                int         x,
-                                                int         y);
-GDK_AVAILABLE_IN_3_22
-GdkMonitor * gdk_display_get_monitor_at_window (GdkDisplay *display,
-                                                GdkWindow  *window);
-
 
 G_END_DECLS
 

@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -288,15 +288,6 @@ typedef gsize GType;
  */
 #define G_TYPE_CHECKSUM (g_checksum_get_type ())
 
-/**
- * G_TYPE_OPTION_GROUP:
- *
- * The #GType for a boxed type holding a #GOptionGroup.
- *
- * Since: 2.44
- */
-#define G_TYPE_OPTION_GROUP (g_option_group_get_type ())
-
 GLIB_AVAILABLE_IN_ALL
 GType   g_date_get_type            (void) G_GNUC_CONST;
 GLIB_AVAILABLE_IN_ALL
@@ -351,11 +342,16 @@ GLIB_AVAILABLE_IN_2_36
 GType   g_markup_parse_context_get_type (void) G_GNUC_CONST;
 GLIB_AVAILABLE_IN_2_40
 GType   g_mapped_file_get_type (void) G_GNUC_CONST;
-GLIB_AVAILABLE_IN_2_44
-GType   g_option_group_get_type    (void) G_GNUC_CONST;
 
 GLIB_DEPRECATED_FOR('G_TYPE_VARIANT')
 GType   g_variant_get_gtype        (void) G_GNUC_CONST;
+
+/**
+ * GStrv:
+ *
+ * A C representable type name for #G_TYPE_STRV.
+ */
+typedef gchar** GStrv;
 
 G_END_DECLS
 

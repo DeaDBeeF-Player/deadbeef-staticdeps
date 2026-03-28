@@ -57,22 +57,9 @@ struct _GtkWindow
   GtkWindowPrivate *priv;
 };
 
-/**
- * GtkWindowClass:
- * @parent_class: The parent class.
- * @set_focus: Sets child as the focus widget for the window.
- * @activate_focus: Activates the current focused widget within the window.
- * @activate_default: Activates the default widget for the window.
- * @keys_changed: Signal gets emitted when the set of accelerators or
- *   mnemonics that are associated with window changes.
- * @enable_debugging: Class handler for the #GtkWindow::enable-debugging
- *   keybinding signal. Since: 3.14
- */
 struct _GtkWindowClass
 {
   GtkBinClass parent_class;
-
-  /*< public >*/
 
   void     (* set_focus)   (GtkWindow *window,
                             GtkWidget *focus);
@@ -82,64 +69,38 @@ struct _GtkWindowClass
   void     (* activate_focus)   (GtkWindow *window);
   void     (* activate_default) (GtkWindow *window);
   void	   (* keys_changed)     (GtkWindow *window);
-  gboolean (* enable_debugging) (GtkWindow *window,
-                                 gboolean   toggle);
-
-  /*< private >*/
 
   /* Padding for future expansion */
   void (*_gtk_reserved1) (void);
   void (*_gtk_reserved2) (void);
   void (*_gtk_reserved3) (void);
+  void (*_gtk_reserved4) (void);
 };
 
-/**
- * GtkWindowType:
- * @GTK_WINDOW_TOPLEVEL: A regular window, such as a dialog.
- * @GTK_WINDOW_POPUP: A special window such as a tooltip.
- *
- * A #GtkWindow can be one of these types. Most things you’d consider a
- * “window” should have type #GTK_WINDOW_TOPLEVEL; windows with this type
- * are managed by the window manager and have a frame by default (call
- * gtk_window_set_decorated() to toggle the frame).  Windows with type
- * #GTK_WINDOW_POPUP are ignored by the window manager; window manager
- * keybindings won’t work on them, the window manager won’t decorate the
- * window with a frame, many GTK+ features that rely on the window
- * manager will not work (e.g. resize grips and
- * maximization/minimization). #GTK_WINDOW_POPUP is used to implement
- * widgets such as #GtkMenu or tooltips that you normally don’t think of
- * as windows per se. Nearly all windows should be #GTK_WINDOW_TOPLEVEL.
- * In particular, do not use #GTK_WINDOW_POPUP just to turn off
- * the window borders; use gtk_window_set_decorated() for that.
- */
-typedef enum
-{
-  GTK_WINDOW_TOPLEVEL,
-  GTK_WINDOW_POPUP
-} GtkWindowType;
+#define GTK_TYPE_WINDOW_GROUP             (gtk_window_group_get_type ())
+#define GTK_WINDOW_GROUP(object)          (G_TYPE_CHECK_INSTANCE_CAST ((object), GTK_TYPE_WINDOW_GROUP, GtkWindowGroup))
+#define GTK_WINDOW_GROUP_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_WINDOW_GROUP, GtkWindowGroupClass))
+#define GTK_IS_WINDOW_GROUP(object)       (G_TYPE_CHECK_INSTANCE_TYPE ((object), GTK_TYPE_WINDOW_GROUP))
+#define GTK_IS_WINDOW_GROUP_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_WINDOW_GROUP))
+#define GTK_WINDOW_GROUP_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_WINDOW_GROUP, GtkWindowGroupClass))
 
-/**
- * GtkWindowPosition:
- * @GTK_WIN_POS_NONE: No influence is made on placement.
- * @GTK_WIN_POS_CENTER: Windows should be placed in the center of the screen.
- * @GTK_WIN_POS_MOUSE: Windows should be placed at the current mouse position.
- * @GTK_WIN_POS_CENTER_ALWAYS: Keep window centered as it changes size, etc.
- * @GTK_WIN_POS_CENTER_ON_PARENT: Center the window on its transient
- *  parent (see gtk_window_set_transient_for()).
- *
- * Window placement can be influenced using this enumeration. Note that
- * using #GTK_WIN_POS_CENTER_ALWAYS is almost always a bad idea.
- * It won’t necessarily work well with all window managers or on all windowing systems.
- */
-typedef enum
+struct _GtkWindowGroup
 {
-  GTK_WIN_POS_NONE,
-  GTK_WIN_POS_CENTER,
-  GTK_WIN_POS_MOUSE,
-  GTK_WIN_POS_CENTER_ALWAYS,
-  GTK_WIN_POS_CENTER_ON_PARENT
-} GtkWindowPosition;
+  GObject parent_instance;
 
+  GtkWindowGroupPrivate *priv;
+};
+
+struct _GtkWindowGroupClass
+{
+  GObjectClass parent_class;
+
+  /* Padding for future expansion */
+  void (*_gtk_reserved1) (void);
+  void (*_gtk_reserved2) (void);
+  void (*_gtk_reserved3) (void);
+  void (*_gtk_reserved4) (void);
+};
 
 GDK_AVAILABLE_IN_ALL
 GType      gtk_window_get_type                 (void) G_GNUC_CONST;
@@ -150,7 +111,7 @@ void       gtk_window_set_title                (GtkWindow           *window,
 						const gchar         *title);
 GDK_AVAILABLE_IN_ALL
 const gchar * gtk_window_get_title             (GtkWindow           *window);
-GDK_DEPRECATED_IN_3_22
+GDK_AVAILABLE_IN_ALL
 void       gtk_window_set_wmclass              (GtkWindow           *window,
 						const gchar         *wmclass_name,
 						const gchar         *wmclass_class);
@@ -387,10 +348,6 @@ GDK_AVAILABLE_IN_ALL
 void     gtk_window_fullscreen    (GtkWindow *window);
 GDK_AVAILABLE_IN_ALL
 void     gtk_window_unfullscreen  (GtkWindow *window);
-GDK_AVAILABLE_IN_3_18
-void     gtk_window_fullscreen_on_monitor(GtkWindow *window,
-                                          GdkScreen *screen,
-                                          gint monitor);
 GDK_AVAILABLE_IN_3_10
 void     gtk_window_close         (GtkWindow *window);
 GDK_AVAILABLE_IN_ALL
@@ -439,15 +396,15 @@ GDK_AVAILABLE_IN_ALL
 void     gtk_window_get_position     (GtkWindow   *window,
                                       gint        *root_x,
                                       gint        *root_y);
-GDK_DEPRECATED_IN_3_20
+GDK_AVAILABLE_IN_ALL
 gboolean gtk_window_parse_geometry   (GtkWindow   *window,
                                       const gchar *geometry);
 
-GDK_DEPRECATED_IN_3_20_FOR(gtk_window_set_default_size)
+GDK_AVAILABLE_IN_ALL
 void gtk_window_set_default_geometry (GtkWindow *window,
                                       gint       width,
                                       gint       height);
-GDK_DEPRECATED_IN_3_20_FOR(gtk_window_resize)
+GDK_AVAILABLE_IN_ALL
 void gtk_window_resize_to_geometry   (GtkWindow *window,
                                       gint       width,
                                       gint       height);
@@ -464,6 +421,27 @@ void     gtk_window_reshow_with_initial_size (GtkWindow *window);
 GDK_AVAILABLE_IN_ALL
 GtkWindowType gtk_window_get_window_type     (GtkWindow     *window);
 
+/* Window groups
+ */
+GDK_AVAILABLE_IN_ALL
+GType            gtk_window_group_get_type      (void) G_GNUC_CONST;
+
+GDK_AVAILABLE_IN_ALL
+GtkWindowGroup * gtk_window_group_new           (void);
+GDK_AVAILABLE_IN_ALL
+void             gtk_window_group_add_window    (GtkWindowGroup     *window_group,
+						 GtkWindow          *window);
+GDK_AVAILABLE_IN_ALL
+void             gtk_window_group_remove_window (GtkWindowGroup     *window_group,
+					         GtkWindow          *window);
+GDK_AVAILABLE_IN_ALL
+GList *          gtk_window_group_list_windows  (GtkWindowGroup     *window_group);
+
+GDK_AVAILABLE_IN_ALL
+GtkWidget *      gtk_window_group_get_current_grab (GtkWindowGroup *window_group);
+GDK_AVAILABLE_IN_ALL
+GtkWidget *      gtk_window_group_get_current_device_grab (GtkWindowGroup *window_group,
+                                                           GdkDevice      *device);
 
 GDK_AVAILABLE_IN_ALL
 GtkApplication *gtk_window_get_application      (GtkWindow          *window);
@@ -474,31 +452,20 @@ void            gtk_window_set_application      (GtkWindow          *window,
 
 /* Window grips
  */
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 void     gtk_window_set_has_resize_grip    (GtkWindow    *window,
                                             gboolean      value);
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 gboolean gtk_window_get_has_resize_grip    (GtkWindow    *window);
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 gboolean gtk_window_resize_grip_is_visible (GtkWindow    *window);
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 gboolean gtk_window_get_resize_grip_area   (GtkWindow    *window,
                                             GdkRectangle *rect);
 
 GDK_AVAILABLE_IN_3_10
 void     gtk_window_set_titlebar           (GtkWindow    *window,
                                             GtkWidget    *titlebar);
-GDK_AVAILABLE_IN_3_16
-GtkWidget *gtk_window_get_titlebar         (GtkWindow    *window);
-
-GDK_AVAILABLE_IN_3_12
-gboolean gtk_window_is_maximized           (GtkWindow    *window);
-
-GDK_AVAILABLE_IN_3_14
-void     gtk_window_set_interactive_debugging (gboolean enable);
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC(GtkWindow, g_object_unref)
-G_DEFINE_AUTOPTR_CLEANUP_FUNC(GtkWindowGroup, g_object_unref)
 
 G_END_DECLS
 

@@ -18,7 +18,9 @@
   General Public License for more details.
 
   You should have received a copy of the GNU Lesser General Public License
-  along with PulseAudio; if not, see <http://www.gnu.org/licenses/>.
+  along with PulseAudio; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+  USA.
 ***/
 
 #include <inttypes.h>
@@ -51,7 +53,8 @@
  *
 @verbatim
 void my_subscription_callback(pa_context *c, pa_subscription_event_type_t t,
-                              uint32_t idx, void *userdata) {
+                              uint32_t idx, void *userdata)
+{
     if ((t & PA_SUBSCRIPTION_EVENT_FACILITY_MASK) == PA_SUBSCRIPTION_EVENT_SOURCE) {
         if ((t & PA_SUBSCRIPTION_EVENT_TYPE_MASK) == PA_SUBSCRIPTION_EVENT_NEW) {
             ... a source was added, let's do stuff! ...

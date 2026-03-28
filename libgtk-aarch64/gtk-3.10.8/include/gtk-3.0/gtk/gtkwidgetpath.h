@@ -72,13 +72,6 @@ GDK_AVAILABLE_IN_ALL
 void                gtk_widget_path_iter_set_object_type  (GtkWidgetPath       *path,
                                                            gint                 pos,
                                                            GType                type);
-GDK_AVAILABLE_IN_3_20
-const char *        gtk_widget_path_iter_get_object_name  (const GtkWidgetPath *path,
-                                                           gint                 pos);
-GDK_AVAILABLE_IN_3_20
-void                gtk_widget_path_iter_set_object_name  (GtkWidgetPath       *path,
-                                                           gint                 pos,
-                                                           const char          *name);
 GDK_AVAILABLE_IN_ALL
 const GtkWidgetPath *
                     gtk_widget_path_iter_get_siblings     (const GtkWidgetPath *path,
@@ -102,13 +95,6 @@ GDK_AVAILABLE_IN_ALL
 gboolean               gtk_widget_path_iter_has_qname (const GtkWidgetPath *path,
                                                        gint                 pos,
                                                        GQuark               qname);
-GDK_AVAILABLE_IN_3_14
-GtkStateFlags          gtk_widget_path_iter_get_state (const GtkWidgetPath *path,
-                                                       gint                 pos);
-GDK_AVAILABLE_IN_3_14
-void                   gtk_widget_path_iter_set_state (GtkWidgetPath       *path,
-                                                       gint                 pos,
-                                                       GtkStateFlags        state);
 
 GDK_AVAILABLE_IN_ALL
 void     gtk_widget_path_iter_add_class     (GtkWidgetPath       *path,
@@ -133,29 +119,29 @@ gboolean gtk_widget_path_iter_has_qclass    (const GtkWidgetPath *path,
                                              gint                 pos,
                                              GQuark               qname);
 
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 void     gtk_widget_path_iter_add_region    (GtkWidgetPath      *path,
                                              gint                pos,
                                              const gchar        *name,
                                              GtkRegionFlags     flags);
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 void     gtk_widget_path_iter_remove_region (GtkWidgetPath      *path,
                                              gint                pos,
                                              const gchar        *name);
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 void     gtk_widget_path_iter_clear_regions (GtkWidgetPath      *path,
                                              gint                pos);
 
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 GSList * gtk_widget_path_iter_list_regions  (const GtkWidgetPath *path,
                                              gint                 pos);
 
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 gboolean gtk_widget_path_iter_has_region    (const GtkWidgetPath *path,
                                              gint                 pos,
                                              const gchar         *name,
                                              GtkRegionFlags      *flags);
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 gboolean gtk_widget_path_iter_has_qregion   (const GtkWidgetPath *path,
                                              gint                 pos,
                                              GQuark               qname,
@@ -170,7 +156,6 @@ gboolean        gtk_widget_path_is_type    (const GtkWidgetPath *path,
 GDK_AVAILABLE_IN_ALL
 gboolean        gtk_widget_path_has_parent (const GtkWidgetPath *path,
                                             GType                type);
-
 
 G_END_DECLS
 

@@ -32,6 +32,7 @@
 
 #include <gtk/gtkwidget.h>
 
+
 G_BEGIN_DECLS
 
 #define GTK_TYPE_CONTAINER              (gtk_container_get_type ())
@@ -54,28 +55,9 @@ struct _GtkContainer
   GtkContainerPrivate *priv;
 };
 
-/**
- * GtkContainerClass:
- * @parent_class: The parent class.
- * @add: Signal emitted when a widget is added to container.
- * @remove: Signal emitted when a widget is removed from container.
- * @check_resize: Signal emitted when a size recalculation is needed.
- * @forall: Invokes callback on each child of container.
- * @set_focus_child: Sets the focused child of container.
- * @child_type: Returns the type of the children supported by the container.
- * @composite_name: Gets a widget’s composite name. Deprecated: 3.10.
- * @set_child_property: Set a property on a child of container.
- * @get_child_property: Get a property from a child of container.
- * @get_path_for_child: Get path representing entire widget hierarchy
- *    from the toplevel down to and including @child.
- *
- * Base class for containers.
- */
 struct _GtkContainerClass
 {
   GtkWidgetClass parent_class;
-
-  /*< public >*/
 
   void    (*add)       		(GtkContainer	 *container,
 				 GtkWidget	 *widget);
@@ -121,20 +103,6 @@ struct _GtkContainerClass
 };
 
 
-/**
- * GtkResizeMode:
- * @GTK_RESIZE_PARENT: Pass resize request to the parent
- * @GTK_RESIZE_QUEUE: Queue resizes on this widget
- * @GTK_RESIZE_IMMEDIATE: Resize immediately. Deprecated.
- */
-typedef enum
-{
-  GTK_RESIZE_PARENT,
-  GTK_RESIZE_QUEUE,
-  GTK_RESIZE_IMMEDIATE
-} GtkResizeMode;
-
-
 /* Application-level methods */
 
 GDK_AVAILABLE_IN_ALL
@@ -151,10 +119,10 @@ GDK_AVAILABLE_IN_ALL
 void    gtk_container_remove		 (GtkContainer	   *container,
 					  GtkWidget	   *widget);
 
-GDK_DEPRECATED_IN_3_12
+GDK_AVAILABLE_IN_ALL
 void    gtk_container_set_resize_mode    (GtkContainer     *container,
 					  GtkResizeMode     resize_mode);
-GDK_DEPRECATED_IN_3_12
+GDK_AVAILABLE_IN_ALL
 GtkResizeMode gtk_container_get_resize_mode (GtkContainer     *container);
 
 GDK_AVAILABLE_IN_ALL
@@ -186,7 +154,7 @@ void     gtk_container_unset_focus_chain (GtkContainer  *container);
 
 /* Widget-level methods */
 
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 void   gtk_container_set_reallocate_redraws (GtkContainer    *container,
 					     gboolean         needs_redraws);
 GDK_AVAILABLE_IN_ALL
@@ -217,10 +185,6 @@ GDK_AVAILABLE_IN_ALL
 void         gtk_container_class_install_child_property (GtkContainerClass *cclass,
 							 guint		    property_id,
 							 GParamSpec	   *pspec);
-GDK_AVAILABLE_IN_3_18
-void         gtk_container_class_install_child_properties (GtkContainerClass *cclass,
-                                                           guint              n_pspecs,
-                                                           GParamSpec       **pspecs);
 GDK_AVAILABLE_IN_ALL
 GParamSpec*  gtk_container_class_find_child_property	(GObjectClass	   *cclass,
 							 const gchar	   *property_name);
@@ -268,11 +232,6 @@ void gtk_container_child_notify (GtkContainer *container,
                                  GtkWidget    *child,
                                  const gchar  *child_property);
 
-GDK_AVAILABLE_IN_3_18
-void gtk_container_child_notify_by_pspec (GtkContainer *container,
-                                          GtkWidget    *child,
-                                          GParamSpec   *pspec);
-
 /**
  * GTK_CONTAINER_WARN_INVALID_CHILD_PROPERTY_ID:
  * @object: the #GObject on which set_child_property() or get_child_property()
@@ -298,8 +257,6 @@ void    gtk_container_class_handle_border_width (GtkContainerClass *klass);
 GDK_AVAILABLE_IN_ALL
 GtkWidgetPath * gtk_container_get_path_for_child (GtkContainer      *container,
                                                   GtkWidget         *child);
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC(GtkContainer, g_object_unref)
 
 G_END_DECLS
 

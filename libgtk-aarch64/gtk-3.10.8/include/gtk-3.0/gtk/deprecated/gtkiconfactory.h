@@ -57,15 +57,9 @@ struct _GtkIconFactory
   GtkIconFactoryPrivate *priv;
 };
 
-/**
- * GtkIconFactoryClass:
- * @parent_class: The parent class.
- */
 struct _GtkIconFactoryClass
 {
   GObjectClass parent_class;
-
-  /*< private >*/
 
   /* Padding for future expansion */
   void (*_gtk_reserved1) (void);
@@ -96,7 +90,7 @@ GDK_DEPRECATED_IN_3_10
 GtkIconSet* gtk_icon_factory_lookup_default  (const gchar     *stock_id);
 
 /* Get preferred real size from registered semantic size.  Note that
- * themes SHOULD use this size, but they aren’t required to; for size
+ * themes SHOULD use this size, but they aren't required to; for size
  * requests and such, you should get the actual pixbuf from the icon
  * set and see what size was rendered.
  *
@@ -220,6 +214,12 @@ GDK_DEPRECATED_IN_3_10
 GtkStateType     gtk_icon_source_get_state                (const GtkIconSource *source);
 GDK_DEPRECATED_IN_3_10
 GtkIconSize      gtk_icon_source_get_size                 (const GtkIconSource *source);
+
+
+/* ignore this */
+void _gtk_icon_set_invalidate_caches (void);
+GList* _gtk_icon_factory_list_ids (void);
+void _gtk_icon_factory_ensure_default_icons (void);
 
 G_END_DECLS
 

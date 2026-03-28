@@ -29,6 +29,7 @@ G_BEGIN_DECLS
 typedef struct _PangoAnalysis PangoAnalysis;
 typedef struct _PangoItem PangoItem;
 
+/* TODO: if more flags are needed, turn this into a real PangoAnalysisFlags enum */
 /**
  * PANGO_ANALYSIS_FLAG_CENTERED_BASELINE:
  *
@@ -38,16 +39,6 @@ typedef struct _PangoItem PangoItem;
  * Since: 1.16
  */
 #define PANGO_ANALYSIS_FLAG_CENTERED_BASELINE (1 << 0)
-
-/**
- * PANGO_ANALYSIS_FLAG_IS_ELLIPSIS:
- *
- * This flag is used to mark runs that hold ellipsized text,
- * in an ellipsized layout.
- *
- * Since: 1.36.7
- */
-#define PANGO_ANALYSIS_FLAG_IS_ELLIPSIS (1 << 1)
 
 /**
  * PangoAnalysis:
@@ -82,12 +73,8 @@ struct _PangoAnalysis
 
 /**
  * PangoItem:
- * @offset: byte offset of the start of this item in text.
- * @length: length of this item in bytes.
- * @num_chars: number of Unicode characters in the item.
- * @analysis: analysis results for the item.
  *
- * The #PangoItem structure stores information about a segment of text.
+ * The #PangoItem structure stores information abouta segment of text.
  */
 struct _PangoItem
 {
@@ -99,16 +86,11 @@ struct _PangoItem
 
 #define PANGO_TYPE_ITEM (pango_item_get_type ())
 
-PANGO_AVAILABLE_IN_ALL
 GType pango_item_get_type (void) G_GNUC_CONST;
 
-PANGO_AVAILABLE_IN_ALL
 PangoItem *pango_item_new   (void);
-PANGO_AVAILABLE_IN_ALL
 PangoItem *pango_item_copy  (PangoItem  *item);
-PANGO_AVAILABLE_IN_ALL
 void       pango_item_free  (PangoItem  *item);
-PANGO_AVAILABLE_IN_ALL
 PangoItem *pango_item_split (PangoItem  *orig,
 			     int         split_index,
 			     int         split_offset);

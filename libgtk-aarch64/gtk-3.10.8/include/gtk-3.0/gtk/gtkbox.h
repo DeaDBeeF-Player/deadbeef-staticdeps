@@ -56,15 +56,9 @@ struct _GtkBox
   GtkBoxPrivate *priv;
 };
 
-/**
- * GtkBoxClass:
- * @parent_class: The parent class.
- */
 struct _GtkBoxClass
 {
   GtkContainerClass parent_class;
-
-  /*< private >*/
 
   /* Padding for future expansion */
   void (*_gtk_reserved1) (void);
@@ -128,12 +122,6 @@ void        gtk_box_set_child_packing   (GtkBox         *box,
                                          gboolean        fill,
                                          guint           padding,
                                          GtkPackType     pack_type);
-
-GDK_AVAILABLE_IN_3_12
-void        gtk_box_set_center_widget   (GtkBox         *box,
-                                         GtkWidget      *widget);
-GDK_AVAILABLE_IN_3_12
-GtkWidget  *gtk_box_get_center_widget   (GtkBox         *box);
 
 G_END_DECLS
 

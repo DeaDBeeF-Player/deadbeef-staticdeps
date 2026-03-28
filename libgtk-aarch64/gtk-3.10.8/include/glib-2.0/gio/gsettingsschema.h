@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 2 of the licence, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -74,12 +74,6 @@ GSettingsSchemaKey *    g_settings_schema_get_key                       (GSettin
 GLIB_AVAILABLE_IN_2_40
 gboolean                g_settings_schema_has_key                       (GSettingsSchema        *schema,
                                                                          const gchar            *name);
-GLIB_AVAILABLE_IN_2_46
-gchar**                 g_settings_schema_list_keys                     (GSettingsSchema        *schema);
-
-
-GLIB_AVAILABLE_IN_2_44
-gchar **                g_settings_schema_list_children                 (GSettingsSchema        *schema);
 
 #define                 G_TYPE_SETTINGS_SCHEMA_KEY                      (g_settings_schema_key_get_type ())
 GLIB_AVAILABLE_IN_2_40
@@ -100,8 +94,6 @@ GLIB_AVAILABLE_IN_2_40
 gboolean                g_settings_schema_key_range_check               (GSettingsSchemaKey     *key,
                                                                          GVariant               *value);
 
-GLIB_AVAILABLE_IN_2_44
-const gchar *           g_settings_schema_key_get_name                  (GSettingsSchemaKey     *key);
 GLIB_AVAILABLE_IN_2_40
 const gchar *           g_settings_schema_key_get_summary               (GSettingsSchemaKey     *key);
 GLIB_AVAILABLE_IN_2_40

@@ -38,8 +38,7 @@ G_BEGIN_DECLS
  * @selection_data: a #GtkSelectionData containing the data was received.
  *   If retrieving the data failed, then then length field
  *   of @selection_data will be negative.
- * @data: (closure): the @user_data supplied to
- *   gtk_clipboard_request_contents().
+ * @data: the @user_data supplied to gtk_clipboard_request_contents().
  *
  * A function to be called when the results of gtk_clipboard_request_contents()
  * are received, or when the request fails.
@@ -51,10 +50,9 @@ typedef void (* GtkClipboardReceivedFunc)         (GtkClipboard     *clipboard,
 /**
  * GtkClipboardTextReceivedFunc:
  * @clipboard: the #GtkClipboard
- * @text: (nullable): the text received, as a UTF-8 encoded string, or
- *   %NULL if retrieving the data failed.
- * @data: (closure): the @user_data supplied to
- *   gtk_clipboard_request_text().
+ * @text: the text received, as a UTF-8 encoded string, or %NULL
+ *   if retrieving the data failed.
+ * @data: the @user_data supplied to gtk_clipboard_request_text().
  *
  * A function to be called when the results of gtk_clipboard_request_text()
  * are received, or when the request fails.
@@ -63,22 +61,6 @@ typedef void (* GtkClipboardTextReceivedFunc)     (GtkClipboard     *clipboard,
 					           const gchar      *text,
 					           gpointer          data);
 
-/**
- * GtkClipboardRichTextReceivedFunc:
- * @clipboard: the #GtkClipboard
- * @format: The format of the rich text
- * @text: (nullable) (type utf8): the rich text received, as
- *   a UTF-8 encoded string, or %NULL if retrieving the data failed.
- * @length: Length of the text.
- * @data: (closure): the @user_data supplied to
- *   gtk_clipboard_request_rich_text().
- *
- * A function to be called when the results of
- * gtk_clipboard_request_rich_text() are received, or when the request
- * fails.
- *
- * Since: 2.10
- */
 typedef void (* GtkClipboardRichTextReceivedFunc) (GtkClipboard     *clipboard,
                                                    GdkAtom           format,
 					           const guint8     *text,
@@ -89,8 +71,7 @@ typedef void (* GtkClipboardRichTextReceivedFunc) (GtkClipboard     *clipboard,
  * GtkClipboardImageReceivedFunc:
  * @clipboard: the #GtkClipboard
  * @pixbuf: the received image
- * @data: (closure): the @user_data supplied to
- *   gtk_clipboard_request_image().
+ * @data: the @user_data supplied to gtk_clipboard_request_image().
  *
  * A function to be called when the results of gtk_clipboard_request_image()
  * are received, or when the request fails.
@@ -101,19 +82,6 @@ typedef void (* GtkClipboardImageReceivedFunc)    (GtkClipboard     *clipboard,
 						   GdkPixbuf        *pixbuf,
 						   gpointer          data);
 
-/**
- * GtkClipboardURIReceivedFunc:
- * @clipboard: the #GtkClipboard
- * @uris: (array zero-terminated=1): the received URIs
- * @data: (closure): the @user_data supplied to
- *   gtk_clipboard_request_uris().
- *
- * A function to be called when the results of
- * gtk_clipboard_request_uris() are received, or when the request
- * fails.
- *
- * Since: 2.14
- */
 typedef void (* GtkClipboardURIReceivedFunc)      (GtkClipboard     *clipboard,
 						   gchar           **uris,
 						   gpointer          data);
@@ -121,11 +89,10 @@ typedef void (* GtkClipboardURIReceivedFunc)      (GtkClipboard     *clipboard,
 /**
  * GtkClipboardTargetsReceivedFunc:
  * @clipboard: the #GtkClipboard
- * @atoms: (nullable) (array length=n_atoms): the supported targets,
- *   as array of #GdkAtom, or %NULL if retrieving the data failed.
+ * @atoms: the supported targets, as array of #GdkAtom, or %NULL
+ *   if retrieving the data failed.
  * @n_atoms: the length of the @atoms array.
- * @data: (closure): the @user_data supplied to
- *   gtk_clipboard_request_targets().
+ * @data: the @user_data supplied to gtk_clipboard_request_targets().
  *
  * A function to be called when the results of gtk_clipboard_request_targets()
  * are received, or when the request fails.
@@ -186,11 +153,10 @@ GType         gtk_clipboard_get_type (void) G_GNUC_CONST;
 GDK_AVAILABLE_IN_ALL
 GtkClipboard *gtk_clipboard_get_for_display (GdkDisplay   *display,
 					     GdkAtom       selection);
+#ifndef GDK_MULTIHEAD_SAFE
 GDK_AVAILABLE_IN_ALL
 GtkClipboard *gtk_clipboard_get             (GdkAtom       selection);
-
-GDK_AVAILABLE_IN_3_16
-GtkClipboard *gtk_clipboard_get_default     (GdkDisplay    *display);
+#endif
 
 GDK_AVAILABLE_IN_ALL
 GdkDisplay   *gtk_clipboard_get_display     (GtkClipboard *clipboard);
@@ -290,8 +256,10 @@ void gtk_clipboard_set_can_store (GtkClipboard         *clipboard,
 GDK_AVAILABLE_IN_ALL
 void gtk_clipboard_store         (GtkClipboard   *clipboard);
 
-GDK_AVAILABLE_IN_3_22
-GdkAtom gtk_clipboard_get_selection (GtkClipboard *clipboard);
+/* private */
+void     _gtk_clipboard_handle_event    (GdkEventOwnerChange *event);
+
+void     _gtk_clipboard_store_all       (void);
 
 G_END_DECLS
 

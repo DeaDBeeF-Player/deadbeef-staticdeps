@@ -22,11 +22,7 @@
 #ifndef __GTK_STACK_H__
 #define __GTK_STACK_H__
 
-#if !defined (__GTK_H_INSIDE__) && !defined (GTK_COMPILATION)
-#error "Only <gtk/gtk.h> can be included directly."
-#endif
-
-#include <gtk/gtkcontainer.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
@@ -49,19 +45,7 @@ typedef enum {
   GTK_STACK_TRANSITION_TYPE_SLIDE_UP,
   GTK_STACK_TRANSITION_TYPE_SLIDE_DOWN,
   GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT,
-  GTK_STACK_TRANSITION_TYPE_SLIDE_UP_DOWN,
-  GTK_STACK_TRANSITION_TYPE_OVER_UP,
-  GTK_STACK_TRANSITION_TYPE_OVER_DOWN,
-  GTK_STACK_TRANSITION_TYPE_OVER_LEFT,
-  GTK_STACK_TRANSITION_TYPE_OVER_RIGHT,
-  GTK_STACK_TRANSITION_TYPE_UNDER_UP,
-  GTK_STACK_TRANSITION_TYPE_UNDER_DOWN,
-  GTK_STACK_TRANSITION_TYPE_UNDER_LEFT,
-  GTK_STACK_TRANSITION_TYPE_UNDER_RIGHT,
-  GTK_STACK_TRANSITION_TYPE_OVER_UP_DOWN,
-  GTK_STACK_TRANSITION_TYPE_OVER_DOWN_UP,
-  GTK_STACK_TRANSITION_TYPE_OVER_LEFT_RIGHT,
-  GTK_STACK_TRANSITION_TYPE_OVER_RIGHT_LEFT
+  GTK_STACK_TRANSITION_TYPE_SLIDE_UP_DOWN
 } GtkStackTransitionType;
 
 struct _GtkStack {
@@ -86,9 +70,6 @@ void                   gtk_stack_add_titled              (GtkStack              
                                                           GtkWidget              *child,
                                                           const gchar            *name,
                                                           const gchar            *title);
-GDK_AVAILABLE_IN_3_12
-GtkWidget *            gtk_stack_get_child_by_name       (GtkStack               *stack,
-                                                          const gchar            *name);
 GDK_AVAILABLE_IN_3_10
 void                   gtk_stack_set_visible_child       (GtkStack               *stack,
                                                           GtkWidget              *child);
@@ -108,16 +89,6 @@ void                   gtk_stack_set_homogeneous         (GtkStack              
                                                           gboolean                homogeneous);
 GDK_AVAILABLE_IN_3_10
 gboolean               gtk_stack_get_homogeneous         (GtkStack               *stack);
-GDK_AVAILABLE_IN_3_16
-void                   gtk_stack_set_hhomogeneous        (GtkStack               *stack,
-                                                          gboolean                hhomogeneous);
-GDK_AVAILABLE_IN_3_16
-gboolean               gtk_stack_get_hhomogeneous        (GtkStack               *stack);
-GDK_AVAILABLE_IN_3_16
-void                   gtk_stack_set_vhomogeneous        (GtkStack               *stack,
-                                                          gboolean                vhomogeneous);
-GDK_AVAILABLE_IN_3_16
-gboolean               gtk_stack_get_vhomogeneous        (GtkStack               *stack);
 GDK_AVAILABLE_IN_3_10
 void                   gtk_stack_set_transition_duration (GtkStack               *stack,
                                                           guint                   duration);
@@ -128,13 +99,7 @@ void                   gtk_stack_set_transition_type     (GtkStack              
                                                           GtkStackTransitionType  transition);
 GDK_AVAILABLE_IN_3_10
 GtkStackTransitionType gtk_stack_get_transition_type     (GtkStack               *stack);
-GDK_AVAILABLE_IN_3_12
-gboolean               gtk_stack_get_transition_running  (GtkStack               *stack);
-GDK_AVAILABLE_IN_3_18
-void                   gtk_stack_set_interpolate_size    (GtkStack *stack,
-                                                          gboolean  interpolate_size);
-GDK_AVAILABLE_IN_3_18
-gboolean               gtk_stack_get_interpolate_size    (GtkStack *stack);
+
 G_END_DECLS
 
 #endif

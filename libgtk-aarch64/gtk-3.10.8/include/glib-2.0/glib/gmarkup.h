@@ -2,18 +2,19 @@
  *
  *  Copyright 2000 Red Hat, Inc.
  *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * GLib is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful,
+ * GLib is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this library; if not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with GLib; see the file COPYING.LIB.  If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef __G_MARKUP_H__
@@ -115,8 +116,7 @@ typedef struct _GMarkupParser GMarkupParser;
 /**
  * GMarkupParser:
  * @start_element: Callback to invoke when the opening tag of an element
- *     is seen. The callback's @attribute_names and @attribute_values parameters
- *     are %NULL-terminated.
+ *     is seen.
  * @end_element: Callback to invoke when the closing tag of an element
  *     is seen. Note that this is also called for empty tags like
  *     `<empty/>`.

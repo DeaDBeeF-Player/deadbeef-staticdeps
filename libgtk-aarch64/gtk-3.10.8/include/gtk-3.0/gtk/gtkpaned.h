@@ -110,12 +110,6 @@ GtkWidget * gtk_paned_get_child2   (GtkPaned       *paned);
 GDK_AVAILABLE_IN_ALL
 GdkWindow * gtk_paned_get_handle_window (GtkPaned  *paned);
 
-GDK_AVAILABLE_IN_3_16
-void        gtk_paned_set_wide_handle (GtkPaned    *paned,
-                                       gboolean     wide);
-GDK_AVAILABLE_IN_3_16
-gboolean    gtk_paned_get_wide_handle (GtkPaned    *paned);
-
 
 G_END_DECLS
 

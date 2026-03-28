@@ -49,9 +49,6 @@ struct _GtkCellAreaBox
   GtkCellAreaBoxPrivate *priv;
 };
 
-/**
- * GtkCellAreaBoxClass:
- */
 struct _GtkCellAreaBoxClass
 {
   /*< private >*/

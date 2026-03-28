@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -52,7 +52,7 @@ typedef struct _GFileIface    		GFileIface;
  * @g_iface: The parent interface.
  * @dup: Duplicates a #GFile.
  * @hash: Creates a hash of a #GFile.
- * @equal: Checks equality of two given #GFiles.
+ * @equal: Checks equality of two given #GFile<!-- -->s.
  * @is_native: Checks to see if a file is native to the system.
  * @has_uri_scheme: Checks to see if a #GFile has a given URI scheme.
  * @get_uri_scheme: Gets the URI scheme for a #GFile.
@@ -80,8 +80,8 @@ typedef struct _GFileIface    		GFileIface;
  * @set_display_name: Sets the display name for a #GFile.
  * @set_display_name_async: Asynchronously sets a #GFile's display name.
  * @set_display_name_finish: Finishes asynchronously setting a #GFile's display name.
- * @query_settable_attributes: Returns a list of #GFileAttributes that can be set.
- * @_query_settable_attributes_async: Asynchronously gets a list of #GFileAttributes that can be set.
+ * @query_settable_attributes: Returns a list of #GFileAttribute<!-- -->s that can be set.
+ * @_query_settable_attributes_async: Asynchronously gets a list of #GFileAttribute<!-- -->s that can be set.
  * @_query_settable_attributes_finish: Finishes asynchronously querying settable attributes.
  * @query_writable_namespaces: Returns a list of #GFileAttribute namespaces that are writable.
  * @_query_writable_namespaces_async: Asynchronously gets a list of #GFileAttribute namespaces that are writable.
@@ -150,9 +150,6 @@ typedef struct _GFileIface    		GFileIface;
  * @eject_mountable_with_operation_finish: Finishes an eject operation using a #GMountOperation. Since 2.22.
  * @poll_mountable: Polls a mountable object for media changes. Since 2.22.
  * @poll_mountable_finish: Finishes an poll operation for media changes. Since 2.22.
- * @measure_disk_usage: Recursively measures the disk usage of @file. Since 2.38
- * @measure_disk_usage_async: Asynchronously recursively measures the disk usage of @file. Since 2.38
- * @measure_disk_usage_finish: Finishes an asynchronous recursive measurement of the disk usage of @file. Since 2.38
  *
  * An interface for writing VFS file handles.
  **/
@@ -606,9 +603,6 @@ GFile *                 g_file_new_tmp                    (const char           
                                                            GError                    **error);
 GLIB_AVAILABLE_IN_ALL
 GFile *                 g_file_parse_name                 (const char                 *parse_name);
-GLIB_AVAILABLE_IN_2_56
-GFile *                 g_file_new_build_filename         (const gchar                *first_element,
-                                                           ...) G_GNUC_NULL_TERMINATED;
 GLIB_AVAILABLE_IN_ALL
 GFile *                 g_file_dup                        (GFile                      *file);
 GLIB_AVAILABLE_IN_ALL
@@ -620,8 +614,6 @@ GLIB_AVAILABLE_IN_ALL
 char *                  g_file_get_basename               (GFile                      *file);
 GLIB_AVAILABLE_IN_ALL
 char *                  g_file_get_path                   (GFile                      *file);
-GLIB_AVAILABLE_IN_2_56
-const char *            g_file_peek_path                  (GFile                      *file);
 GLIB_AVAILABLE_IN_ALL
 char *                  g_file_get_uri                    (GFile                      *file);
 GLIB_AVAILABLE_IN_ALL
@@ -1252,22 +1244,6 @@ gboolean g_file_replace_contents_finish      (GFile                  *file,
 
 GLIB_AVAILABLE_IN_ALL
 gboolean g_file_supports_thread_contexts     (GFile                  *file);
-
-GLIB_AVAILABLE_IN_2_56
-GBytes  *g_file_load_bytes                   (GFile                  *file,
-                                              GCancellable           *cancellable,
-                                              gchar                 **etag_out,
-                                              GError                **error);
-GLIB_AVAILABLE_IN_2_56
-void     g_file_load_bytes_async             (GFile                  *file,
-                                              GCancellable           *cancellable,
-                                              GAsyncReadyCallback     callback,
-                                              gpointer                user_data);
-GLIB_AVAILABLE_IN_2_56
-GBytes  *g_file_load_bytes_finish            (GFile                  *file,
-                                              GAsyncResult           *result,
-                                              gchar                 **etag_out,
-                                              GError                **error);
 
 G_END_DECLS
 

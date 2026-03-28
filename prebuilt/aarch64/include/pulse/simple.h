@@ -18,7 +18,9 @@
   General Public License for more details.
 
   You should have received a copy of the GNU Lesser General Public License
-  along with PulseAudio; if not, see <http://www.gnu.org/licenses/>.
+  along with PulseAudio; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+  USA.
 ***/
 
 #include <sys/types.h>
@@ -76,13 +78,12 @@
  *
  * \section ctrl_sec Buffer control
  *
- * \li pa_simple_get_latency() - Will return the total latency of
- *                               the playback or record pipeline, respectively.
- * \li pa_simple_flush() - Will throw away all data currently in buffers.
- *
- * If a playback stream is used then the following operation is available:
+ * If a playback stream is used then a few other operations are available:
  *
  * \li pa_simple_drain() - Will wait for all sent data to finish playing.
+ * \li pa_simple_flush() - Will throw away all data currently in buffers.
+ * \li pa_simple_get_latency() - Will return the total latency of
+ *                               the playback pipeline.
  *
  * \section cleanup_sec Cleanup
  *
@@ -136,22 +137,13 @@ int pa_simple_write(pa_simple *s, const void *data, size_t bytes, int *error);
 /** Wait until all data already written is played by the daemon. */
 int pa_simple_drain(pa_simple *s, int *error);
 
-/** Read some data from the server. This function blocks until \a bytes amount
- * of data has been received from the server, or until an error occurs.
- * Returns a negative value on failure. */
-int pa_simple_read(
-    pa_simple *s, /**< The connection object. */
-    void *data,   /**< A pointer to a buffer. */
-    size_t bytes, /**< The number of bytes to read. */
-    int *error
-    /**< A pointer where the error code is stored when the function returns
-     * a negative value. It is OK to pass NULL here. */
-    );
+/** Read some data from the server. */
+int pa_simple_read(pa_simple *s, void *data, size_t bytes, int *error);
 
-/** Return the playback or record latency. */
+/** Return the playback latency. */
 pa_usec_t pa_simple_get_latency(pa_simple *s, int *error);
 
-/** Flush the playback or record buffer. This discards any audio in the buffer. */
+/** Flush the playback buffer. This discards any audio in the buffer. */
 int pa_simple_flush(pa_simple *s, int *error);
 
 PA_C_DECL_END

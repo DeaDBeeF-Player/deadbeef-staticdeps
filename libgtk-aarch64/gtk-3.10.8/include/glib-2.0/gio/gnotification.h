@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -25,7 +25,6 @@
 #endif
 
 #include <gio/giotypes.h>
-#include <gio/gioenums.h>
 
 G_BEGIN_DECLS
 
@@ -51,13 +50,9 @@ GLIB_AVAILABLE_IN_2_40
 void                    g_notification_set_icon                         (GNotification *notification,
                                                                          GIcon         *icon);
 
-GLIB_DEPRECATED_IN_2_42_FOR(g_notification_set_priority)
+GLIB_AVAILABLE_IN_2_40
 void                    g_notification_set_urgent                       (GNotification *notification,
                                                                          gboolean       urgent);
-
-GLIB_AVAILABLE_IN_2_42
-void                    g_notification_set_priority                     (GNotification         *notification,
-                                                                         GNotificationPriority  priority);
 
 GLIB_AVAILABLE_IN_2_40
 void                    g_notification_add_button                       (GNotification *notification,

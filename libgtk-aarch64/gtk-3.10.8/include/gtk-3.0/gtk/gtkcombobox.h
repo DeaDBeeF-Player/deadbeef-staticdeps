@@ -47,25 +47,14 @@ struct _GtkComboBox
   GtkComboBoxPrivate *priv;
 };
 
-/**
- * GtkComboBoxClass:
- * @parent_class: The parent class.
- * @changed: Signal is emitted when the active item is changed.
- * @format_entry_text: Signal which allows you to change how the text
- *    displayed in a combo box’s entry is displayed.
- */
 struct _GtkComboBoxClass
 {
   GtkBinClass parent_class;
 
-  /*< public >*/
-
   /* signals */
   void     (* changed)           (GtkComboBox *combo_box);
   gchar   *(* format_entry_text) (GtkComboBox *combo_box,
-                                  const gchar *path);
-
-  /*< private >*/
+				  const gchar *path);
 
   /* Padding for future expansion */
   void (*_gtk_reserved1) (void);
@@ -119,9 +108,9 @@ GDK_DEPRECATED_IN_3_10
 void          gtk_combo_box_set_title              (GtkComboBox *combo_box,
                                                     const gchar *title);
 
-GDK_DEPRECATED_IN_3_20_FOR(gtk_widget_get_focus_on_click)
+GDK_AVAILABLE_IN_ALL
 gboolean      gtk_combo_box_get_focus_on_click     (GtkComboBox *combo);
-GDK_DEPRECATED_IN_3_20_FOR(gtk_widget_set_focus_on_click)
+GDK_AVAILABLE_IN_ALL
 void          gtk_combo_box_set_focus_on_click     (GtkComboBox *combo,
                                                     gboolean     focus_on_click);
 
@@ -182,7 +171,7 @@ void          gtk_combo_box_popup_for_device (GtkComboBox     *combo_box,
 GDK_AVAILABLE_IN_ALL
 void          gtk_combo_box_popdown          (GtkComboBox     *combo_box);
 GDK_AVAILABLE_IN_ALL
-AtkObject *   gtk_combo_box_get_popup_accessible (GtkComboBox *combo_box);
+AtkObject*    gtk_combo_box_get_popup_accessible (GtkComboBox *combo_box);
 
 GDK_AVAILABLE_IN_ALL
 gint          gtk_combo_box_get_id_column        (GtkComboBox *combo_box);

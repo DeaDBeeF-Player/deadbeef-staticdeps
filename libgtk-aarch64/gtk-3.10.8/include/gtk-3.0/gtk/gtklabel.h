@@ -25,13 +25,15 @@
 #ifndef __GTK_LABEL_H__
 #define __GTK_LABEL_H__
 
+
 #if !defined (__GTK_H_INSIDE__) && !defined (GTK_COMPILATION)
 #error "Only <gtk/gtk.h> can be included directly."
 #endif
 
-#include <gtk/deprecated/gtkmisc.h>
+#include <gtk/gtkmisc.h>
 #include <gtk/gtkwindow.h>
 #include <gtk/gtkmenu.h>
+
 
 G_BEGIN_DECLS
 
@@ -211,21 +213,13 @@ void         gtk_label_set_track_visited_links  (GtkLabel *label,
 GDK_AVAILABLE_IN_ALL
 gboolean     gtk_label_get_track_visited_links  (GtkLabel *label);
 
-GDK_AVAILABLE_IN_3_16
-void         gtk_label_set_xalign (GtkLabel *label,
-                                   gfloat    xalign);
 
-GDK_AVAILABLE_IN_3_16
-gfloat       gtk_label_get_xalign (GtkLabel *label);
+/* private */
 
-GDK_AVAILABLE_IN_3_16
-void         gtk_label_set_yalign (GtkLabel *label,
-                                   gfloat    yalign);
-
-GDK_AVAILABLE_IN_3_16
-gfloat       gtk_label_get_yalign (GtkLabel *label);
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC(GtkLabel, g_object_unref)
+void _gtk_label_mnemonics_visible_apply_recursively (GtkWidget *widget,
+                                                     gboolean   mnemonics_visible);
+gint _gtk_label_get_cursor_position (GtkLabel *label);
+gint _gtk_label_get_selection_bound (GtkLabel *label);
 
 G_END_DECLS
 

@@ -23,17 +23,15 @@
 #endif
 
 #include <gdk/gdkversionmacros.h>
-#include <gdk/deprecated/gdkcolor.h>
+#include <gdk/gdkcolor.h>
 #include <gdk/gdkrgba.h>
-#include <gdk/gdkdrawingcontext.h>
 #include <gdk/gdkpixbuf.h>
 #include <pango/pangocairo.h>
 
 G_BEGIN_DECLS
 
-GDK_DEPRECATED_IN_3_22_FOR(gdk_window_begin_draw_frame() and gdk_drawing_context_get_cairo_context())
+GDK_AVAILABLE_IN_ALL
 cairo_t  * gdk_cairo_create             (GdkWindow          *window);
-
 GDK_AVAILABLE_IN_ALL
 gboolean   gdk_cairo_get_clip_rectangle (cairo_t            *cr,
                                          GdkRectangle       *rect);
@@ -72,19 +70,6 @@ GDK_AVAILABLE_IN_3_10
 cairo_surface_t * gdk_cairo_surface_create_from_pixbuf      (const GdkPixbuf *pixbuf,
                                                              int scale,
                                                              GdkWindow *for_window);
-GDK_AVAILABLE_IN_3_16
-void       gdk_cairo_draw_from_gl (cairo_t              *cr,
-                                   GdkWindow            *window,
-                                   int                   source,
-                                   int                   source_type,
-                                   int                   buffer_scale,
-                                   int                   x,
-                                   int                   y,
-                                   int                   width,
-                                   int                   height);
-
-GDK_AVAILABLE_IN_3_22
-GdkDrawingContext *     gdk_cairo_get_drawing_context   (cairo_t *cr);
 
 G_END_DECLS
 

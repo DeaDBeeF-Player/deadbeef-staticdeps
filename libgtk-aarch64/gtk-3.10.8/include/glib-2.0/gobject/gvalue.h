@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -88,8 +88,6 @@ G_BEGIN_DECLS
  * 
  * The type of value transformation functions which can be registered with
  * g_value_register_transform_func().
- *
- * @dest_value will be initialized to the correct destination type.
  */
 typedef void (*GValueTransform) (const GValue *src_value,
 				 GValue       *dest_value);
@@ -139,9 +137,6 @@ void            g_value_unset   	(GValue       *value);
 GLIB_AVAILABLE_IN_ALL
 void		g_value_set_instance	(GValue	      *value,
 					 gpointer      instance);
-GLIB_AVAILABLE_IN_2_42
-void            g_value_init_from_instance   (GValue       *value,
-                                              gpointer      instance);
 
 
 /* --- private --- */

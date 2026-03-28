@@ -52,15 +52,10 @@ struct _GtkSearchBar
   GtkBin parent;
 };
 
-/**
- * GtkSearchBarClass:
- * @parent_class: The parent class.
- */
 struct _GtkSearchBarClass
 {
-  GtkBinClass parent_class;
-
   /*< private >*/
+  GtkBinClass parent_class;
 
   /* Padding for future expansion */
   void (*_gtk_reserved1) (void);

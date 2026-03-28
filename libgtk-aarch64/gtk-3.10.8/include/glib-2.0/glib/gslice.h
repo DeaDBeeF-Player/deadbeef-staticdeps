@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -60,17 +60,16 @@ void     g_slice_free_chain_with_offset (gsize         block_size,
 #define g_slice_dup(type, mem)                                  \
   (1 ? (type*) g_slice_copy (sizeof (type), (mem))              \
      : ((void) ((type*) 0 == (mem)), (type*) 0))
-#define g_slice_free(type, mem)                                 \
-G_STMT_START {                                                  \
+#define g_slice_free(type, mem)				do {	\
   if (1) g_slice_free1 (sizeof (type), (mem));			\
   else   (void) ((type*) 0 == (mem)); 				\
-} G_STMT_END
-#define g_slice_free_chain(type, mem_chain, next)               \
-G_STMT_START {                                                  \
+} while (0)
+#define g_slice_free_chain(type, mem_chain, next)	do {	\
   if (1) g_slice_free_chain_with_offset (sizeof (type),		\
                  (mem_chain), G_STRUCT_OFFSET (type, next)); 	\
   else   (void) ((type*) 0 == (mem_chain));			\
-} G_STMT_END
+} while (0)
+
 
 /* --- internal debugging API --- */
 typedef enum {

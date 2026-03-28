@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -55,7 +55,7 @@ typedef struct _GAppLaunchContextPrivate GAppLaunchContextPrivate;
  * GAppInfoIface:
  * @g_iface: The parent interface.
  * @dup: Copies a #GAppInfo.
- * @equal: Checks two #GAppInfos for equality.
+ * @equal: Checks two #GAppInfo<!-- -->s for equality.
  * @get_id: Gets a string identifier for a #GAppInfo.
  * @get_name: Gets the name of the application for a #GAppInfo.
  * @get_description: Gets a short description for the application described by the #GAppInfo.
@@ -66,7 +66,8 @@ typedef struct _GAppLaunchContextPrivate GAppLaunchContextPrivate;
  * @supports_files: Indicates whether the application specified accepts filename arguments.
  * @launch_uris: Launches an application with a list of URIs.
  * @should_show: Returns whether an application should be shown (e.g. when getting a list of installed applications).
- * [FreeDesktop.Org Startup Notification Specification](http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt).
+ * <ulink url="http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt">
+ * <citetitle>FreeDesktop.Org Startup Notification Specification</citetitle></ulink>.
  * @set_as_default_for_type: Sets an application as default for a given content type.
  * @set_as_default_for_extension: Sets an application as default for a given file extension.
  * @add_supports_type: Adds to the #GAppInfo information about supported file types.
@@ -77,7 +78,6 @@ typedef struct _GAppLaunchContextPrivate GAppLaunchContextPrivate;
  * @get_commandline: Gets the commandline for the #GAppInfo. Since 2.20
  * @get_display_name: Gets the display name for the #GAppInfo. Since 2.24
  * @set_as_last_used_for_type: Sets the application as the last used. See g_app_info_set_as_last_used_for_type().
- * @get_supported_types: Retrieves the list of content types that @app_info claims to support.
  *
  * Application Information interface, for operating system portability.
  */
@@ -99,13 +99,13 @@ struct _GAppInfoIface
   GIcon *      (* get_icon)                     (GAppInfo           *appinfo);
   gboolean     (* launch)                       (GAppInfo           *appinfo,
                                                  GList              *files,
-                                                 GAppLaunchContext  *context,
+                                                 GAppLaunchContext  *launch_context,
                                                  GError            **error);
   gboolean     (* supports_uris)                (GAppInfo           *appinfo);
   gboolean     (* supports_files)               (GAppInfo           *appinfo);
   gboolean     (* launch_uris)                  (GAppInfo           *appinfo,
                                                  GList              *uris,
-                                                 GAppLaunchContext  *context,
+                                                 GAppLaunchContext  *launch_context,
                                                  GError            **error);
   gboolean     (* should_show)                  (GAppInfo           *appinfo);
 
@@ -162,7 +162,7 @@ GIcon *     g_app_info_get_icon                     (GAppInfo             *appin
 GLIB_AVAILABLE_IN_ALL
 gboolean    g_app_info_launch                       (GAppInfo             *appinfo,
                                                      GList                *files,
-                                                     GAppLaunchContext    *context,
+                                                     GAppLaunchContext    *launch_context,
                                                      GError              **error);
 GLIB_AVAILABLE_IN_ALL
 gboolean    g_app_info_supports_uris                (GAppInfo             *appinfo);
@@ -171,7 +171,7 @@ gboolean    g_app_info_supports_files               (GAppInfo             *appin
 GLIB_AVAILABLE_IN_ALL
 gboolean    g_app_info_launch_uris                  (GAppInfo             *appinfo,
                                                      GList                *uris,
-                                                     GAppLaunchContext    *context,
+                                                     GAppLaunchContext    *launch_context,
                                                      GError              **error);
 GLIB_AVAILABLE_IN_ALL
 gboolean    g_app_info_should_show                  (GAppInfo             *appinfo);
@@ -226,19 +226,8 @@ GAppInfo *g_app_info_get_default_for_uri_scheme  (const char  *uri_scheme);
 
 GLIB_AVAILABLE_IN_ALL
 gboolean  g_app_info_launch_default_for_uri      (const char              *uri,
-                                                  GAppLaunchContext       *context,
+                                                  GAppLaunchContext       *launch_context,
                                                   GError                 **error);
-
-GLIB_AVAILABLE_IN_2_50
-void      g_app_info_launch_default_for_uri_async  (const char           *uri,
-                                                    GAppLaunchContext    *context,
-                                                    GCancellable         *cancellable,
-                                                    GAsyncReadyCallback   callback,
-                                                    gpointer              user_data);
-GLIB_AVAILABLE_IN_2_50
-gboolean  g_app_info_launch_default_for_uri_finish (GAsyncResult         *result,
-                                                    GError              **error);
-
 
 /**
  * GAppLaunchContext:

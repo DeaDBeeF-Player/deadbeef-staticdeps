@@ -1,32 +1,34 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* GtkPlacesSidebar - sidebar widget for places in the filesystem
+/*
+ *  GtkPlacesSidebar - sidebar widget for places in the filesystem
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published
- * by the Free Software Foundation, either version 2.1 of the License, or
- * (at your option) any later version.
+ *  This code comes from Nautilus, GNOME's file manager.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU General Public License as
+ *  published by the Free Software Foundation; either version 2 of the
+ *  License, or (at your option) any later version.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  General Public License for more details.
  *
- * This code comes from Nautilus, GNOME’s file manager.
+ *  You should have received a copy of the GNU General Public License
+ *  along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * Authors : Mr Jamie McCracken (jamiemcc at blueyonder dot co dot uk)
- *           Federico Mena Quintero <federico@gnome.org>
+ *  Authors : Mr Jamie McCracken (jamiemcc at blueyonder dot co dot uk)
+ *            Federico Mena Quintero <federico@gnome.org>
+ *
  */
-
-#ifndef __GTK_PLACES_SIDEBAR_H__
-#define __GTK_PLACES_SIDEBAR_H__
-
 #if !defined (__GTK_H_INSIDE__) && !defined (GTK_COMPILATION)
 #error "Only <gtk/gtk.h> can be included directly."
 #endif
+
+#ifndef __GTK_PLACES_SIDEBAR_H__
+#define __GTK_PLACES_SIDEBAR_H__
 
 #include <gtk/gtkwidget.h>
 
@@ -92,34 +94,17 @@ GDK_AVAILABLE_IN_3_10
 void               gtk_places_sidebar_set_location               (GtkPlacesSidebar   *sidebar,
                                                                   GFile              *location);
 
-GDK_AVAILABLE_IN_3_18
-gboolean           gtk_places_sidebar_get_show_recent            (GtkPlacesSidebar   *sidebar);
-GDK_AVAILABLE_IN_3_18
-void               gtk_places_sidebar_set_show_recent            (GtkPlacesSidebar   *sidebar,
-                                                                  gboolean            show_recent);
-
 GDK_AVAILABLE_IN_3_10
 gboolean           gtk_places_sidebar_get_show_desktop           (GtkPlacesSidebar   *sidebar);
 GDK_AVAILABLE_IN_3_10
 void               gtk_places_sidebar_set_show_desktop           (GtkPlacesSidebar   *sidebar,
                                                                   gboolean            show_desktop);
 
-GDK_DEPRECATED_IN_3_18
+GDK_AVAILABLE_IN_3_10
 gboolean           gtk_places_sidebar_get_show_connect_to_server (GtkPlacesSidebar   *sidebar);
-GDK_DEPRECATED_IN_3_18
+GDK_AVAILABLE_IN_3_10
 void               gtk_places_sidebar_set_show_connect_to_server (GtkPlacesSidebar   *sidebar,
                                                                   gboolean            show_connect_to_server);
-GDK_AVAILABLE_IN_3_14
-gboolean           gtk_places_sidebar_get_show_enter_location    (GtkPlacesSidebar   *sidebar);
-GDK_AVAILABLE_IN_3_14
-void               gtk_places_sidebar_set_show_enter_location    (GtkPlacesSidebar   *sidebar,
-                                                                  gboolean            show_enter_location);
-
-GDK_AVAILABLE_IN_3_12
-void                 gtk_places_sidebar_set_local_only           (GtkPlacesSidebar   *sidebar,
-                                                                  gboolean            local_only);
-GDK_AVAILABLE_IN_3_12
-gboolean             gtk_places_sidebar_get_local_only           (GtkPlacesSidebar   *sidebar);
 
 
 GDK_AVAILABLE_IN_3_10
@@ -134,27 +119,7 @@ GSList *           gtk_places_sidebar_list_shortcuts             (GtkPlacesSideb
 GDK_AVAILABLE_IN_3_10
 GFile *            gtk_places_sidebar_get_nth_bookmark           (GtkPlacesSidebar   *sidebar,
                                                                   gint                n);
-GDK_AVAILABLE_IN_3_18
-void               gtk_places_sidebar_set_drop_targets_visible   (GtkPlacesSidebar   *sidebar,
-                                                                  gboolean            visible,
-                                                                  GdkDragContext     *context);
-GDK_AVAILABLE_IN_3_18
-gboolean           gtk_places_sidebar_get_show_trash             (GtkPlacesSidebar   *sidebar);
-GDK_AVAILABLE_IN_3_18
-void               gtk_places_sidebar_set_show_trash             (GtkPlacesSidebar   *sidebar,
-                                                                  gboolean            show_trash);
 
-GDK_AVAILABLE_IN_3_18
-void                 gtk_places_sidebar_set_show_other_locations (GtkPlacesSidebar   *sidebar,
-                                                                  gboolean            show_other_locations);
-GDK_AVAILABLE_IN_3_18
-gboolean             gtk_places_sidebar_get_show_other_locations (GtkPlacesSidebar   *sidebar);
-
-GDK_AVAILABLE_IN_3_22
-void                 gtk_places_sidebar_set_show_starred_location (GtkPlacesSidebar   *sidebar,
-                                                                   gboolean            show_starred_location);
-GDK_AVAILABLE_IN_3_22
-gboolean             gtk_places_sidebar_get_show_starred_location (GtkPlacesSidebar   *sidebar);
 G_END_DECLS
 
 #endif /* __GTK_PLACES_SIDEBAR_H__ */

@@ -31,7 +31,6 @@
 
 #include <gdk/gdkversionmacros.h>
 #include <gdk/gdktypes.h>
-#include <gdk/gdkdrawingcontext.h>
 #include <gdk/gdkevents.h>
 #include <gdk/gdkframeclock.h>
 
@@ -49,7 +48,7 @@ typedef struct _GdkWindowRedirect    GdkWindowRedirect;
  * @GDK_INPUT_OUTPUT windows are the standard kind of window you might expect.
  * Such windows receive events and are also displayed on screen.
  * @GDK_INPUT_ONLY windows are invisible; they are usually placed above other
- * windows in order to trap or filter the events. You can’t draw on
+ * windows in order to trap or filter the events. You can't draw on
  * @GDK_INPUT_ONLY windows.
  */
 typedef enum
@@ -68,10 +67,7 @@ typedef enum
  *  #GtkMenu)
  * @GDK_WINDOW_FOREIGN: foreign window (see gdk_window_foreign_new())
  * @GDK_WINDOW_OFFSCREEN: offscreen window (see
- *  [Offscreen Windows][OFFSCREEN-WINDOWS]). Since 2.18
- * @GDK_WINDOW_SUBSURFACE: subsurface-based window; This window is visually
- *  tied to a toplevel, and is moved/stacked with it. Currently this window
- *  type is only implemented in Wayland. Since 3.14
+ *  <xref linkend="OFFSCREEN-WINDOWS"/>). Since 2.18
  *
  * Describes the kind of window.
  */
@@ -82,8 +78,7 @@ typedef enum
   GDK_WINDOW_CHILD,
   GDK_WINDOW_TEMP,
   GDK_WINDOW_FOREIGN,
-  GDK_WINDOW_OFFSCREEN,
-  GDK_WINDOW_SUBSURFACE
+  GDK_WINDOW_OFFSCREEN
 } GdkWindowType;
 
 /**
@@ -98,8 +93,8 @@ typedef enum
  * @GDK_WA_TYPE_HINT: Honor the type_hint field
  *
  * Used to indicate which fields in the #GdkWindowAttr struct should be honored.
- * For example, if you filled in the “cursor” and “x” fields of #GdkWindowAttr,
- * pass “@GDK_WA_X | @GDK_WA_CURSOR” to gdk_window_new(). Fields in
+ * For example, if you filled in the "cursor" and "x" fields of #GdkWindowAttr,
+ * pass "@GDK_WA_X | @GDK_WA_CURSOR" to gdk_window_new(). Fields in
  * #GdkWindowAttr not covered by a bit in this enum are required; for example,
  * the @width/@height, @wclass, and @window_type fields are required, they have
  * no corresponding flag in #GdkWindowAttributesType.
@@ -127,9 +122,9 @@ typedef enum
  * @GDK_HINT_ASPECT: aspect ratio fields are set
  * @GDK_HINT_RESIZE_INC: resize increment fields are set
  * @GDK_HINT_WIN_GRAVITY: window gravity field is set
- * @GDK_HINT_USER_POS: indicates that the window’s position was explicitly set
+ * @GDK_HINT_USER_POS: indicates that the window's position was explicitly set
  *  by the user
- * @GDK_HINT_USER_SIZE: indicates that the window’s size was explicitly set by
+ * @GDK_HINT_USER_SIZE: indicates that the window's size was explicitly set by
  *  the user
  *
  * Used to indicate which fields of a #GdkGeometry struct should be paid
@@ -153,6 +148,57 @@ typedef enum
   GDK_HINT_USER_POS    = 1 << 7,
   GDK_HINT_USER_SIZE   = 1 << 8
 } GdkWindowHints;
+
+
+/**
+ * GdkWindowTypeHint:
+ * @GDK_WINDOW_TYPE_HINT_NORMAL: Normal toplevel window.
+ * @GDK_WINDOW_TYPE_HINT_DIALOG: Dialog window.
+ * @GDK_WINDOW_TYPE_HINT_MENU: Window used to implement a menu; GTK+ uses
+ *  this hint only for torn-off menus, see #GtkTearoffMenuItem.
+ * @GDK_WINDOW_TYPE_HINT_TOOLBAR: Window used to implement toolbars.
+ * @GDK_WINDOW_TYPE_HINT_SPLASHSCREEN: Window used to display a splash
+ *  screen during application startup.
+ * @GDK_WINDOW_TYPE_HINT_UTILITY: Utility windows which are not detached
+ *  toolbars or dialogs.
+ * @GDK_WINDOW_TYPE_HINT_DOCK: Used for creating dock or panel windows.
+ * @GDK_WINDOW_TYPE_HINT_DESKTOP: Used for creating the desktop background
+ *  window.
+ * @GDK_WINDOW_TYPE_HINT_DROPDOWN_MENU: A menu that belongs to a menubar.
+ * @GDK_WINDOW_TYPE_HINT_POPUP_MENU: A menu that does not belong to a menubar,
+ *  e.g. a context menu.
+ * @GDK_WINDOW_TYPE_HINT_TOOLTIP: A tooltip.
+ * @GDK_WINDOW_TYPE_HINT_NOTIFICATION: A notification - typically a "bubble"
+ *  that belongs to a status icon.
+ * @GDK_WINDOW_TYPE_HINT_COMBO: A popup from a combo box.
+ * @GDK_WINDOW_TYPE_HINT_DND: A window that is used to implement a DND cursor.
+ *
+ * These are hints for the window manager that indicate what type of function
+ * the window has. The window manager can use this when determining decoration
+ * and behaviour of the window. The hint must be set before mapping the window.
+ *
+ * See the
+ * <ulink url="http://www.freedesktop.org/Standards/wm-spec">Extended
+ * Window Manager Hints</ulink> specification for more details about
+ * window types.
+ */
+typedef enum
+{
+  GDK_WINDOW_TYPE_HINT_NORMAL,
+  GDK_WINDOW_TYPE_HINT_DIALOG,
+  GDK_WINDOW_TYPE_HINT_MENU,		/* Torn off menu */
+  GDK_WINDOW_TYPE_HINT_TOOLBAR,
+  GDK_WINDOW_TYPE_HINT_SPLASHSCREEN,
+  GDK_WINDOW_TYPE_HINT_UTILITY,
+  GDK_WINDOW_TYPE_HINT_DOCK,
+  GDK_WINDOW_TYPE_HINT_DESKTOP,
+  GDK_WINDOW_TYPE_HINT_DROPDOWN_MENU,	/* A drop down menu (from a menubar) */
+  GDK_WINDOW_TYPE_HINT_POPUP_MENU,	/* A popup menu (from right-click) */
+  GDK_WINDOW_TYPE_HINT_TOOLTIP,
+  GDK_WINDOW_TYPE_HINT_NOTIFICATION,
+  GDK_WINDOW_TYPE_HINT_COMBO,
+  GDK_WINDOW_TYPE_HINT_DND
+} GdkWindowTypeHint;
 
 /* The next two enumeration values current match the
  * Motif constants. If this is changed, the implementation
@@ -228,8 +274,8 @@ typedef enum
  * Defines the reference point of a window and the meaning of coordinates
  * passed to gtk_window_move(). See gtk_window_move() and the "implementation
  * notes" section of the
- * [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec)
- * specification for more details.
+ * <ulink url="http://www.freedesktop.org/Standards/wm-spec">Extended
+ * Window Manager Hints</ulink> specification for more details.
  */
 typedef enum
 {
@@ -245,49 +291,6 @@ typedef enum
   GDK_GRAVITY_STATIC
 } GdkGravity;
 
-/**
- * GdkAnchorHints:
- * @GDK_ANCHOR_FLIP_X: allow flipping anchors horizontally
- * @GDK_ANCHOR_FLIP_Y: allow flipping anchors vertically
- * @GDK_ANCHOR_SLIDE_X: allow sliding window horizontally
- * @GDK_ANCHOR_SLIDE_Y: allow sliding window vertically
- * @GDK_ANCHOR_RESIZE_X: allow resizing window horizontally
- * @GDK_ANCHOR_RESIZE_Y: allow resizing window vertically
- * @GDK_ANCHOR_FLIP: allow flipping anchors on both axes
- * @GDK_ANCHOR_SLIDE: allow sliding window on both axes
- * @GDK_ANCHOR_RESIZE: allow resizing window on both axes
- *
- * Positioning hints for aligning a window relative to a rectangle.
- *
- * These hints determine how the window should be positioned in the case that
- * the window would fall off-screen if placed in its ideal position.
- *
- * For example, %GDK_ANCHOR_FLIP_X will replace %GDK_GRAVITY_NORTH_WEST with
- * %GDK_GRAVITY_NORTH_EAST and vice versa if the window extends beyond the left
- * or right edges of the monitor.
- *
- * If %GDK_ANCHOR_SLIDE_X is set, the window can be shifted horizontally to fit
- * on-screen. If %GDK_ANCHOR_RESIZE_X is set, the window can be shrunken
- * horizontally to fit.
- *
- * In general, when multiple flags are set, flipping should take precedence over
- * sliding, which should take precedence over resizing.
- *
- * Since: 3.22
- * Stability: Unstable
- */
-typedef enum
-{
-  GDK_ANCHOR_FLIP_X   = 1 << 0,
-  GDK_ANCHOR_FLIP_Y   = 1 << 1,
-  GDK_ANCHOR_SLIDE_X  = 1 << 2,
-  GDK_ANCHOR_SLIDE_Y  = 1 << 3,
-  GDK_ANCHOR_RESIZE_X = 1 << 4,
-  GDK_ANCHOR_RESIZE_Y = 1 << 5,
-  GDK_ANCHOR_FLIP     = GDK_ANCHOR_FLIP_X | GDK_ANCHOR_FLIP_Y,
-  GDK_ANCHOR_SLIDE    = GDK_ANCHOR_SLIDE_X | GDK_ANCHOR_SLIDE_Y,
-  GDK_ANCHOR_RESIZE   = GDK_ANCHOR_RESIZE_X | GDK_ANCHOR_RESIZE_Y
-} GdkAnchorHints;
 
 /**
  * GdkWindowEdge:
@@ -343,8 +346,8 @@ typedef enum
  * @visual: #GdkVisual for window
  * @window_type: type of window
  * @cursor: cursor for the window (see gdk_window_set_cursor())
- * @wmclass_name: don’t use (see gtk_window_set_wmclass())
- * @wmclass_class: don’t use (see gtk_window_set_wmclass())
+ * @wmclass_name: don't use (see gtk_window_set_wmclass())
+ * @wmclass_class: don't use (see gtk_window_set_wmclass())
  * @override_redirect: %TRUE to bypass the window manager
  * @type_hint: a hint of the function of the window
  *
@@ -388,7 +391,7 @@ struct _GdkWindowAttr
  * @win_gravity: window gravity, see gtk_window_set_gravity()
  *
  * The #GdkGeometry struct gives the window manager information about
- * a window’s geometry constraints. Normally you would set these on
+ * a window's geometry constraints. Normally you would set these on
  * the GTK+ level using gtk_window_set_geometry_hints(). #GtkWindow
  * then sets the hints on the #GdkWindow it creates.
  *
@@ -413,12 +416,12 @@ struct _GdkWindowAttr
  * size of one character in the terminal. Finally, the base size should be set
  * to the size of one character. The net effect is that the minimum size of the
  * terminal will have a 1x1 character terminal area, and only terminal sizes on
- * the “character grid” will be allowed.
+ * the "character grid" will be allowed.
  *
- * Here’s an example of how the terminal example would be implemented, assuming
- * a terminal area widget called “terminal” and a toplevel window “toplevel”:
+ * Here's an example of how the terminal example would be implemented, assuming
+ * a terminal area widget called "terminal" and a toplevel window "toplevel":
  *
- * |[<!-- language="C" -->
+ * <informalexample><programlisting><![CDATA[
  * 	GdkGeometry hints;
  *
  * 	hints.base_width = terminal->char_width;
@@ -434,7 +437,7 @@ struct _GdkWindowAttr
  *                                 GDK_HINT_RESIZE_INC |
  *                                 GDK_HINT_MIN_SIZE |
  *                                 GDK_HINT_BASE_SIZE);
- * ]|
+ * ]]></programlisting></informalexample>
  *
  * The other useful fields are the @min_aspect and @max_aspect fields; these
  * contain a width/height ratio as a floating point number. If a geometry widget
@@ -622,15 +625,15 @@ void gdk_window_shape_combine_region (GdkWindow	      *window,
 GDK_AVAILABLE_IN_ALL
 void gdk_window_set_child_shapes (GdkWindow *window);
 
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 gboolean gdk_window_get_composited (GdkWindow *window);
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 void gdk_window_set_composited   (GdkWindow *window,
                                   gboolean   composited);
 
 /*
  * This routine allows you to merge (ie ADD) child shapes to your
- * own window’s shape keeping its current shape and ADDING the child
+ * own window's shape keeping its current shape and ADDING the child
  * shapes to it.
  * 
  * - Raster
@@ -648,12 +651,6 @@ void gdk_window_set_child_input_shapes     (GdkWindow       *window);
 GDK_AVAILABLE_IN_ALL
 void gdk_window_merge_child_input_shapes   (GdkWindow       *window);
 
-
-GDK_AVAILABLE_IN_3_18
-void gdk_window_set_pass_through (GdkWindow *window,
-                                  gboolean   pass_through);
-GDK_AVAILABLE_IN_3_18
-gboolean gdk_window_get_pass_through (GdkWindow *window);
 
 /*
  * Check if a window has been shown, and whether all its
@@ -676,7 +673,7 @@ GdkWindowState gdk_window_get_state (GdkWindow *window);
 /* Set static bit gravity on the parent, and static
  * window gravity on all children.
  */
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 gboolean gdk_window_set_static_gravities (GdkWindow *window,
                                           gboolean   use_static);
 
@@ -737,26 +734,15 @@ GDK_AVAILABLE_IN_ALL
 cairo_region_t *gdk_window_get_visible_region(GdkWindow         *window);
 
 
-GDK_DEPRECATED_IN_3_22_FOR(gdk_window_begin_draw_frame)
+GDK_AVAILABLE_IN_ALL
 void	      gdk_window_begin_paint_rect   (GdkWindow          *window,
 					     const GdkRectangle *rectangle);
-GDK_AVAILABLE_IN_3_16
-void	      gdk_window_mark_paint_from_clip (GdkWindow          *window,
-					       cairo_t            *cr);
-GDK_DEPRECATED_IN_3_22_FOR(gdk_window_begin_draw_frame)
+GDK_AVAILABLE_IN_ALL
 void	      gdk_window_begin_paint_region (GdkWindow          *window,
 					     const cairo_region_t    *region);
-GDK_DEPRECATED_IN_3_22_FOR(gdk_window_end_draw_frame)
+GDK_AVAILABLE_IN_ALL
 void	      gdk_window_end_paint          (GdkWindow          *window);
-
-GDK_AVAILABLE_IN_3_22
-GdkDrawingContext *gdk_window_begin_draw_frame  (GdkWindow            *window,
-                                                 const cairo_region_t *region);
-GDK_AVAILABLE_IN_3_22
-void          gdk_window_end_draw_frame    (GdkWindow            *window,
-                                            GdkDrawingContext    *context);
-
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 void	      gdk_window_flush             (GdkWindow          *window);
 
 GDK_AVAILABLE_IN_ALL
@@ -771,16 +757,16 @@ void          gdk_window_set_startup_id    (GdkWindow     *window,
 GDK_AVAILABLE_IN_ALL
 void          gdk_window_set_transient_for (GdkWindow     *window,
 					    GdkWindow     *parent);
-GDK_DEPRECATED_IN_3_4
+GDK_DEPRECATED_IN_3_4_FOR(gdk_window_set_background_rgba)
 void	      gdk_window_set_background	 (GdkWindow	  *window,
 					  const GdkColor  *color);
-GDK_DEPRECATED_IN_3_22
+GDK_AVAILABLE_IN_ALL
 void          gdk_window_set_background_rgba (GdkWindow     *window,
                                               const GdkRGBA *rgba);
-GDK_DEPRECATED_IN_3_22
+GDK_AVAILABLE_IN_ALL
 void	      gdk_window_set_background_pattern (GdkWindow	 *window,
                                                  cairo_pattern_t *pattern);
-GDK_DEPRECATED_IN_3_22
+GDK_AVAILABLE_IN_ALL
 cairo_pattern_t *gdk_window_get_background_pattern (GdkWindow     *window);
 
 GDK_AVAILABLE_IN_ALL
@@ -955,9 +941,6 @@ GDK_AVAILABLE_IN_ALL
 void          gdk_window_unmaximize      (GdkWindow       *window);
 GDK_AVAILABLE_IN_ALL
 void          gdk_window_fullscreen      (GdkWindow       *window);
-GDK_AVAILABLE_IN_3_18
-void          gdk_window_fullscreen_on_monitor (GdkWindow      *window,
-                                                gint            monitor);
 GDK_AVAILABLE_IN_3_8
 void          gdk_window_set_fullscreen_mode (GdkWindow   *window,
                                           GdkFullscreenMode mode);
@@ -1049,28 +1032,28 @@ void       gdk_window_freeze_updates      (GdkWindow    *window);
 GDK_AVAILABLE_IN_ALL
 void       gdk_window_thaw_updates        (GdkWindow    *window);
 
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 void       gdk_window_freeze_toplevel_updates_libgtk_only (GdkWindow *window);
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 void       gdk_window_thaw_toplevel_updates_libgtk_only   (GdkWindow *window);
 
-GDK_DEPRECATED_IN_3_22
+GDK_AVAILABLE_IN_ALL
 void       gdk_window_process_all_updates (void);
-GDK_DEPRECATED_IN_3_22
+GDK_AVAILABLE_IN_ALL
 void       gdk_window_process_updates     (GdkWindow    *window,
 					   gboolean      update_children);
 
 /* Enable/disable flicker, so you can tell if your code is inefficient. */
-GDK_DEPRECATED_IN_3_22
+GDK_AVAILABLE_IN_ALL
 void       gdk_window_set_debug_updates   (gboolean      setting);
 
 GDK_AVAILABLE_IN_ALL
-void       gdk_window_constrain_size      (GdkGeometry    *geometry,
-                                           GdkWindowHints  flags,
-                                           gint            width,
-                                           gint            height,
-                                           gint           *new_width,
-                                           gint           *new_height);
+void       gdk_window_constrain_size      (GdkGeometry  *geometry,
+                                           guint         flags,
+                                           gint          width,
+                                           gint          height,
+                                           gint         *new_width,
+                                           gint         *new_height);
 
 GDK_DEPRECATED_IN_3_8
 void gdk_window_enable_synchronized_configure (GdkWindow *window);
@@ -1106,26 +1089,6 @@ GdkFrameClock* gdk_window_get_frame_clock      (GdkWindow     *window);
 GDK_AVAILABLE_IN_3_10
 void       gdk_window_set_opaque_region        (GdkWindow      *window,
                                                 cairo_region_t *region);
-
-GDK_AVAILABLE_IN_3_12
-void       gdk_window_set_event_compression    (GdkWindow      *window,
-                                                gboolean        event_compression);
-GDK_AVAILABLE_IN_3_12
-gboolean   gdk_window_get_event_compression    (GdkWindow      *window);
-
-GDK_AVAILABLE_IN_3_12
-void       gdk_window_set_shadow_width         (GdkWindow      *window,
-                                                gint            left,
-                                                gint            right,
-                                                gint            top,
-                                                gint            bottom);
-GDK_AVAILABLE_IN_3_14
-gboolean  gdk_window_show_window_menu          (GdkWindow      *window,
-                                                GdkEvent       *event);
-
-GDK_AVAILABLE_IN_3_16
-GdkGLContext * gdk_window_create_gl_context    (GdkWindow      *window,
-                                                GError        **error);
 
 G_END_DECLS
 

@@ -74,58 +74,49 @@ typedef void (*PangoXftSubstituteFunc) (FcPattern *pattern,
 
 /* Calls for applications
  */
-PANGO_AVAILABLE_IN_1_2
 PangoFontMap *pango_xft_get_font_map     (Display *display,
 					  int      screen);
 #ifndef PANGO_DISABLE_DEPRECATED
-PANGO_DEPRECATED
 PangoContext *pango_xft_get_context      (Display *display,
 					  int      screen);
 #endif
-PANGO_AVAILABLE_IN_1_2
 void          pango_xft_shutdown_display (Display *display,
 					  int      screen);
 
-PANGO_AVAILABLE_IN_1_2
 void pango_xft_set_default_substitute (Display                *display,
 				       int                     screen,
 				       PangoXftSubstituteFunc  func,
 				       gpointer                data,
 				       GDestroyNotify          notify);
-PANGO_AVAILABLE_IN_1_2
 void pango_xft_substitute_changed     (Display                *display,
 				       int                     screen);
 
-PANGO_AVAILABLE_IN_ALL
 GType pango_xft_font_map_get_type (void) G_GNUC_CONST;
 
 #define PANGO_XFT_FONT(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), PANGO_TYPE_XFT_FONT, PangoXftFont))
 #define PANGO_TYPE_XFT_FONT              (pango_xft_font_get_type ())
 #define PANGO_XFT_IS_FONT(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), PANGO_TYPE_XFT_FONT))
 
-PANGO_AVAILABLE_IN_ALL
 GType      pango_xft_font_get_type (void) G_GNUC_CONST;
 
 /* For shape engines
  */
 
 #ifdef PANGO_ENABLE_ENGINE
-PANGO_AVAILABLE_IN_ALL
 XftFont *     pango_xft_font_get_font          (PangoFont *font);
-PANGO_AVAILABLE_IN_ALL
 Display *     pango_xft_font_get_display       (PangoFont *font);
 #ifndef PANGO_DISABLE_DEPRECATED
-PANGO_DEPRECATED_FOR(pango_fc_font_lock_face)
+G_DEPRECATED_FOR(pango_fc_font_lock_face)
 FT_Face       pango_xft_font_lock_face         (PangoFont *font);
-PANGO_DEPRECATED_FOR(pango_fc_font_unlock_face)
+G_DEPRECATED_FOR(pango_fc_font_unlock_face)
 void	      pango_xft_font_unlock_face       (PangoFont *font);
-PANGO_DEPRECATED_FOR(pango_fc_font_get_glyph)
+G_DEPRECATED_FOR(pango_fc_font_get_glyph)
 guint	      pango_xft_font_get_glyph	       (PangoFont *font,
 						gunichar   wc);
-PANGO_DEPRECATED_FOR(pango_fc_font_has_char)
+G_DEPRECATED_FOR(pango_fc_font_has_char)
 gboolean      pango_xft_font_has_char          (PangoFont *font,
 						gunichar   wc);
-PANGO_DEPRECATED_FOR(PANGO_GET_UNKNOWN_GLYPH)
+G_DEPRECATED_FOR(PANGO_GET_UNKNOWN_GLYPH)
 PangoGlyph    pango_xft_font_get_unknown_glyph (PangoFont *font,
 						gunichar   wc);
 #endif /* PANGO_DISABLE_DEPRECATED */

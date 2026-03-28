@@ -30,24 +30,8 @@ G_BEGIN_DECLS
 #define GTK_IS_CSS_PROVIDER_CLASS(c)  (G_TYPE_CHECK_CLASS_TYPE    ((c), GTK_TYPE_CSS_PROVIDER))
 #define GTK_CSS_PROVIDER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS  ((o), GTK_TYPE_CSS_PROVIDER, GtkCssProviderClass))
 
-/**
- * GTK_CSS_PROVIDER_ERROR:
- *
- * Domain for #GtkCssProvider errors.
- */
 #define GTK_CSS_PROVIDER_ERROR (gtk_css_provider_error_quark ())
 
-/**
- * GtkCssProviderError:
- * @GTK_CSS_PROVIDER_ERROR_FAILED: Failed.
- * @GTK_CSS_PROVIDER_ERROR_SYNTAX: Syntax error.
- * @GTK_CSS_PROVIDER_ERROR_IMPORT: Import error.
- * @GTK_CSS_PROVIDER_ERROR_NAME: Name error.
- * @GTK_CSS_PROVIDER_ERROR_DEPRECATED: Deprecation error.
- * @GTK_CSS_PROVIDER_ERROR_UNKNOWN_VALUE: Unknown value.
- *
- * Error codes for %GTK_CSS_PROVIDER_ERROR.
- */
 typedef enum
 {
   GTK_CSS_PROVIDER_ERROR_FAILED,
@@ -107,10 +91,6 @@ GDK_AVAILABLE_IN_ALL
 gboolean         gtk_css_provider_load_from_path (GtkCssProvider  *css_provider,
                                                   const gchar     *path,
                                                   GError         **error);
-
-GDK_AVAILABLE_IN_3_16
-void             gtk_css_provider_load_from_resource (GtkCssProvider *css_provider,
-                                                      const gchar    *resource_path);
 
 GDK_AVAILABLE_IN_ALL
 GtkCssProvider * gtk_css_provider_get_default (void);

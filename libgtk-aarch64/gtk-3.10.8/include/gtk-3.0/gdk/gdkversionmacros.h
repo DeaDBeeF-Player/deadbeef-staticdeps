@@ -12,7 +12,9 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, see <http://www.gnu.org/licenses/>.
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
  */
 
 #if !defined (__GDK_H_INSIDE__) && !defined (GDK_COMPILATION)
@@ -25,8 +27,8 @@
 #include <glib.h>
 
 #define GDK_MAJOR_VERSION (3)
-#define GDK_MINOR_VERSION (22)
-#define GDK_MICRO_VERSION (30)
+#define GDK_MINOR_VERSION (10)
+#define GDK_MICRO_VERSION (8)
 
 #ifndef _GDK_EXTERN
 #define _GDK_EXTERN extern
@@ -112,65 +114,6 @@
  */
 #define GDK_VERSION_3_10        (G_ENCODE_VERSION (3, 10))
 
-/**
- * GDK_VERSION_3_12:
- *
- * A macro that evaluates to the 3.12 version of GDK, in a format
- * that can be used by the C pre-processor.
- *
- * Since: 3.12
- */
-#define GDK_VERSION_3_12        (G_ENCODE_VERSION (3, 12))
-
-/**
- * GDK_VERSION_3_14:
- *
- * A macro that evaluates to the 3.14 version of GDK, in a format
- * that can be used by the C pre-processor.
- *
- * Since: 3.14
- */
-#define GDK_VERSION_3_14        (G_ENCODE_VERSION (3, 14))
-
-/**
- * GDK_VERSION_3_16:
- *
- * A macro that evaluates to the 3.16 version of GDK, in a format
- * that can be used by the C pre-processor.
- *
- * Since: 3.16
- */
-#define GDK_VERSION_3_16        (G_ENCODE_VERSION (3, 16))
-
-/**
- * GDK_VERSION_3_18:
- *
- * A macro that evaluates to the 3.18 version of GDK, in a format
- * that can be used by the C pre-processor.
- *
- * Since: 3.18
- */
-#define GDK_VERSION_3_18        (G_ENCODE_VERSION (3, 18))
-
-/**
- * GDK_VERSION_3_20:
- *
- * A macro that evaluates to the 3.20 version of GDK, in a format
- * that can be used by the C pre-processor.
- *
- * Since: 3.18
- */
-#define GDK_VERSION_3_20        (G_ENCODE_VERSION (3, 20))
-
-/**
- * GDK_VERSION_3_22:
- *
- * A macro that evaluates to the 3.22 version of GDK, in a format
- * that can be used by the C pre-processor.
- *
- * Since: 3.20
- */
-#define GDK_VERSION_3_22        (G_ENCODE_VERSION (3, 22))
 
 /* evaluates to the current stable version; for development cycles,
  * this means the next stable target
@@ -328,89 +271,4 @@
 # define GDK_AVAILABLE_IN_3_10                _GDK_EXTERN
 #endif
 
-#if GDK_VERSION_MIN_REQUIRED >= GDK_VERSION_3_12
-# define GDK_DEPRECATED_IN_3_12               GDK_DEPRECATED
-# define GDK_DEPRECATED_IN_3_12_FOR(f)        GDK_DEPRECATED_FOR(f)
-#else
-# define GDK_DEPRECATED_IN_3_12               _GDK_EXTERN
-# define GDK_DEPRECATED_IN_3_12_FOR(f)        _GDK_EXTERN
-#endif
-
-#if GDK_VERSION_MAX_ALLOWED < GDK_VERSION_3_12
-# define GDK_AVAILABLE_IN_3_12                GDK_UNAVAILABLE(3, 12)
-#else
-# define GDK_AVAILABLE_IN_3_12                _GDK_EXTERN
-#endif
-
-#if GDK_VERSION_MIN_REQUIRED >= GDK_VERSION_3_14
-# define GDK_DEPRECATED_IN_3_14               GDK_DEPRECATED
-# define GDK_DEPRECATED_IN_3_14_FOR(f)        GDK_DEPRECATED_FOR(f)
-#else
-# define GDK_DEPRECATED_IN_3_14               _GDK_EXTERN
-# define GDK_DEPRECATED_IN_3_14_FOR(f)        _GDK_EXTERN
-#endif
-
-#if GDK_VERSION_MAX_ALLOWED < GDK_VERSION_3_14
-# define GDK_AVAILABLE_IN_3_14                GDK_UNAVAILABLE(3, 14)
-#else
-# define GDK_AVAILABLE_IN_3_14                _GDK_EXTERN
-#endif
-
-#if GDK_VERSION_MIN_REQUIRED >= GDK_VERSION_3_16
-# define GDK_DEPRECATED_IN_3_16               GDK_DEPRECATED
-# define GDK_DEPRECATED_IN_3_16_FOR(f)        GDK_DEPRECATED_FOR(f)
-#else
-# define GDK_DEPRECATED_IN_3_16               _GDK_EXTERN
-# define GDK_DEPRECATED_IN_3_16_FOR(f)        _GDK_EXTERN
-#endif
-
-#if GDK_VERSION_MAX_ALLOWED < GDK_VERSION_3_16
-# define GDK_AVAILABLE_IN_3_16                GDK_UNAVAILABLE(3, 16)
-#else
-# define GDK_AVAILABLE_IN_3_16                _GDK_EXTERN
-#endif
-
-#if GDK_VERSION_MIN_REQUIRED >= GDK_VERSION_3_18
-# define GDK_DEPRECATED_IN_3_18               GDK_DEPRECATED
-# define GDK_DEPRECATED_IN_3_18_FOR(f)        GDK_DEPRECATED_FOR(f)
-#else
-# define GDK_DEPRECATED_IN_3_18               _GDK_EXTERN
-# define GDK_DEPRECATED_IN_3_18_FOR(f)        _GDK_EXTERN
-#endif
-
-#if GDK_VERSION_MAX_ALLOWED < GDK_VERSION_3_18
-# define GDK_AVAILABLE_IN_3_18                GDK_UNAVAILABLE(3, 18)
-#else
-# define GDK_AVAILABLE_IN_3_18                _GDK_EXTERN
-#endif
-
-#if GDK_VERSION_MIN_REQUIRED >= GDK_VERSION_3_20
-# define GDK_DEPRECATED_IN_3_20               GDK_DEPRECATED
-# define GDK_DEPRECATED_IN_3_20_FOR(f)        GDK_DEPRECATED_FOR(f)
-#else
-# define GDK_DEPRECATED_IN_3_20               _GDK_EXTERN
-# define GDK_DEPRECATED_IN_3_20_FOR(f)        _GDK_EXTERN
-#endif
-
-#if GDK_VERSION_MAX_ALLOWED < GDK_VERSION_3_20
-# define GDK_AVAILABLE_IN_3_20                GDK_UNAVAILABLE(3, 20)
-#else
-# define GDK_AVAILABLE_IN_3_20                _GDK_EXTERN
-#endif
-
-#if GDK_VERSION_MIN_REQUIRED >= GDK_VERSION_3_22
-# define GDK_DEPRECATED_IN_3_22               GDK_DEPRECATED
-# define GDK_DEPRECATED_IN_3_22_FOR(f)        GDK_DEPRECATED_FOR(f)
-#else
-# define GDK_DEPRECATED_IN_3_22               _GDK_EXTERN
-# define GDK_DEPRECATED_IN_3_22_FOR(f)        _GDK_EXTERN
-#endif
-
-#if GDK_VERSION_MAX_ALLOWED < GDK_VERSION_3_22
-# define GDK_AVAILABLE_IN_3_22                GDK_UNAVAILABLE(3, 22)
-#else
-# define GDK_AVAILABLE_IN_3_22                _GDK_EXTERN
-#endif
-
 #endif  /* __GDK_VERSION_MACROS_H__ */
-

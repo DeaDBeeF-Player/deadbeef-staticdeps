@@ -43,18 +43,11 @@ G_BEGIN_DECLS
  * GtkTextBTree is the PRIVATE internal representation of it.
  */
 
-/**
- * GtkTextBufferTargetInfo:
- * @GTK_TEXT_BUFFER_TARGET_INFO_BUFFER_CONTENTS: Buffer contents
- * @GTK_TEXT_BUFFER_TARGET_INFO_RICH_TEXT: Rich text
- * @GTK_TEXT_BUFFER_TARGET_INFO_TEXT: Text
+/* these values are used as "info" for the targets contained in the
+ * lists returned by gtk_text_buffer_get_copy,paste_target_list()
  *
- * These values are used as “info” for the targets contained in the
- * lists returned by gtk_text_buffer_get_copy_target_list() and
- * gtk_text_buffer_get_paste_target_list().
- *
- * The values counts down from `-1` to avoid clashes
- * with application added drag destinations which usually start at 0.
+ * the enum counts down from G_MAXUINT to avoid clashes with application
+ * added drag destinations which usually start at 0.
  */
 typedef enum
 {
@@ -82,78 +75,60 @@ struct _GtkTextBuffer
   GtkTextBufferPrivate *priv;
 };
 
-/**
- * GtkTextBufferClass:
- * @parent_class: The object class structure needs to be the first.
- * @insert_text: The class handler for the #GtkTextBuffer::insert-text signal.
- * @insert_pixbuf: The class handler for the #GtkTextBuffer::insert-pixbuf
- *   signal.
- * @insert_child_anchor: The class handler for the
- *   #GtkTextBuffer::insert-child-anchor signal.
- * @delete_range: The class handler for the #GtkTextBuffer::delete-range signal.
- * @changed: The class handler for the #GtkTextBuffer::changed signal.
- * @modified_changed: The class handler for the #GtkTextBuffer::modified-changed
- *   signal.
- * @mark_set: The class handler for the #GtkTextBuffer::mark-set signal.
- * @mark_deleted: The class handler for the #GtkTextBuffer::mark-deleted signal.
- * @apply_tag: The class handler for the #GtkTextBuffer::apply-tag signal.
- * @remove_tag: The class handler for the #GtkTextBuffer::remove-tag signal.
- * @begin_user_action: The class handler for the
- *   #GtkTextBuffer::begin-user-action signal.
- * @end_user_action: The class handler for the #GtkTextBuffer::end-user-action
- *   signal.
- * @paste_done: The class handler for the #GtkTextBuffer::paste-done signal.
- */
 struct _GtkTextBufferClass
 {
   GObjectClass parent_class;
 
-  void (* insert_text)            (GtkTextBuffer      *buffer,
-                                   GtkTextIter        *pos,
-                                   const gchar        *new_text,
-                                   gint                new_text_length);
+  void (* insert_text)     (GtkTextBuffer *buffer,
+                            GtkTextIter *pos,
+                            const gchar *new_text,
+                            gint new_text_length);
 
-  void (* insert_pixbuf)          (GtkTextBuffer      *buffer,
-                                   GtkTextIter        *iter,
-                                   GdkPixbuf          *pixbuf);
+  void (* insert_pixbuf)   (GtkTextBuffer *buffer,
+                            GtkTextIter   *iter,
+                            GdkPixbuf     *pixbuf);
 
-  void (* insert_child_anchor)    (GtkTextBuffer      *buffer,
-                                   GtkTextIter        *iter,
-                                   GtkTextChildAnchor *anchor);
+  void (* insert_child_anchor)   (GtkTextBuffer      *buffer,
+                                  GtkTextIter        *iter,
+                                  GtkTextChildAnchor *anchor);
 
-  void (* delete_range)           (GtkTextBuffer      *buffer,
-                                   GtkTextIter        *start,
-                                   GtkTextIter        *end);
+  void (* delete_range)     (GtkTextBuffer *buffer,
+                             GtkTextIter   *start,
+                             GtkTextIter   *end);
 
-  void (* changed)                (GtkTextBuffer      *buffer);
+  /* Only for text/widgets/pixbuf changed, marks/tags don't cause this
+   * to be emitted
+   */
+  void (* changed)         (GtkTextBuffer *buffer);
 
-  void (* modified_changed)       (GtkTextBuffer      *buffer);
 
-  void (* mark_set)               (GtkTextBuffer      *buffer,
-                                   const GtkTextIter  *location,
-                                   GtkTextMark        *mark);
+  /* New value for the modified flag */
+  void (* modified_changed)   (GtkTextBuffer *buffer);
 
-  void (* mark_deleted)           (GtkTextBuffer      *buffer,
-                                   GtkTextMark        *mark);
+  /* Mark moved or created */
+  void (* mark_set)           (GtkTextBuffer *buffer,
+                               const GtkTextIter *location,
+                               GtkTextMark *mark);
 
-  void (* apply_tag)              (GtkTextBuffer      *buffer,
-                                   GtkTextTag         *tag,
-                                   const GtkTextIter  *start,
-                                   const GtkTextIter  *end);
+  void (* mark_deleted)       (GtkTextBuffer *buffer,
+                               GtkTextMark *mark);
 
-  void (* remove_tag)             (GtkTextBuffer      *buffer,
-                                   GtkTextTag         *tag,
-                                   const GtkTextIter  *start,
-                                   const GtkTextIter  *end);
+  void (* apply_tag)          (GtkTextBuffer *buffer,
+                               GtkTextTag *tag,
+                               const GtkTextIter *start,
+                               const GtkTextIter *end);
 
-  void (* begin_user_action)      (GtkTextBuffer      *buffer);
+  void (* remove_tag)         (GtkTextBuffer *buffer,
+                               GtkTextTag *tag,
+                               const GtkTextIter *start,
+                               const GtkTextIter *end);
 
-  void (* end_user_action)        (GtkTextBuffer      *buffer);
+  /* Called at the start and end of an atomic user action */
+  void (* begin_user_action)  (GtkTextBuffer *buffer);
+  void (* end_user_action)    (GtkTextBuffer *buffer);
 
-  void (* paste_done)             (GtkTextBuffer      *buffer,
-                                   GtkClipboard       *clipboard);
-
-  /*< private >*/
+  void (* paste_done)         (GtkTextBuffer *buffer,
+                               GtkClipboard  *clipboard);
 
   /* Padding for future expansion */
   void (*_gtk_reserved1) (void);
@@ -235,12 +210,6 @@ void    gtk_text_buffer_insert_with_tags_by_name  (GtkTextBuffer     *buffer,
                                                    gint               len,
                                                    const gchar       *first_tag_name,
                                                    ...) G_GNUC_NULL_TERMINATED;
-
-GDK_AVAILABLE_IN_3_16
-void     gtk_text_buffer_insert_markup            (GtkTextBuffer     *buffer,
-                                                   GtkTextIter       *iter,
-                                                   const gchar       *markup,
-                                                   gint               len);
 
 /* Delete from the buffer */
 GDK_AVAILABLE_IN_ALL
@@ -468,6 +437,33 @@ GtkTargetList * gtk_text_buffer_get_copy_target_list    (GtkTextBuffer *buffer);
 GDK_AVAILABLE_IN_ALL
 GtkTargetList * gtk_text_buffer_get_paste_target_list   (GtkTextBuffer *buffer);
 
+/* INTERNAL private stuff */
+void            _gtk_text_buffer_spew                  (GtkTextBuffer      *buffer);
+
+GtkTextBTree*   _gtk_text_buffer_get_btree             (GtkTextBuffer      *buffer);
+
+const PangoLogAttr* _gtk_text_buffer_get_line_log_attrs (GtkTextBuffer     *buffer,
+                                                         const GtkTextIter *anywhere_in_line,
+                                                         gint              *char_len);
+
+void _gtk_text_buffer_notify_will_remove_tag (GtkTextBuffer *buffer,
+                                              GtkTextTag    *tag);
+
+void _gtk_text_buffer_get_text_before (GtkTextBuffer   *buffer,
+                                       AtkTextBoundary  boundary_type,
+                                       GtkTextIter     *position,
+                                       GtkTextIter     *start,
+                                       GtkTextIter     *end);
+void _gtk_text_buffer_get_text_at     (GtkTextBuffer   *buffer,
+                                       AtkTextBoundary  boundary_type,
+                                       GtkTextIter     *position,
+                                       GtkTextIter     *start,
+                                       GtkTextIter     *end);
+void _gtk_text_buffer_get_text_after  (GtkTextBuffer   *buffer,
+                                       AtkTextBoundary  boundary_type,
+                                       GtkTextIter     *position,
+                                       GtkTextIter     *start,
+                                       GtkTextIter     *end);
 
 G_END_DECLS
 

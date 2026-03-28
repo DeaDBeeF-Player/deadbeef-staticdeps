@@ -20,12 +20,7 @@
 #ifndef __GTK_STACK_SWITCHER_H__
 #define __GTK_STACK_SWITCHER_H__
 
-#if !defined (__GTK_H_INSIDE__) && !defined (GTK_COMPILATION)
-#error "Only <gtk/gtk.h> can be included directly."
-#endif
-
-#include <gtk/gtkbox.h>
-#include <gtk/gtkstack.h>
+#include "gtkstack.h"
 
 G_BEGIN_DECLS
 

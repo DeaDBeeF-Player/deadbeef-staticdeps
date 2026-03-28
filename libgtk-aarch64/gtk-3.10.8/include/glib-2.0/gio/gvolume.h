@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -105,10 +105,10 @@ G_BEGIN_DECLS
  * @mount_finish: Finishes a mount operation.
  * @eject: Ejects a given #GVolume.
  * @eject_finish: Finishes an eject operation.
- * @get_identifier: Returns the [identifier][volume-identifier] of the given kind, or %NULL if
+ * @get_identifier: Returns the <link linkend="volume-identifier">identifier</link> of the given kind, or %NULL if
  *    the #GVolume doesn't have one.
  * @enumerate_identifiers: Returns an array strings listing the kinds
- *    of [identifiers][volume-identifier] which the #GVolume has.
+ *    of <link linkend="volume-identifier">identifiers</link> which the #GVolume has.
  * @should_automount: Returns %TRUE if the #GVolume should be automatically mounted.
  * @get_activation_root: Returns the activation root for the #GVolume if it is known in advance or %NULL if
  *   it is not known.

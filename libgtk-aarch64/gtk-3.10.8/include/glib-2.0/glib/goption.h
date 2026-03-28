@@ -3,17 +3,17 @@
  *  Copyright (C) 2004  Anders Carlsson <andersca@gnome.org>
  *
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
+ * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+ * Library General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this library; if not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef __G_OPTION_H__
@@ -31,7 +31,7 @@ G_BEGIN_DECLS
 /**
  * GOptionContext:
  * 
- * A `GOptionContext` struct defines which options
+ * A <structname>GOptionContext</structname> struct defines which options
  * are accepted by the commandline option parser. The struct has only private 
  * fields and should not be directly accessed.
  */
@@ -40,12 +40,12 @@ typedef struct _GOptionContext GOptionContext;
 /**
  * GOptionGroup:
  *
- * A `GOptionGroup` struct defines the options in a single
+ * A <structname>GOptionGroup</structname> struct defines the options in a single
  * group. The struct has only private fields and should not be directly accessed.
  *
  * All options in a group share the same translation function. Libraries which
  * need to parse commandline options are expected to provide a function for
- * getting a `GOptionGroup` holding their options, which
+ * getting a <structname>GOptionGroup</structname> holding their options, which
  * the application can then add to its #GOptionContext.
  */
 typedef struct _GOptionGroup   GOptionGroup;
@@ -53,7 +53,6 @@ typedef struct _GOptionEntry   GOptionEntry;
 
 /**
  * GOptionFlags:
- * @G_OPTION_FLAG_NONE: No flags. Since: 2.42.
  * @G_OPTION_FLAG_HIDDEN: The option doesn't appear in `--help` output.
  * @G_OPTION_FLAG_IN_MAIN: The option appears in the main section of the
  *     `--help` output, even if it is defined in a group.
@@ -80,7 +79,6 @@ typedef struct _GOptionEntry   GOptionEntry;
  */
 typedef enum
 {
-  G_OPTION_FLAG_NONE            = 0,
   G_OPTION_FLAG_HIDDEN		= 1 << 0,
   G_OPTION_FLAG_IN_MAIN		= 1 << 1,
   G_OPTION_FLAG_REVERSE		= 1 << 2,
@@ -95,8 +93,8 @@ typedef enum
  * @G_OPTION_ARG_NONE: No extra argument. This is useful for simple flags.
  * @G_OPTION_ARG_STRING: The option takes a string argument.
  * @G_OPTION_ARG_INT: The option takes an integer argument.
- * @G_OPTION_ARG_CALLBACK: The option provides a callback (of type
- *     #GOptionArgFunc) to parse the extra argument.
+ * @G_OPTION_ARG_CALLBACK: The option provides a callback to parse the
+ *     extra argument.
  * @G_OPTION_ARG_FILENAME: The option takes a filename as argument.
  * @G_OPTION_ARG_STRING_ARRAY: The option takes a string argument, multiple
  *     uses of the option are collected into an array of strings.
@@ -310,12 +308,6 @@ void		g_option_context_set_ignore_unknown_options (GOptionContext *context,
 GLIB_AVAILABLE_IN_ALL
 gboolean        g_option_context_get_ignore_unknown_options (GOptionContext *context);
 
-GLIB_AVAILABLE_IN_2_44
-void            g_option_context_set_strict_posix           (GOptionContext *context,
-                                                             gboolean        strict_posix);
-GLIB_AVAILABLE_IN_2_44
-gboolean        g_option_context_get_strict_posix           (GOptionContext *context);
-
 GLIB_AVAILABLE_IN_ALL
 void            g_option_context_add_main_entries (GOptionContext      *context,
 						   const GOptionEntry  *entries,
@@ -364,12 +356,8 @@ void	      g_option_group_set_parse_hooks	    (GOptionGroup       *group,
 GLIB_AVAILABLE_IN_ALL
 void	      g_option_group_set_error_hook	    (GOptionGroup       *group,
 						     GOptionErrorFunc	 error_func);
-GLIB_DEPRECATED_IN_2_44
+GLIB_AVAILABLE_IN_ALL
 void          g_option_group_free                   (GOptionGroup       *group);
-GLIB_AVAILABLE_IN_2_44
-GOptionGroup *g_option_group_ref                    (GOptionGroup       *group);
-GLIB_AVAILABLE_IN_2_44
-void          g_option_group_unref                  (GOptionGroup       *group);
 GLIB_AVAILABLE_IN_ALL
 void          g_option_group_add_entries            (GOptionGroup       *group,
 						     const GOptionEntry *entries);

@@ -49,9 +49,9 @@ void                  gdk_init                            (gint           *argc,
 GDK_AVAILABLE_IN_ALL
 gboolean              gdk_init_check                      (gint           *argc,
                                                            gchar        ***argv);
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 void                  gdk_add_option_entries_libgtk_only  (GOptionGroup   *group);
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 void                  gdk_pre_parse_libgtk_only           (void);
 
 GDK_AVAILABLE_IN_ALL
@@ -66,12 +66,12 @@ void                  gdk_notify_startup_complete_with_id (const gchar* startup_
 
 /* Push and pop error handlers for X errors
  */
-GDK_DEPRECATED_IN_3_22_FOR(gdk_x11_display_error_trap_push)
+GDK_AVAILABLE_IN_ALL
 void                           gdk_error_trap_push        (void);
 /* warn unused because you could use pop_ignored otherwise */
-GDK_DEPRECATED_IN_3_22_FOR(gdk_x11_display_error_trap_pop)
+GDK_AVAILABLE_IN_ALL
 G_GNUC_WARN_UNUSED_RESULT gint gdk_error_trap_pop         (void);
-GDK_DEPRECATED_IN_3_22_FOR(gdk_x11_display_error_trap_pop_ignored)
+GDK_AVAILABLE_IN_ALL
 void                           gdk_error_trap_pop_ignored (void);
 
 
@@ -95,6 +95,8 @@ GdkGrabStatus gdk_keyboard_grab      (GdkWindow    *window,
                                       guint32       time_);
 #endif /* GDK_MULTIDEVICE_SAFE */
 
+#ifndef GDK_MULTIHEAD_SAFE
+
 #ifndef GDK_MULTIDEVICE_SAFE
 GDK_DEPRECATED_IN_3_0_FOR(gdk_device_ungrab)
 void          gdk_pointer_ungrab     (guint32       time_);
@@ -104,23 +106,25 @@ GDK_DEPRECATED_IN_3_0_FOR(gdk_display_device_is_grabbed)
 gboolean      gdk_pointer_is_grabbed (void);
 #endif /* GDK_MULTIDEVICE_SAFE */
 
-GDK_DEPRECATED_IN_3_22
+GDK_AVAILABLE_IN_ALL
 gint gdk_screen_width  (void) G_GNUC_CONST;
-GDK_DEPRECATED_IN_3_22
+GDK_AVAILABLE_IN_ALL
 gint gdk_screen_height (void) G_GNUC_CONST;
 
-GDK_DEPRECATED_IN_3_22
+GDK_AVAILABLE_IN_ALL
 gint gdk_screen_width_mm  (void) G_GNUC_CONST;
-GDK_DEPRECATED_IN_3_22
+GDK_AVAILABLE_IN_ALL
 gint gdk_screen_height_mm (void) G_GNUC_CONST;
 
-GDK_DEPRECATED_IN_3_22_FOR(gdk_display_set_double_click_time)
+GDK_AVAILABLE_IN_ALL
 void gdk_set_double_click_time (guint msec);
 
-GDK_DEPRECATED_IN_3_22_FOR(gdk_display_beep)
+GDK_AVAILABLE_IN_ALL
 void gdk_beep (void);
 
-GDK_DEPRECATED_IN_3_22_FOR(gdk_display_flush)
+#endif /* GDK_MULTIHEAD_SAFE */
+
+GDK_AVAILABLE_IN_ALL
 void gdk_flush (void);
 
 GDK_AVAILABLE_IN_ALL

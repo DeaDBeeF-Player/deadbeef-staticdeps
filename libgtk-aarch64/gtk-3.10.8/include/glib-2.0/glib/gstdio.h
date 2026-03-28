@@ -2,18 +2,19 @@
  *
  * Copyright 2004 Tor Lillqvist
  *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * GLib is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful,
+ * GLib is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this library; if not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with GLib; see the file COPYING.LIB.  If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef __G_STDIO_H__
@@ -25,7 +26,7 @@
 
 G_BEGIN_DECLS
 
-#if (defined (__MINGW64_VERSION_MAJOR) || defined (_MSC_VER)) && !defined(_WIN64)
+#if defined (_MSC_VER) && !defined(_WIN64)
 
 /* Make it clear that we mean the struct with 32-bit st_size and
  * 32-bit st_*time fields as that is how the 32-bit GLib DLL normally

@@ -38,13 +38,6 @@
 G_BEGIN_DECLS
 
 /* Kinds of widget-specific help */
-/**
- * GtkWidgetHelpType:
- * @GTK_WIDGET_HELP_TOOLTIP: Tooltip.
- * @GTK_WIDGET_HELP_WHATS_THIS: What’s this.
- *
- * Kinds of widget-specific help. Used by the ::show-help signal.
- */
 typedef enum
 {
   GTK_WIDGET_HELP_TOOLTIP,
@@ -52,7 +45,7 @@ typedef enum
 } GtkWidgetHelpType;
 
 /* Macro for casting a pointer to a GtkWidget or GtkWidgetClass pointer.
- * Macros for testing whether widget or klass are of type GTK_TYPE_WIDGET.
+ * Macros for testing whether `widget' or `klass' are of type GTK_TYPE_WIDGET.
  */
 #define GTK_TYPE_WIDGET			  (gtk_widget_get_type ())
 #define GTK_WIDGET(widget)		  (G_TYPE_CHECK_INSTANCE_CAST ((widget), GTK_TYPE_WIDGET, GtkWidget))
@@ -66,18 +59,18 @@ typedef enum
 typedef struct _GtkWidgetPrivate       GtkWidgetPrivate;
 typedef struct _GtkWidgetClass	       GtkWidgetClass;
 typedef struct _GtkWidgetClassPrivate  GtkWidgetClassPrivate;
+typedef struct _GtkWidgetAuxInfo       GtkWidgetAuxInfo;
 
 /**
  * GtkAllocation:
- * @x: the X position of the widget’s area relative to its parents allocation.
- * @y: the Y position of the widget’s area relative to its parents allocation.
- * @width: the width of the widget’s allocated area.
- * @height: the height of the widget’s allocated area.
+ * @x: the X position of the widget's area relative to its parents allocation.
+ * @y: the Y position of the widget's area relative to its parents allocation.
+ * @width: the width of the widget's allocated area.
+ * @height: the height of the widget's allocated area.
  *
- * A #GtkAllocation-struct of a widget represents region
+ * A <structname>GtkAllocation</structname> of a widget represents region
  * which has been allocated to the widget by its parent. It is a subregion
- * of its parents allocation. See
- * [GtkWidget’s geometry management section][geometry-management] for
+ * of its parents allocation. See <xref linkend="geometry-management"/> for
  * more information.
  */
 typedef 	GdkRectangle	   GtkAllocation;
@@ -112,12 +105,11 @@ typedef gboolean (*GtkTickCallback) (GtkWidget     *widget,
 
 /**
  * GtkRequisition:
- * @width: the widget’s desired width
- * @height: the widget’s desired height
+ * @width: the widget's desired width
+ * @height: the widget's desired height
  *
- * A #GtkRequisition-struct represents the desired size of a widget. See
- * [GtkWidget’s geometry management section][geometry-management] for
- * more information.
+ * A <structname>GtkRequisition</structname> represents the desired size of a widget. See
+ * <xref linkend="geometry-management"/> for more information.
  */
 struct _GtkRequisition
 {
@@ -134,8 +126,6 @@ struct _GtkWidget
 {
   GInitiallyUnowned parent_instance;
 
-  /*< private >*/
-
   GtkWidgetPrivate *priv;
 };
 
@@ -148,46 +138,6 @@ struct _GtkWidget
  * @activate_signal: The signal to emit when a widget of this class is
  *   activated, gtk_widget_activate() handles the emission.
  *   Implementation of this signal is optional.
- * @dispatch_child_properties_changed: Seldomly overidden.
- * @destroy: Signals that all holders of a reference to the widget
- *   should release the reference that they hold.
- * @show: Signal emitted when widget is shown
- * @show_all: Recursively shows a widget, and any child widgets (if the widget is
- * a container).
- * @hide: Signal emitted when widget is hidden.
- * @map: Signal emitted when widget is going to be mapped, that is
- *   when the widget is visible (which is controlled with
- *   gtk_widget_set_visible()) and all its parents up to the toplevel
- *   widget are also visible.
- * @unmap: Signal emitted when widget is going to be unmapped, which
- *   means that either it or any of its parents up to the toplevel
- *   widget have been set as hidden.
- * @realize: Signal emitted when widget is associated with a
- *   #GdkWindow, which means that gtk_widget_realize() has been called or
- *   the widget has been mapped (that is, it is going to be drawn).
- * @unrealize: Signal emitted when the GdkWindow associated with
- *   widget is destroyed, which means that gtk_widget_unrealize() has
- *   been called or the widget has been unmapped (that is, it is going
- *   to be hidden).
- * @size_allocate: Signal emitted to get the widget allocation.
- * @state_changed: Signal emitted when the widget state
- *   changes. Deprecated: 3.0
- * @state_flags_changed: Signal emitted when the widget state changes,
- *   see gtk_widget_get_state_flags().
- * @parent_set: Signal emitted when a new parent has been set on a
- *   widget.
- * @hierarchy_changed: Signal emitted when the anchored state of a
- *   widget changes.
- * @style_set: Signal emitted when a new style has been set on a
- * widget. Deprecated: 3.0
- * @direction_changed: Signal emitted when the text direction of a
- *   widget changes.
- * @grab_notify: Signal emitted when a widget becomes shadowed by a
- *   GTK+ grab (not a pointer or keyboard grab) on another widget, or
- *   when it becomes unshadowed due to a grab being removed.
- * @child_notify: Signal emitted for each child property that has
- *   changed on an object.
- * @draw: Signal emitted when a widget is supposed to render itself.
  * @get_request_mode: This allows a widget to tell its parent container whether
  *   it prefers to be allocated in %GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH or
  *   %GTK_SIZE_REQUEST_WIDTH_FOR_HEIGHT mode.
@@ -197,7 +147,7 @@ struct _GtkWidget
  *   %GTK_SIZE_REQUEST_CONSTANT_SIZE disables any height-for-width or
  *   width-for-height geometry management for a said widget and is the
  *   default return.
- *   It’s important to note (as described below) that any widget
+ *   It's important to note (as described below) that any widget
  *   which trades height-for-width or width-for-height must respond properly 
  *   to both of the virtual methods #GtkWidgetClass.get_preferred_height_for_width()
  *   and #GtkWidgetClass.get_preferred_width_for_height() since it might be 
@@ -209,14 +159,14 @@ struct _GtkWidget
  *   #GtkWidgetClass.get_preferred_height()).
  * @get_preferred_width_for_height: This is analogous to
  *   #GtkWidgetClass.get_preferred_height_for_width() except that it
- *   operates in the oposite orientation. It’s rare that a widget actually
+ *   operates in the oposite orientation. It's rare that a widget actually
  *   does %GTK_SIZE_REQUEST_WIDTH_FOR_HEIGHT requests but this can happen
  *   when, for example, a widget or container gets additional columns to
  *   compensate for a smaller allocated height.
  * @get_preferred_width: This is called by containers to obtain the minimum
  *   and natural width of a widget. A widget will never be allocated a width
  *   less than its minimum and will only ever be allocated a width greater
- *   than the natural width once all of the said widget’s siblings have
+ *   than the natural width once all of the said widget's siblings have
  *   received their natural widths.
  *   Furthermore, a widget will only ever be allocated a width greater than
  *   its natural width if it was configured to receive extra expand space
@@ -226,138 +176,36 @@ struct _GtkWidget
  *   contextual width to request height for. By implementing this virtual
  *   method it is possible for a #GtkLabel to tell its parent how much height
  *   would be required if the label were to be allocated a said width.
- * @mnemonic_activate: Activates the @widget if @group_cycling is
- *   %FALSE, and just grabs the focus if @group_cycling is %TRUE.
- * @grab_focus: Causes @widget to have the keyboard focus for the
- *   #GtkWindow it’s inside.
- * @focus:
- * @move_focus: Signal emitted when a change of focus is requested
- * @keynav_failed: Signal emitted if keyboard navigation fails.
- * @event: The GTK+ main loop will emit three signals for each GDK
- *   event delivered to a widget: one generic ::event signal, another,
- *   more specific, signal that matches the type of event delivered
- *   (e.g. "key-press-event") and finally a generic "event-after"
- *   signal.
- * @button_press_event: Signal will be emitted when a button
- *   (typically from a mouse) is pressed.
- * @button_release_event: Signal will be emitted when a button
- *   (typically from a mouse) is released.
- * @scroll_event: Signal emitted when a button in the 4 to 7 range is
- *   pressed.
- * @motion_notify_event: Signal emitted when the pointer moves over
- *   the widget’s #GdkWindow.
- * @delete_event: Signal emitted if a user requests that a toplevel
- *   window is closed.
- * @destroy_event: Signal is emitted when a #GdkWindow is destroyed.
- * @key_press_event: Signal emitted when a key is pressed.
- * @key_release_event: Signal is emitted when a key is released.
- * @enter_notify_event: Signal event will be emitted when the pointer
- *   enters the widget’s window.
- * @leave_notify_event: Will be emitted when the pointer leaves the
- *   widget’s window.
- * @configure_event: Signal will be emitted when the size, position or
- *   stacking of the widget’s window has changed.
- * @focus_in_event: Signal emitted when the keyboard focus enters the
- * widget’s window.
- * @focus_out_event: Signal emitted when the keyboard focus leaves the
- * widget’s window.
- * @map_event: Signal emitted when the widget’s window is mapped.
- * @unmap_event: Signal will be emitted when the widget’s window is
- *   unmapped.
- * @property_notify_event: Signal will be emitted when a property on
- *   the widget’s window has been changed or deleted.
- * @selection_clear_event: Signal will be emitted when the the
- *   widget’s window has lost ownership of a selection.
- * @selection_request_event: Signal will be emitted when another
- *   client requests ownership of the selection owned by the widget's
- *   window.
- * @selection_notify_event:
- * @proximity_in_event:
- * @proximity_out_event:
- * @visibility_notify_event: Signal emitted when the widget’s window is
- *   obscured or unobscured.
- * @window_state_event: Signal emitted when the state of the toplevel
- *   window associated to the widget changes.
- * @damage_event: Signal emitted when a redirected window belonging to
- *   widget gets drawn into.
- * @grab_broken_event: Signal emitted when a pointer or keyboard grab
- *   on a window belonging to widget gets broken.
- * @selection_get:
- * @selection_received:
- * @drag_begin: Signal emitted on the drag source when a drag is
- *   started.
- * @drag_end: Signal emitted on the drag source when a drag is
- *   finished.
- * @drag_data_get: Signal emitted on the drag source when the drop
- *   site requests the data which is dragged.
- * @drag_data_delete: Signal emitted on the drag source when a drag
- *   with the action %GDK_ACTION_MOVE is successfully completed.
- * @drag_leave: Signal emitted on the drop site when the cursor leaves
- *   the widget.
- * @drag_motion: signal emitted on the drop site when the user moves
- *   the cursor over the widget during a drag.
- * @drag_drop: Signal emitted on the drop site when the user drops the
- *   data onto the widget.
- * @drag_data_received: Signal emitted on the drop site when the
- *   dragged data has been received.
- * @drag_failed: Signal emitted on the drag source when a drag has
- *   failed.
- * @popup_menu: Signal emitted whenever a widget should pop up a
- *   context menu.
- * @show_help:
- * @get_accessible: Returns the accessible object that describes the
- *   widget to an assistive technology.
- * @screen_changed: Signal emitted when the screen of a widget has
- *   changed.
- * @can_activate_accel: Signal allows applications and derived widgets
- *   to override the default GtkWidget handling for determining whether
- *   an accelerator can be activated.
- * @composited_changed: Signal emitted when the composited status of
- *   widgets screen changes. See gdk_screen_is_composited().
- * @query_tooltip: Signal emitted when “has-tooltip” is %TRUE and the
- *   hover timeout has expired with the cursor hovering “above”
- *   widget; or emitted when widget got focus in keyboard mode.
- * @compute_expand: Computes whether a container should give this
- *   widget extra space when possible.
  * @adjust_size_request: Convert an initial size request from a widget's
  *   #GtkSizeRequestMode virtual method implementations into a size request to
  *   be used by parent containers in laying out the widget.
- *   adjust_size_request adjusts from a child widget's
- *   original request to what a parent container should
+ *   adjust_size_request adjusts <emphasis>from</emphasis> a child widget's
+ *   original request <emphasis>to</emphasis> what a parent container should
  *   use for layout. The @for_size argument will be -1 if the request should
  *   not be for a particular size in the opposing orientation, i.e. if the
  *   request is not height-for-width or width-for-height. If @for_size is
  *   greater than -1, it is the proposed allocation in the opposing
  *   orientation that we need the request for. Implementations of
  *   adjust_size_request should chain up to the default implementation,
- *   which applies #GtkWidget’s margin properties and imposes any values
+ *   which applies #GtkWidget's margin properties and imposes any values
  *   from gtk_widget_set_size_request(). Chaining up should be last,
- *   after your subclass adjusts the request, so
+ *   <emphasis>after</emphasis> your subclass adjusts the request, so
  *   #GtkWidget can apply constraints and add the margin properly.
  * @adjust_size_allocation: Convert an initial size allocation assigned
  *   by a #GtkContainer using gtk_widget_size_allocate(), into an actual
  *   size allocation to be used by the widget. adjust_size_allocation
- *   adjusts to a child widget’s actual allocation
- *   from what a parent container computed for the
+ *   adjusts <emphasis>to</emphasis> a child widget's actual allocation
+ *   <emphasis>from</emphasis> what a parent container computed for the
  *   child. The adjusted allocation must be entirely within the original
  *   allocation. In any custom implementation, chain up to the default
  *   #GtkWidget implementation of this method, which applies the margin
  *   and alignment properties of #GtkWidget. Chain up
- *   before performing your own adjustments so your
+ *   <emphasis>before</emphasis> performing your own adjustments so your
  *   own adjustments remove more allocation after the #GtkWidget base
  *   class has already removed margin and alignment. The natural size
  *   passed in should be adjusted in the same way as the allocated size,
  *   which allows adjustments to perform alignments or other changes
  *   based on natural size.
- * @style_updated: Signal emitted when the GtkStyleContext of a widget
- *   is changed.
- * @touch_event:
- * @get_preferred_height_and_baseline_for_width:
- * @adjust_baseline_request:
- * @adjust_baseline_allocation:
- * @queue_draw_region: Invalidates the area of widget defined by
- *   region by calling gdk_window_invalidate_region() on the widget's
- *   window and all its child windows.
  */
 struct _GtkWidgetClass
 {
@@ -608,6 +456,16 @@ struct _GtkWidgetClass
   void (*_gtk_reserved7) (void);
 };
 
+struct _GtkWidgetAuxInfo
+{
+  gint width;
+  gint height;
+
+  guint   halign : 4;
+  guint   valign : 4;
+
+  GtkBorder margin;
+};
 
 GDK_AVAILABLE_IN_ALL
 GType	   gtk_widget_get_type		  (void) G_GNUC_CONST;
@@ -663,8 +521,6 @@ GDK_AVAILABLE_IN_ALL
 void	   gtk_widget_queue_resize	  (GtkWidget	       *widget);
 GDK_AVAILABLE_IN_ALL
 void	   gtk_widget_queue_resize_no_redraw (GtkWidget *widget);
-GDK_AVAILABLE_IN_3_20
-void       gtk_widget_queue_allocate      (GtkWidget           *widget);
 GDK_AVAILABLE_IN_3_8
 GdkFrameClock* gtk_widget_get_frame_clock (GtkWidget           *widget);
 
@@ -741,7 +597,7 @@ gboolean   gtk_widget_mnemonic_activate   (GtkWidget           *widget,
 GDK_AVAILABLE_IN_ALL
 gboolean   gtk_widget_event		  (GtkWidget	       *widget,
 					   GdkEvent	       *event);
-GDK_DEPRECATED_IN_3_22
+GDK_AVAILABLE_IN_ALL
 gint       gtk_widget_send_expose         (GtkWidget           *widget,
 					   GdkEvent            *event);
 GDK_AVAILABLE_IN_ALL
@@ -751,14 +607,14 @@ gboolean   gtk_widget_send_focus_change   (GtkWidget           *widget,
 GDK_AVAILABLE_IN_ALL
 gboolean   gtk_widget_activate		     (GtkWidget	       *widget);
      
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 void	   gtk_widget_reparent		  (GtkWidget	       *widget,
 					   GtkWidget	       *new_parent);
 GDK_AVAILABLE_IN_ALL
 gboolean   gtk_widget_intersect		  (GtkWidget	       *widget,
 					   const GdkRectangle  *area,
 					   GdkRectangle	       *intersection);
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 cairo_region_t *gtk_widget_region_intersect	  (GtkWidget	       *widget,
 					   const cairo_region_t     *region);
 
@@ -783,11 +639,6 @@ GDK_AVAILABLE_IN_3_2
 gboolean   gtk_widget_has_visible_focus   (GtkWidget           *widget);
 GDK_AVAILABLE_IN_ALL
 void       gtk_widget_grab_focus          (GtkWidget           *widget);
-GDK_AVAILABLE_IN_3_20
-void       gtk_widget_set_focus_on_click  (GtkWidget           *widget,
-                                           gboolean             focus_on_click);
-GDK_AVAILABLE_IN_3_20
-gboolean   gtk_widget_get_focus_on_click  (GtkWidget           *widget);
 
 GDK_AVAILABLE_IN_ALL
 void       gtk_widget_set_can_default     (GtkWidget           *widget,
@@ -879,10 +730,10 @@ void                  gtk_widget_set_app_paintable      (GtkWidget    *widget,
 GDK_AVAILABLE_IN_ALL
 gboolean              gtk_widget_get_app_paintable      (GtkWidget    *widget);
 
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 void                  gtk_widget_set_double_buffered    (GtkWidget    *widget,
 							 gboolean      double_buffered);
-GDK_DEPRECATED_IN_3_14
+GDK_AVAILABLE_IN_ALL
 gboolean              gtk_widget_get_double_buffered    (GtkWidget    *widget);
 
 GDK_AVAILABLE_IN_ALL
@@ -925,10 +776,6 @@ GDK_AVAILABLE_IN_ALL
 int                   gtk_widget_get_allocated_height   (GtkWidget     *widget);
 GDK_AVAILABLE_IN_3_10
 int                   gtk_widget_get_allocated_baseline (GtkWidget     *widget);
-GDK_AVAILABLE_IN_3_20
-void                  gtk_widget_get_allocated_size     (GtkWidget     *widget,
-                                                         GtkAllocation *allocation,
-                                                         int           *baseline);
 
 GDK_AVAILABLE_IN_ALL
 void                  gtk_widget_get_allocation         (GtkWidget     *widget,
@@ -936,12 +783,6 @@ void                  gtk_widget_get_allocation         (GtkWidget     *widget,
 GDK_AVAILABLE_IN_ALL
 void                  gtk_widget_set_allocation         (GtkWidget     *widget,
                                                          const GtkAllocation *allocation);
-GDK_AVAILABLE_IN_3_14
-void                  gtk_widget_set_clip               (GtkWidget     *widget,
-                                                         const GtkAllocation *clip);
-GDK_AVAILABLE_IN_3_14
-void                  gtk_widget_get_clip               (GtkWidget     *widget,
-                                                         GtkAllocation *clip);
 
 GDK_DEPRECATED_IN_3_0_FOR(gtk_widget_get_preferred_width & gtk_widget_get_preferred_height)
 
@@ -1012,7 +853,7 @@ GDK_AVAILABLE_IN_3_10
 gint          gtk_widget_get_scale_factor (GtkWidget *widget);
 GDK_AVAILABLE_IN_ALL
 GdkDisplay *  gtk_widget_get_display     (GtkWidget *widget);
-GDK_DEPRECATED_IN_3_12
+GDK_AVAILABLE_IN_ALL
 GdkWindow *   gtk_widget_get_root_window (GtkWidget *widget);
 GDK_AVAILABLE_IN_ALL
 GtkSettings*  gtk_widget_get_settings    (GtkWidget *widget);
@@ -1080,25 +921,15 @@ GtkAlign gtk_widget_get_valign_with_baseline (GtkWidget *widget);
 GDK_AVAILABLE_IN_ALL
 void     gtk_widget_set_valign        (GtkWidget *widget,
                                        GtkAlign   align);
-GDK_DEPRECATED_IN_3_12_FOR(gtk_widget_get_margin_start)
+GDK_AVAILABLE_IN_ALL
 gint     gtk_widget_get_margin_left   (GtkWidget *widget);
-GDK_DEPRECATED_IN_3_12_FOR(gtk_widget_set_margin_start)
+GDK_AVAILABLE_IN_ALL
 void     gtk_widget_set_margin_left   (GtkWidget *widget,
                                        gint       margin);
-GDK_DEPRECATED_IN_3_12_FOR(gtk_widget_get_margin_end)
+GDK_AVAILABLE_IN_ALL
 gint     gtk_widget_get_margin_right  (GtkWidget *widget);
-GDK_DEPRECATED_IN_3_12_FOR(gtk_widget_set_margin_end)
+GDK_AVAILABLE_IN_ALL
 void     gtk_widget_set_margin_right  (GtkWidget *widget,
-                                       gint       margin);
-GDK_AVAILABLE_IN_3_12
-gint     gtk_widget_get_margin_start  (GtkWidget *widget);
-GDK_AVAILABLE_IN_3_12
-void     gtk_widget_set_margin_start  (GtkWidget *widget,
-                                       gint       margin);
-GDK_AVAILABLE_IN_3_12
-gint     gtk_widget_get_margin_end    (GtkWidget *widget);
-GDK_AVAILABLE_IN_3_12
-void     gtk_widget_set_margin_end    (GtkWidget *widget,
                                        gint       margin);
 GDK_AVAILABLE_IN_ALL
 gint     gtk_widget_get_margin_top    (GtkWidget *widget);
@@ -1140,24 +971,24 @@ GDK_AVAILABLE_IN_ALL
 gboolean     gtk_widget_hide_on_delete	(GtkWidget	*widget);
 
 /* Functions to override widget styling */
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 void         gtk_widget_override_color            (GtkWidget     *widget,
                                                    GtkStateFlags  state,
                                                    const GdkRGBA *color);
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 void         gtk_widget_override_background_color (GtkWidget     *widget,
                                                    GtkStateFlags  state,
                                                    const GdkRGBA *color);
 
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 void         gtk_widget_override_font             (GtkWidget                  *widget,
                                                    const PangoFontDescription *font_desc);
 
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 void         gtk_widget_override_symbolic_color   (GtkWidget     *widget,
                                                    const gchar   *name,
                                                    const GdkRGBA *color);
-GDK_DEPRECATED_IN_3_16
+GDK_AVAILABLE_IN_ALL
 void         gtk_widget_override_cursor           (GtkWidget       *widget,
                                                    const GdkRGBA   *cursor,
                                                    const GdkRGBA   *secondary_cursor);
@@ -1169,11 +1000,6 @@ GDK_AVAILABLE_IN_ALL
 PangoContext *gtk_widget_create_pango_context (GtkWidget   *widget);
 GDK_AVAILABLE_IN_ALL
 PangoContext *gtk_widget_get_pango_context    (GtkWidget   *widget);
-GDK_AVAILABLE_IN_3_18
-void gtk_widget_set_font_options (GtkWidget                  *widget,
-                                  const cairo_font_options_t *options);
-GDK_AVAILABLE_IN_3_18
-const cairo_font_options_t *gtk_widget_get_font_options (GtkWidget *widget);
 GDK_AVAILABLE_IN_ALL
 PangoLayout  *gtk_widget_create_pango_layout  (GtkWidget   *widget,
 					       const gchar *text);
@@ -1243,7 +1069,7 @@ GDK_AVAILABLE_IN_ALL
 GtkTextDirection gtk_widget_get_default_direction (void);
 
 /* Compositing manager functionality */
-GDK_DEPRECATED_IN_3_22_FOR(gdk_screen_is_composited)
+GDK_AVAILABLE_IN_ALL
 gboolean gtk_widget_is_composited (GtkWidget *widget);
 
 /* Counterpart to gdk_window_shape_combine_region.
@@ -1312,12 +1138,6 @@ GtkStyleContext * gtk_widget_get_style_context (GtkWidget *widget);
 
 GDK_AVAILABLE_IN_ALL
 GtkWidgetPath *   gtk_widget_get_path (GtkWidget *widget);
-
-GDK_AVAILABLE_IN_3_20
-void              gtk_widget_class_set_css_name (GtkWidgetClass *widget_class,
-                                                 const char     *name);
-GDK_AVAILABLE_IN_3_20
-const char *      gtk_widget_class_get_css_name (GtkWidgetClass *widget_class);
 
 GDK_AVAILABLE_IN_3_4
 GdkModifierType   gtk_widget_get_modifier_mask (GtkWidget         *widget,
@@ -1476,22 +1296,6 @@ void    gtk_widget_class_bind_template_child_full       (GtkWidgetClass        *
 						         const gchar           *name,
 						         gboolean               internal_child,
 						         gssize                 struct_offset);
-
-GDK_AVAILABLE_IN_3_16
-GActionGroup           *gtk_widget_get_action_group     (GtkWidget             *widget,
-                                                         const gchar           *prefix);
-
-GDK_AVAILABLE_IN_3_16
-const gchar **          gtk_widget_list_action_prefixes (GtkWidget             *widget);
-
-GDK_AVAILABLE_IN_3_18
-void                    gtk_widget_set_font_map         (GtkWidget             *widget,
-                                                         PangoFontMap          *font_map);
-GDK_AVAILABLE_IN_3_18
-PangoFontMap *          gtk_widget_get_font_map         (GtkWidget             *widget);
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC(GtkWidget, g_object_unref)
-G_DEFINE_AUTOPTR_CLEANUP_FUNC(GtkRequisition, gtk_requisition_free)
 
 G_END_DECLS
 

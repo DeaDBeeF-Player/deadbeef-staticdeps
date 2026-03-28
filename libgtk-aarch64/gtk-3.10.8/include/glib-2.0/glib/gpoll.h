@@ -2,17 +2,17 @@
  * Copyright (C) 2008 Red Hat, Inc.
  *
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
+ * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+ * Library General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this library; if not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef __G_POLL_H__
@@ -22,7 +22,6 @@
 #error "Only <glib.h> can be included directly."
 #endif
 
-#include <glibconfig.h>
 #include <glib/gtypes.h>
 
 G_BEGIN_DECLS
@@ -91,9 +90,7 @@ typedef gint    (*GPollFunc)    (GPollFD *ufds,
 struct _GPollFD
 {
 #if defined (G_OS_WIN32) && GLIB_SIZEOF_VOID_P == 8
-#ifndef __GTK_DOC_IGNORE__
   gint64	fd;
-#endif
 #else
   gint		fd;
 #endif
@@ -101,13 +98,15 @@ struct _GPollFD
   gushort 	revents;
 };
 
-/**
- * G_POLLFD_FORMAT:
- *
- * A format specifier that can be used in printf()-style format strings
- * when printing the @fd member of a #GPollFD.
- */
-/* defined in glibconfig.h */
+#ifdef G_OS_WIN32
+#if GLIB_SIZEOF_VOID_P == 8
+#define G_POLLFD_FORMAT "%#I64x"
+#else
+#define G_POLLFD_FORMAT "%#x"
+#endif
+#else
+#define G_POLLFD_FORMAT "%d"
+#endif
 
 GLIB_AVAILABLE_IN_ALL
 gint

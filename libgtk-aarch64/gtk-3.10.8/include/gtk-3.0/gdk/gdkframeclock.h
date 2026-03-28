@@ -12,7 +12,9 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, see <http://www.gnu.org/licenses/>.
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
  */
 
 /*
@@ -22,12 +24,12 @@
  * GTK+ at ftp://ftp.gtk.org/pub/gtk/.
  */
 
-#ifndef __GDK_FRAME_CLOCK_H__
-#define __GDK_FRAME_CLOCK_H__
-
 #if !defined (__GDK_H_INSIDE__) && !defined (GDK_COMPILATION)
 #error "Only <gdk/gdk.h> can be included directly."
 #endif
+
+#ifndef __GDK_FRAME_CLOCK_H__
+#define __GDK_FRAME_CLOCK_H__
 
 #include <gdk/gdkframetimings.h>
 
@@ -57,7 +59,7 @@ typedef struct _GdkFrameClockClass         GdkFrameClockClass;
  *
  * #GdkFrameClockPhase is used to represent the different paint clock
  * phases that can be requested. The elements of the enumeration
- * correspond to the signals of #GdkFrameClock.
+ * correspond to the signals of #GdkPaintClock.
  *
  * Since: 3.8
  **/

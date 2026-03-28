@@ -79,48 +79,6 @@ struct _GtkEntry
   GtkEntryPrivate *priv;
 };
 
-/**
- * GtkEntryClass:
- * @parent_class: The parent class.
- * @populate_popup: Class handler for the #GtkEntry::populate-popup signal. If
- *   non-%NULL, this will be called to add additional entries to the context
- *   menu when it is displayed.
- * @activate: Class handler for the #GtkEntry::activate signal. The default
- *   implementation calls gtk_window_activate_default() on the entry’s top-level
- *   window.
- * @move_cursor: Class handler for the #GtkEntry::move-cursor signal. The
- *   default implementation specifies the standard #GtkEntry cursor movement
- *   behavior.
- * @insert_at_cursor: Class handler for the #GtkEntry::insert-at-cursor signal.
- *   The default implementation inserts text at the cursor.
- * @delete_from_cursor: Class handler for the #GtkEntry::delete-from-cursor
- *   signal. The default implementation deletes the selection or the specified
- *   number of characters or words.
- * @backspace: Class handler for the #GtkEntry::backspace signal. The default
- *   implementation deletes the selection or a single character or word.
- * @cut_clipboard: Class handler for the #GtkEntry::cut-clipboard signal. The
- *   default implementation cuts the selection, if one exists.
- * @copy_clipboard: Class handler for the #GtkEntry::copy-clipboard signal. The
- *   default implementation copies the selection, if one exists.
- * @paste_clipboard: Class handler for the #GtkEntry::paste-clipboard signal.
- *   The default implementation pastes at the current cursor position or over
- *   the current selection if one exists.
- * @toggle_overwrite: Class handler for the #GtkEntry::toggle-overwrite signal.
- *   The default implementation toggles overwrite mode and blinks the cursor.
- * @get_text_area_size: Calculate the size of the text area, which is its
- *   allocated width and requested height, minus space for margins and borders.
- *   This virtual function must be non-%NULL.
- * @get_frame_size: Calculate the size of the text area frame, which is its
- *   allocated width and requested height, minus space for margins and borders,
- *   and taking baseline and text height into account. This virtual function
- *   must be non-%NULL.
- *
- * Class structure for #GtkEntry. All virtual functions have a default
- * implementation. Derived classes may set the virtual function pointers for the
- * signal handlers to %NULL, but must keep @get_text_area_size and
- * @get_frame_size non-%NULL; either use the default implementation, or provide
- * a custom one.
- */
 struct _GtkEntryClass
 {
   GtkWidgetClass parent_class;
@@ -158,9 +116,6 @@ struct _GtkEntryClass
                                gint           *y,
 			       gint           *width,
 			       gint           *height);
-  void (* insert_emoji)       (GtkEntry             *entry);
-
-  /*< private >*/
 
   /* Padding for future expansion */
   void (*_gtk_reserved1)      (void);
@@ -169,6 +124,7 @@ struct _GtkEntryClass
   void (*_gtk_reserved4)      (void);
   void (*_gtk_reserved5)      (void);
   void (*_gtk_reserved6)      (void);
+  void (*_gtk_reserved7)      (void);
 };
 
 GDK_AVAILABLE_IN_ALL
@@ -240,12 +196,6 @@ void       gtk_entry_set_width_chars            (GtkEntry      *entry,
                                                  gint           n_chars);
 GDK_AVAILABLE_IN_ALL
 gint       gtk_entry_get_width_chars            (GtkEntry      *entry);
-
-GDK_AVAILABLE_IN_3_12
-void       gtk_entry_set_max_width_chars        (GtkEntry      *entry,
-                                                 gint           n_chars);
-GDK_AVAILABLE_IN_3_12
-gint       gtk_entry_get_max_width_chars        (GtkEntry      *entry);
 
 /* Somewhat more convenient than the GtkEditable generic functions
  */
@@ -417,9 +367,6 @@ void            gtk_entry_set_tabs                           (GtkEntry          
 
 GDK_AVAILABLE_IN_3_10
 PangoTabArray  *gtk_entry_get_tabs                           (GtkEntry             *entry);
-
-GDK_AVAILABLE_IN_3_16
-void           gtk_entry_grab_focus_without_selecting        (GtkEntry             *entry);
 
 G_END_DECLS
 

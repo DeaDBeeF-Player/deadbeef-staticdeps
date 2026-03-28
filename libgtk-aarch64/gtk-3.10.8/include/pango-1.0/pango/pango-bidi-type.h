@@ -24,7 +24,6 @@
 
 #include <glib.h>
 
-#include <pango/pango-version-macros.h>
 G_BEGIN_DECLS
 
 /**
@@ -82,7 +81,6 @@ typedef enum {
   PANGO_BIDI_TYPE_ON
 } PangoBidiType;
 
-PANGO_AVAILABLE_IN_1_22
 PangoBidiType pango_bidi_type_for_unichar (gunichar ch) G_GNUC_CONST;
 
 /**
@@ -123,14 +121,12 @@ typedef enum {
   PANGO_DIRECTION_NEUTRAL
 } PangoDirection;
 
-PANGO_AVAILABLE_IN_ALL
 PangoDirection pango_unichar_direction      (gunichar     ch) G_GNUC_CONST;
-PANGO_AVAILABLE_IN_1_4
 PangoDirection pango_find_base_dir          (const gchar *text,
 					     gint         length);
 
 #ifndef PANGO_DISABLE_DEPRECATED
-PANGO_DEPRECATED_FOR(g_unichar_get_mirror_char)
+G_DEPRECATED_FOR(g_unichar_get_mirror_char)
 gboolean       pango_get_mirror_char        (gunichar     ch,
 					     gunichar    *mirrored_ch);
 #endif

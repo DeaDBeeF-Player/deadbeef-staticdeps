@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -192,22 +192,6 @@ GLIB_AVAILABLE_IN_ALL
 gssize   g_output_stream_write_finish  (GOutputStream             *stream,
 					GAsyncResult              *result,
 					GError                   **error);
-
-GLIB_AVAILABLE_IN_2_44
-void     g_output_stream_write_all_async (GOutputStream           *stream,
-                                          const void              *buffer,
-                                          gsize                    count,
-                                          int                      io_priority,
-                                          GCancellable            *cancellable,
-                                          GAsyncReadyCallback      callback,
-                                          gpointer                 user_data);
-
-GLIB_AVAILABLE_IN_2_44
-gboolean g_output_stream_write_all_finish (GOutputStream          *stream,
-                                           GAsyncResult           *result,
-                                           gsize                  *bytes_written,
-                                           GError                **error);
-
 GLIB_AVAILABLE_IN_2_34
 void     g_output_stream_write_bytes_async  (GOutputStream             *stream,
 					     GBytes                    *bytes,

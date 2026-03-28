@@ -292,10 +292,6 @@ typedef struct _cairo_user_data_key {
  * @CAIRO_STATUS_DEVICE_FINISHED: target device has been finished (Since 1.12)
  * @CAIRO_STATUS_JBIG2_GLOBAL_MISSING: %CAIRO_MIME_TYPE_JBIG2_GLOBAL_ID has been used on at least one image
  *   but no image provided %CAIRO_MIME_TYPE_JBIG2_GLOBAL (Since 1.14)
- * @CAIRO_STATUS_PNG_ERROR: error occurred in libpng while reading from or writing to a PNG file (Since 1.16)
- * @CAIRO_STATUS_FREETYPE_ERROR: error occurred in libfreetype (Since 1.16)
- * @CAIRO_STATUS_WIN32_GDI_ERROR: error occurred in the Windows Graphics Device Interface (Since 1.16)
- * @CAIRO_STATUS_TAG_ERROR: invalid tag name, attributes, or nesting (Since 1.16)
  * @CAIRO_STATUS_LAST_STATUS: this is a special value indicating the number of
  *   status values defined in this enumeration.  When using this value, note
  *   that the version of cairo at run-time may have additional status values
@@ -352,10 +348,6 @@ typedef enum _cairo_status {
     CAIRO_STATUS_INVALID_MESH_CONSTRUCTION,
     CAIRO_STATUS_DEVICE_FINISHED,
     CAIRO_STATUS_JBIG2_GLOBAL_MISSING,
-    CAIRO_STATUS_PNG_ERROR,
-    CAIRO_STATUS_FREETYPE_ERROR,
-    CAIRO_STATUS_WIN32_GDI_ERROR,
-    CAIRO_STATUS_TAG_ERROR,
 
     CAIRO_STATUS_LAST_STATUS
 } cairo_status_t;
@@ -1025,17 +1017,6 @@ cairo_copy_clip_rectangle_list (cairo_t *cr);
 
 cairo_public void
 cairo_rectangle_list_destroy (cairo_rectangle_list_t *rectangle_list);
-
-/* Logical structure tagging functions */
-
-#define CAIRO_TAG_DEST "cairo.dest"
-#define CAIRO_TAG_LINK "Link"
-
-cairo_public void
-cairo_tag_begin (cairo_t *cr, const char *tag_name, const char *attributes);
-
-cairo_public void
-cairo_tag_end (cairo_t *cr, const char *tag_name);
 
 /* Font/Text functions */
 
@@ -2230,15 +2211,6 @@ cairo_surface_create_for_rectangle (cairo_surface_t	*target,
                                     double		 width,
                                     double		 height);
 
-/**
- * cairo_surface_observer_mode_t:
- * @CAIRO_SURFACE_OBSERVER_NORMAL: no recording is done
- * @CAIRO_SURFACE_OBSERVER_RECORD_OPERATIONS: operations are recorded
- *
- * Whether operations should be recorded.
- *
- * Since: 1.12
- **/
 typedef enum {
 	CAIRO_SURFACE_OBSERVER_NORMAL = 0,
 	CAIRO_SURFACE_OBSERVER_RECORD_OPERATIONS = 0x1
@@ -2453,10 +2425,6 @@ cairo_surface_set_user_data (cairo_surface_t		 *surface,
 #define CAIRO_MIME_TYPE_JBIG2 "application/x-cairo.jbig2"
 #define CAIRO_MIME_TYPE_JBIG2_GLOBAL "application/x-cairo.jbig2-global"
 #define CAIRO_MIME_TYPE_JBIG2_GLOBAL_ID "application/x-cairo.jbig2-global-id"
-#define CAIRO_MIME_TYPE_CCITT_FAX "image/g3fax"
-#define CAIRO_MIME_TYPE_CCITT_FAX_PARAMS "application/x-cairo.ccitt.params"
-#define CAIRO_MIME_TYPE_EPS "application/postscript"
-#define CAIRO_MIME_TYPE_EPS_PARAMS "application/x-cairo.eps.params"
 
 cairo_public void
 cairo_surface_get_mime_data (cairo_surface_t		*surface,
@@ -3071,17 +3039,6 @@ cairo_matrix_transform_point (const cairo_matrix_t *matrix,
  **/
 typedef struct _cairo_region cairo_region_t;
 
-/**
- * cairo_region_overlap_t:
- * @CAIRO_REGION_OVERLAP_IN: The contents are entirely inside the region. (Since 1.10)
- * @CAIRO_REGION_OVERLAP_OUT: The contents are entirely outside the region. (Since 1.10)
- * @CAIRO_REGION_OVERLAP_PART: The contents are partially inside and
- *     partially outside the region. (Since 1.10)
- *
- * Used as the return value for cairo_region_contains_rectangle().
- *
- * Since: 1.10
- **/
 typedef enum _cairo_region_overlap {
     CAIRO_REGION_OVERLAP_IN,		/* completely inside region */
     CAIRO_REGION_OVERLAP_OUT,		/* completely outside region */

@@ -34,12 +34,11 @@
 
 G_BEGIN_DECLS
 
-/**
+/*
  * GtkTranslateFunc:
  * @path: The id of the message. In #GtkActionGroup this will be a label
  *   or tooltip from a #GtkActionEntry.
- * @func_data: (closure): user data passed in when registering the
- *   function
+ * @func_data: user data passed in when registering the function
  *
  * The function used to translate messages in e.g. #GtkIconFactory
  * and #GtkActionGroup.
@@ -53,16 +52,6 @@ typedef gchar * (*GtkTranslateFunc) (const gchar  *path,
 
 typedef struct _GtkStockItem GtkStockItem;
 
-/**
- * GtkStockItem:
- * @stock_id: Identifier.
- * @label: User visible label.
- * @modifier: Modifier type for keyboard accelerator
- * @keyval: Keyboard accelerator
- * @translation_domain: Translation domain of the menu or toolbar item
- *
- * Deprecated: 3.10
- */
 struct _GtkStockItem
 {
   gchar *stock_id;
@@ -107,14 +96,12 @@ G_DEPRECATED
 #endif
 typedef char * GtkStock;
 
-#ifndef GTK_DISABLE_DEPRECATED
-
 /* Stock IDs (not all are stock items; some are images only) */
 /**
  * GTK_STOCK_ABOUT:
  *
- * The “About” item.
- * ![](help-about.png)
+ * The "About" item.
+ * <inlinegraphic fileref="help-about.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.6
  *
@@ -125,7 +112,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_ADD:
  *
- * The “Add” item and icon.
+ * The "Add" item.
+ * <inlinegraphic fileref="list-add.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;list-add&quot; or the label &quot;_Add&quot;.
  */
@@ -134,7 +122,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_APPLY:
  *
- * The “Apply” item and icon.
+ * The "Apply" item.
+ * <inlinegraphic fileref="gtk-apply.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Do not use an icon. Use label &quot;_Apply&quot;.
  */
@@ -143,7 +132,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_BOLD:
  *
- * The “Bold” item and icon.
+ * The "Bold" item.
+ * <inlinegraphic fileref="format-text-bold.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;format-text-bold&quot;.
  */
@@ -152,7 +142,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_CANCEL:
  *
- * The “Cancel” item and icon.
+ * The "Cancel" item.
+ * <inlinegraphic fileref="gtk-cancel.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Do not use an icon. Use label &quot;_Cancel&quot;.
  */
@@ -161,7 +152,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_CAPS_LOCK_WARNING:
  *
- * The “Caps Lock Warning” icon.
+ * The "Caps Lock Warning" icon.
+ * <inlinegraphic fileref="gtk-caps-lock-warning.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.16
  *
@@ -172,7 +164,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_CDROM:
  *
- * The “CD-Rom” item and icon.
+ * The "CD-Rom" item.
+ * <inlinegraphic fileref="media-optical.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;media-optical&quot;.
  */
@@ -181,7 +174,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_CLEAR:
  *
- * The “Clear” item and icon.
+ * The "Clear" item.
+ * <inlinegraphic fileref="edit-clear.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;edit-clear&quot;.
  */
@@ -190,7 +184,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_CLOSE:
  *
- * The “Close” item and icon.
+ * The "Close" item.
+ * <inlinegraphic fileref="window-close.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;window-close&quot; or the label &quot;_Close&quot;.
  */
@@ -199,7 +194,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_COLOR_PICKER:
  *
- * The “Color Picker” item and icon.
+ * The "Color Picker" item.
+ * <inlinegraphic fileref="gtk-color-picker.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.2
  *
@@ -210,7 +206,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_CONNECT:
  *
- * The “Connect” icon.
+ * The "Connect" icon.
+ * <inlinegraphic fileref="gtk-connect.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.6
  *
@@ -221,7 +218,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_CONVERT:
  *
- * The “Convert” item and icon.
+ * The "Convert" item.
+ * <inlinegraphic fileref="gtk-convert.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10
  */
@@ -230,34 +228,38 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_COPY:
  *
- * The “Copy” item and icon.
+ * The "Copy" item.
+ * <inlinegraphic fileref="edit-copy.png" format="PNG"></inlinegraphic>
  *
- * Deprecated: 3.10: Use the named icon &quot;edit-copy&quot; or the label &quot;_Copy&quot;.
+ * Deprecated: 3.10: Do not use an icon. Use label &quot;_Copy&quot;.
  */
 #define GTK_STOCK_COPY             ((GtkStock)"gtk-copy")
 
 /**
  * GTK_STOCK_CUT:
  *
- * The “Cut” item and icon.
+ * The "Cut" item.
+ * <inlinegraphic fileref="edit-cut.png" format="PNG"></inlinegraphic>
  *
- * Deprecated: 3.10: Use the named icon &quot;edit-cut&quot; or the label &quot;Cu_t&quot;.
+ * Deprecated: 3.10: Do not use an icon. Use label &quot;Cu_t&quot;.
  */
 #define GTK_STOCK_CUT              ((GtkStock)"gtk-cut")
 
 /**
  * GTK_STOCK_DELETE:
  *
- * The “Delete” item and icon.
+ * The "Delete" item.
+ * <inlinegraphic fileref="edit-delete.png" format="PNG"></inlinegraphic>
  *
- * Deprecated: 3.10: Use the named icon &quot;edit-delete&quot; or the label &quot;_Delete&quot;.
+ * Deprecated: 3.10: Do not use an icon. Use label &quot;_Delete&quot;.
  */
 #define GTK_STOCK_DELETE           ((GtkStock)"gtk-delete")
 
 /**
  * GTK_STOCK_DIALOG_AUTHENTICATION:
  *
- * The “Authentication” item and icon.
+ * The "Authentication" item.
+ * <inlinegraphic fileref="dialog-password.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.4
  *
@@ -268,7 +270,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_DIALOG_INFO:
  *
- * The “Information” item and icon.
+ * The "Information" item.
+ * <inlinegraphic fileref="dialog-information.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;dialog-information&quot;.
  */
@@ -277,7 +280,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_DIALOG_WARNING:
  *
- * The “Warning” item and icon.
+ * The "Warning" item.
+ * <inlinegraphic fileref="dialog-warning.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;dialog-warning&quot;.
  */
@@ -286,7 +290,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_DIALOG_ERROR:
  *
- * The “Error” item and icon.
+ * The "Error" item.
+ * <inlinegraphic fileref="dialog-error.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;dialog-error&quot;.
  */
@@ -295,7 +300,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_DIALOG_QUESTION:
  *
- * The “Question” item and icon.
+ * The "Question" item.
+ * <inlinegraphic fileref="dialog-question.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;dialog-question&quot;.
  */
@@ -304,7 +310,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_DIRECTORY:
  *
- * The “Directory” icon.
+ * The "Directory" icon.
+ * <inlinegraphic fileref="folder.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.6
  *
@@ -315,7 +322,7 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_DISCARD:
  *
- * The “Discard” item.
+ * The "Discard" item.
  *
  * Since: 2.12
  *
@@ -326,7 +333,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_DISCONNECT:
  *
- * The “Disconnect” icon.
+ * The "Disconnect" icon.
+ * <inlinegraphic fileref="gtk-disconnect.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.6
  *
@@ -337,7 +345,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_DND:
  *
- * The “Drag-And-Drop” icon.
+ * The "Drag-And-Drop" icon.
+ * <inlinegraphic fileref="gtk-dnd.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10
  */
@@ -346,7 +355,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_DND_MULTIPLE:
  *
- * The “Drag-And-Drop multiple” icon.
+ * The "Drag-And-Drop multiple" icon.
+ * <inlinegraphic fileref="gtk-dnd-multiple.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10
  */
@@ -355,7 +365,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_EDIT:
  *
- * The “Edit” item and icon.
+ * The "Edit" item.
+ * <inlinegraphic fileref="gtk-edit.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.6
  *
@@ -366,7 +377,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_EXECUTE:
  *
- * The “Execute” item and icon.
+ * The "Execute" item.
+ * <inlinegraphic fileref="system-run.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;system-run&quot;.
  */
@@ -375,7 +387,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_FILE:
  *
- * The “File” item and icon.
+ * The "File" item.
+ * <inlinegraphic fileref="text-x-generic.png" format="PNG"></inlinegraphic>
  *
  * Since 3.0, this item has a label, before it only had an icon.
  *
@@ -388,7 +401,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_FIND:
  *
- * The “Find” item and icon.
+ * The "Find" item.
+ * <inlinegraphic fileref="edit-find.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;edit-find&quot;.
  */
@@ -397,7 +411,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_FIND_AND_REPLACE:
  *
- * The “Find and Replace” item and icon.
+ * The "Find and Replace" item.
+ * <inlinegraphic fileref="edit-find-replace.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;edit-find-replace&quot;.
  */
@@ -406,7 +421,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_FLOPPY:
  *
- * The “Floppy” item and icon.
+ * The "Floppy" item.
+ * <inlinegraphic fileref="media-floppy.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10
  */
@@ -415,7 +431,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_FULLSCREEN:
  *
- * The “Fullscreen” item and icon.
+ * The "Fullscreen" item.
+ * <inlinegraphic fileref="view-fullscreen.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.8
  *
@@ -426,7 +443,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_GOTO_BOTTOM:
  *
- * The “Bottom” item and icon.
+ * The "Bottom" item.
+ * <inlinegraphic fileref="go-bottom.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;go-bottom&quot;.
  */
@@ -435,7 +453,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_GOTO_FIRST:
  *
- * The “First” item and icon. The icon has an RTL variant.
+ * The "First" item.
+ * <inlinegraphic fileref="go-first-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="go-first-rtl.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;go-first&quot;.
  */
@@ -444,7 +465,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_GOTO_LAST:
  *
- * The “Last” item and icon. The icon has an RTL variant.
+ * The "Last" item.
+ * <inlinegraphic fileref="go-last-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="go-last-rtl.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;go-last&quot;.
  */
@@ -453,7 +477,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_GOTO_TOP:
  *
- * The “Top” item and icon.
+ * The "Top" item.
+ * <inlinegraphic fileref="go-top.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;go-top&quot;.
  */
@@ -462,7 +487,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_GO_BACK:
  *
- * The “Back” item and icon. The icon has an RTL variant.
+ * The "Back" item.
+ * <inlinegraphic fileref="go-previous-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="go-previous-rtl.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;go-previous&quot;.
 */
@@ -471,7 +499,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_GO_DOWN:
  *
- * The “Down” item and icon.
+ * The "Down" item.
+ * <inlinegraphic fileref="go-down.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;go-down&quot;.
  */
@@ -480,7 +509,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_GO_FORWARD:
  *
- * The “Forward” item and icon. The icon has an RTL variant.
+ * The "Forward" item.
+ * <inlinegraphic fileref="go-next-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="go-next-rtl.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;go-next&quot;.
  */
@@ -489,7 +521,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_GO_UP:
  *
- * The “Up” item and icon.
+ * The "Up" item.
+ * <inlinegraphic fileref="go-up.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;go-up&quot;.
  */
@@ -498,7 +531,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_HARDDISK:
  *
- * The “Harddisk” item and icon.
+ * The "Harddisk" item.
+ * <inlinegraphic fileref="drive-harddisk.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.4
  *
@@ -509,7 +543,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_HELP:
  *
- * The “Help” item and icon.
+ * The "Help" item.
+ * <inlinegraphic fileref="help-contents.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;help-browser&quot;.
  */
@@ -518,7 +553,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_HOME:
  *
- * The “Home” item and icon.
+ * The "Home" item.
+ * <inlinegraphic fileref="go-home.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;go-home&quot;.
  */
@@ -527,7 +563,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_INDEX:
  *
- * The “Index” item and icon.
+ * The "Index" item.
+ * <inlinegraphic fileref="gtk-index.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10
  */
@@ -536,7 +573,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_INDENT:
  *
- * The “Indent” item and icon. The icon has an RTL variant.
+ * The "Indent" item.
+ * <inlinegraphic fileref="format-indent-more-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="format-indent-more-rtl.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.4
  *
@@ -547,7 +587,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_INFO:
  *
- * The “Info” item and icon.
+ * The "Info" item.
+ * <inlinegraphic fileref="dialog-information.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.8
  *
@@ -558,7 +599,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_ITALIC:
  *
- * The “Italic” item and icon.
+ * The "Italic" item.
+ * <inlinegraphic fileref="format-text-italic.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;format-text-italic&quot;.
  */
@@ -567,7 +609,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_JUMP_TO:
  *
- * The “Jump to” item and icon. The icon has an RTL variant.
+ * The "Jump to" item.
+ * <inlinegraphic fileref="go-jump-ltr.png" format="PNG"></inlinegraphic>
+ * RTL-variant
+ * <inlinegraphic fileref="go-jump-rtl.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;go-jump&quot;.
  */
@@ -576,7 +621,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_JUSTIFY_CENTER:
  *
- * The “Center” item and icon.
+ * The "Center" item.
+ * <inlinegraphic fileref="format-justify-center.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;format-justify-center&quot;.
  */
@@ -585,7 +631,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_JUSTIFY_FILL:
  *
- * The “Fill” item and icon.
+ * The "Fill" item.
+ * <inlinegraphic fileref="format-justify-fill.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;format-justify-fill&quot;.
  */
@@ -594,7 +641,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_JUSTIFY_LEFT:
  *
- * The “Left” item and icon.
+ * The "Left" item.
+ * <inlinegraphic fileref="format-justify-left.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;format-justify-left&quot;.
  */
@@ -603,7 +651,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_JUSTIFY_RIGHT:
  *
- * The “Right” item and icon.
+ * The "Right" item.
+ * <inlinegraphic fileref="format-justify-right.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;format-justify-right&quot;.
  */
@@ -612,7 +661,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_LEAVE_FULLSCREEN:
  *
- * The “Leave Fullscreen” item and icon.
+ * The "Leave Fullscreen" item.
+ * <inlinegraphic fileref="view-restore.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.8
  *
@@ -623,7 +673,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_MISSING_IMAGE:
  *
- * The “Missing image” icon.
+ * The "Missing image" icon.
+ * <inlinegraphic fileref="image-missing.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;image-missing&quot;.
  */
@@ -632,7 +683,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_MEDIA_FORWARD:
  *
- * The “Media Forward” item and icon. The icon has an RTL variant.
+ * The "Media Forward" item.
+ * <inlinegraphic fileref="media-seek-forward-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="media-seek-forward-rtl.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.6
  *
@@ -643,7 +697,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_MEDIA_NEXT:
  *
- * The “Media Next” item and icon. The icon has an RTL variant.
+ * The "Media Next" item.
+ * <inlinegraphic fileref="media-skip-forward-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="media-skip-forward-rtl.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.6
  *
@@ -654,7 +711,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_MEDIA_PAUSE:
  *
- * The “Media Pause” item and icon.
+ * The "Media Pause" item.
+ * <inlinegraphic fileref="media-playback-pause.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.6
  *
@@ -665,7 +723,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_MEDIA_PLAY:
  *
- * The “Media Play” item and icon. The icon has an RTL variant.
+ * The "Media Play" item.
+ * <inlinegraphic fileref="media-playback-start-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="media-playback-start-rtl.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.6
  *
@@ -676,7 +737,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_MEDIA_PREVIOUS:
  *
- * The “Media Previous” item and icon. The icon has an RTL variant.
+ * The "Media Previous" item.
+ * <inlinegraphic fileref="media-skip-backward-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="media-skip-backward-rtl.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.6
  *
@@ -687,7 +751,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_MEDIA_RECORD:
  *
- * The “Media Record” item and icon.
+ * The "Media Record" item.
+ * <inlinegraphic fileref="media-record.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.6
  *
@@ -698,7 +763,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_MEDIA_REWIND:
  *
- * The “Media Rewind” item and icon. The icon has an RTL variant.
+ * The "Media Rewind" item.
+ * <inlinegraphic fileref="media-seek-backward-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="media-seek-backward-rtl.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.6
  *
@@ -709,7 +777,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_MEDIA_STOP:
  *
- * The “Media Stop” item and icon.
+ * The "Media Stop" item.
+ * <inlinegraphic fileref="media-playback-stop.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.6
  *
@@ -720,7 +789,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_NETWORK:
  *
- * The “Network” item and icon.
+ * The "Network" item.
+ * <inlinegraphic fileref="network-idle.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.4
  *
@@ -731,7 +801,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_NEW:
  *
- * The “New” item and icon.
+ * The "New" item.
+ * <inlinegraphic fileref="document-new.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;document-new&quot; or the label &quot;_New&quot;.
  */
@@ -740,7 +811,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_NO:
  *
- * The “No” item and icon.
+ * The "No" item.
+ * <inlinegraphic fileref="gtk-no.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10
  */
@@ -749,7 +821,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_OK:
  *
- * The “OK” item and icon.
+ * The "OK" item.
+ * <inlinegraphic fileref="gtk-ok.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Do not use an icon. Use label &quot;_OK&quot;.
  */
@@ -758,7 +831,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_OPEN:
  *
- * The “Open” item and icon.
+ * The "Open" item.
+ * <inlinegraphic fileref="document-open.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;document-open&quot; or the label &quot;_Open&quot;.
  */
@@ -767,7 +841,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_ORIENTATION_PORTRAIT:
  *
- * The “Portrait Orientation” item and icon.
+ * The "Portrait Orientation" item.
+ * <inlinegraphic fileref="gtk-orientation-portrait.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.10
  *
@@ -778,7 +853,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_ORIENTATION_LANDSCAPE:
  *
- * The “Landscape Orientation” item and icon.
+ * The "Landscape Orientation" item.
+ * <inlinegraphic fileref="gtk-orientation-landscape.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.10
  *
@@ -789,7 +865,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_ORIENTATION_REVERSE_LANDSCAPE:
  *
- * The “Reverse Landscape Orientation” item and icon.
+ * The "Reverse Landscape Orientation" item.
+ * <inlinegraphic fileref="gtk-orientation-reverse-landscape.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.10
  *
@@ -800,7 +877,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_ORIENTATION_REVERSE_PORTRAIT:
  *
- * The “Reverse Portrait Orientation” item and icon.
+ * The "Reverse Portrait Orientation" item.
+ * <inlinegraphic fileref="gtk-orientation-reverse-portrait.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.10
  *
@@ -811,7 +889,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_PAGE_SETUP:
  *
- * The “Page Setup” item and icon.
+ * The "Page Setup" item.
+ * <inlinegraphic fileref="gtk-page-setup.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.14
  *
@@ -822,16 +901,18 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_PASTE:
  *
- * The “Paste” item and icon.
+ * The "Paste" item.
+ * <inlinegraphic fileref="edit-paste.png" format="PNG"></inlinegraphic>
  *
- * Deprecated: 3.10: Use named icon &quot;edit-paste&quot; or the label &quot;_Paste&quot;.
+ * Deprecated: 3.10: Do not use an icon. Use label &quot;_Paste&quot;.
  */
 #define GTK_STOCK_PASTE            ((GtkStock)"gtk-paste")
 
 /**
  * GTK_STOCK_PREFERENCES:
  *
- * The “Preferences” item and icon.
+ * The "Preferences" item.
+ * <inlinegraphic fileref="gtk-preferences.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;preferences-system&quot; or the label &quot;_Preferences&quot;.
  */
@@ -840,7 +921,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_PRINT:
  *
- * The “Print” item and icon.
+ * The "Print" item.
+ * <inlinegraphic fileref="document-print.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;document-print&quot; or the label &quot;_Print&quot;.
  */
@@ -849,7 +931,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_PRINT_ERROR:
  *
- * The “Print Error” icon.
+ * The "Print Error" icon.
+ * <inlinegraphic fileref="printer-error.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.14
  *
@@ -860,7 +943,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_PRINT_PAUSED:
  *
- * The “Print Paused” icon.
+ * The "Print Paused" icon.
+ * <inlinegraphic fileref="printer-paused.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.14
  *
@@ -871,7 +955,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_PRINT_PREVIEW:
  *
- * The “Print Preview” item and icon.
+ * The "Print Preview" item.
+ * <inlinegraphic fileref="document-print-preview.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use label &quot;Pre_view&quot;.
  */
@@ -880,7 +965,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_PRINT_REPORT:
  *
- * The “Print Report” icon.
+ * The "Print Report" icon.
+ * <inlinegraphic fileref="printer-info.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.14
  *
@@ -892,7 +978,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_PRINT_WARNING:
  *
- * The “Print Warning” icon.
+ * The "Print Warning" icon.
+ * <inlinegraphic fileref="printer-warning.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.14
  *
@@ -903,7 +990,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_PROPERTIES:
  *
- * The “Properties” item and icon.
+ * The "Properties" item.
+ * <inlinegraphic fileref="document-properties.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;document-properties&quot; or the label &quot;_Properties&quot;.
  */
@@ -912,7 +1000,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_QUIT:
  *
- * The “Quit” item and icon.
+ * The "Quit" item.
+ * <inlinegraphic fileref="application-exit.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;application-exit&quot; or the label &quot;_Quit&quot;.
  */
@@ -921,7 +1010,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_REDO:
  *
- * The “Redo” item and icon. The icon has an RTL variant.
+ * The "Redo" item.
+ * <inlinegraphic fileref="edit-redo-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="edit-redo-rtl.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;edit-redo&quot; or the label &quot;_Redo&quot;.
  */
@@ -930,7 +1022,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_REFRESH:
  *
- * The “Refresh” item and icon.
+ * The "Refresh" item.
+ * <inlinegraphic fileref="view-refresh.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;view-refresh&quot; or the label &quot;_Refresh&quot;.
  */
@@ -939,7 +1032,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_REMOVE:
  *
- * The “Remove” item and icon.
+ * The "Remove" item.
+ * <inlinegraphic fileref="list-remove.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;list-remove&quot; or the label &quot;_Remove&quot;.
  */
@@ -948,7 +1042,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_REVERT_TO_SAVED:
  *
- * The “Revert” item and icon. The icon has an RTL variant.
+ * The "Revert" item.
+ * <inlinegraphic fileref="document-revert-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="document-revert-rtl.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;document-revert&quot; or the label &quot;_Revert&quot;.
  */
@@ -957,7 +1054,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_SAVE:
  *
- * The “Save” item and icon.
+ * The "Save" item.
+ * <inlinegraphic fileref="document-save.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;document-save&quot; or the label &quot;_Save&quot;.
  */
@@ -966,7 +1064,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_SAVE_AS:
  *
- * The “Save As” item and icon.
+ * The "Save As" item.
+ * <inlinegraphic fileref="document-save-as.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;document-save-as&quot; or the label &quot;Save _As&quot;.
  */
@@ -975,7 +1074,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_SELECT_ALL:
  *
- * The “Select All” item and icon.
+ * The "Select All" item.
+ * <inlinegraphic fileref="edit-select-all.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.10
  *
@@ -986,7 +1086,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_SELECT_COLOR:
  *
- * The “Color” item and icon.
+ * The "Color" item.
+ * <inlinegraphic fileref="gtk-select-color.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10
  */
@@ -995,7 +1096,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_SELECT_FONT:
  *
- * The “Font” item and icon.
+ * The "Font" item.
+ * <inlinegraphic fileref="gtk-font.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10
  */
@@ -1004,7 +1106,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_SORT_ASCENDING:
  *
- * The “Ascending” item and icon.
+ * The "Ascending" item.
+ * <inlinegraphic fileref="view-sort-ascending.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;view-sort-ascending&quot;.
  */
@@ -1013,7 +1116,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_SORT_DESCENDING:
  *
- * The “Descending” item and icon.
+ * The "Descending" item.
+ * <inlinegraphic fileref="view-sort-descending.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;view-sort-descending&quot;.
  */
@@ -1022,7 +1126,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_SPELL_CHECK:
  *
- * The “Spell Check” item and icon.
+ * The "Spell Check" item.
+ * <inlinegraphic fileref="tools-check-spelling.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;tools-check-spelling&quot;.
  */
@@ -1031,7 +1136,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_STOP:
  *
- * The “Stop” item and icon.
+ * The "Stop" item.
+ * <inlinegraphic fileref="process-stop.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;process-stop&quot; or the label &quot;_Stop&quot;.
  */
@@ -1040,7 +1146,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_STRIKETHROUGH:
  *
- * The “Strikethrough” item and icon.
+ * The "Strikethrough" item.
+ * <inlinegraphic fileref="format-text-strikethrough.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;format-text-strikethrough&quot; or the label &quot;_Strikethrough&quot;.
  */
@@ -1049,7 +1156,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_UNDELETE:
  *
- * The “Undelete” item and icon. The icon has an RTL variant.
+ * The "Undelete" item.
+ * <inlinegraphic fileref="gtk-undelete-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="gtk-undelete-rtl.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10
  */
@@ -1058,7 +1168,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_UNDERLINE:
  *
- * The “Underline” item and icon.
+ * The "Underline" item.
+ * <inlinegraphic fileref="format-text-underline.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;format-text-underline&quot; or the label &quot;_Underline&quot;.
  */
@@ -1067,7 +1178,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_UNDO:
  *
- * The “Undo” item and icon. The icon has an RTL variant.
+ * The "Undo" item.
+ * <inlinegraphic fileref="edit-undo-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="edit-undo-rtl.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;edit-undo&quot; or the label &quot;_Undo&quot;.
  */
@@ -1076,7 +1190,10 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_UNINDENT:
  *
- * The “Unindent” item and icon. The icon has an RTL variant.
+ * The "Unindent" item.
+ * <inlinegraphic fileref="format-indent-less-ltr.png" format="PNG"></inlinegraphic>
+ * RTL variant
+ * <inlinegraphic fileref="format-indent-less-rtl.png" format="PNG"></inlinegraphic>
  *
  * Since: 2.4
  *
@@ -1087,7 +1204,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_YES:
  *
- * The “Yes” item and icon.
+ * The "Yes" item.
+ * <inlinegraphic fileref="gtk-yes.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10
  */
@@ -1096,7 +1214,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_ZOOM_100:
  *
- * The “Zoom 100%” item and icon.
+ * The "Zoom 100%" item.
+ * <inlinegraphic fileref="zoom-original.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;zoom-original&quot; or the label &quot;_Normal Size&quot;.
  */
@@ -1105,7 +1224,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_ZOOM_FIT:
  *
- * The “Zoom to Fit” item and icon.
+ * The "Zoom to Fit" item.
+ * <inlinegraphic fileref="zoom-fit-best.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;zoom-fit-best&quot; or the label &quot;Best _Fit&quot;.
  */
@@ -1114,7 +1234,8 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_ZOOM_IN:
  *
- * The “Zoom In” item and icon.
+ * The "Zoom In" item.
+ * <inlinegraphic fileref="zoom-in.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;zoom-in&quot; or the label &quot;Zoom _In&quot;.
  */
@@ -1123,13 +1244,12 @@ typedef char * GtkStock;
 /**
  * GTK_STOCK_ZOOM_OUT:
  *
- * The “Zoom Out” item and icon.
+ * The "Zoom Out" item.
+ * <inlinegraphic fileref="zoom-out.png" format="PNG"></inlinegraphic>
  *
  * Deprecated: 3.10: Use named icon &quot;zoom-out&quot; or the label &quot;Zoom _Out&quot;.
  */
 #define GTK_STOCK_ZOOM_OUT         ((GtkStock)"gtk-zoom-out")
-
-#endif
 
 G_END_DECLS
 

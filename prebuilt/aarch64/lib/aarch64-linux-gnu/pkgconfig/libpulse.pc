@@ -2,11 +2,11 @@ prefix=/usr
 exec_prefix=${prefix}
 libdir=${prefix}/lib/aarch64-linux-gnu
 includedir=${prefix}/include
-modlibexecdir=${prefix}/lib/pulse-11.1/modules
+modlibexecdir=${prefix}/lib/pulse-4.0/modules
 
 Name: libpulse
 Description: PulseAudio Client Interface
-Version: 11.1
+Version: 4.0
 Libs: -L${libdir} -lpulse 
-Libs.private: -L${libdir}/pulseaudio -lpulsecommon-11.1
+Libs.private: -L${libdir}/pulseaudio -lpulsecommon-4.0
 Cflags: -I${includedir} -D_REENTRANT
