@@ -55,11 +55,25 @@ download_pkg() {
 
 download_pkg libx11-6
 download_pkg libx11-dev
+download_pkg libxcursor1
+download_pkg libxcursor-dev
+download_pkg libxext6
+download_pkg libxext-dev
+download_pkg libxfixes3
+download_pkg libxfixes-dev
+download_pkg libxrandr2
+download_pkg libxrandr-dev
+download_pkg libxrender1
+download_pkg libxrender-dev
 download_pkg libjack-jackd2-0
 download_pkg libjack-jackd2-dev
 download_pkg libpulse0
 download_pkg libpulse-mainloop-glib0
 download_pkg libpulse-dev
+download_pkg libstdc++6
+download_pkg libstdc++6-4.7-dev
+download_pkg libgcc1
+download_pkg libgcc-4.7-dev
 # pipewire is not available in trusty
 #download_pkg libpipewire-0.3-0t64
 #download_pkg libpipewire-0.3-dev
@@ -76,6 +90,9 @@ for i in *.deb; do
     if [ -f data.tar.xz ]; then
         tar xf data.tar.xz
         rm data.tar.xz
+    elif [ -f data.tar.gz ]; then
+        tar zxf data.tar.gz
+        rm data.tar.gz
     elif [ -f data.tar.zst ]; then
         tar --use-compress-program=unzstd -xf data.tar.zst
         rm data.tar.zst

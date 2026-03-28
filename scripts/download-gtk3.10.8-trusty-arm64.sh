@@ -96,6 +96,9 @@ for i in *.deb; do
     if [ -f data.tar.xz ]; then
         tar xf data.tar.xz
         rm data.tar.xz
+    elif [ -f data.tar.gz ]; then
+        tar zxf data.tar.gz
+        rm data.tar.gz
     elif [ -f data.tar.zst ]; then
         tar --use-compress-program=unzstd -xf data.tar.zst
         rm data.tar.zst
