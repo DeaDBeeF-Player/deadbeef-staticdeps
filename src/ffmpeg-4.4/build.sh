@@ -3,6 +3,7 @@
 if [[ "$ARCH" == "aarch64" ]]; then
     OPT="--disable-asm"
 else
+    echo "Invalid arch: $ARCH"
     OPT=""
 fi
 ./configure --extra-cflags="-fPIC $CFLAGS" \

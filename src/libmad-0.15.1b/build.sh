@@ -1,3 +1,4 @@
+#!/bin/bash
 make distclean
 
 if [[ "$ARCH" == "i686" ]]; then
@@ -5,7 +6,7 @@ if [[ "$ARCH" == "i686" ]]; then
 elif [[ "$ARCH" == "x86_64" ]]; then
     FPM=intel
 elif [[ "$ARCH" == "aarch64" ]]; then
-    FPM=arm
+    FPM=default # there's no dedicated arm64 fpm in libmad
 else
     FPM=default
 fi

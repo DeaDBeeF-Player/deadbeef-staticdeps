@@ -96,7 +96,7 @@ for i in $libs ; do
     echo CFLAGS=$CFLAGS
     echo CXXFLAGS=$CFLAGS
     echo LDFLAGS=$LDFLAGS
-    sh ./build.sh || {
+    bash ./build.sh || {
         echo "Build failed"
         cp ./config.log $PREFIX/
         exit 1
