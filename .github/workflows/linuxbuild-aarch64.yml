@@ -1,10 +1,10 @@
-name: Build for Linux Aarch64
+name: Build for Linux AArch64
 
 on: [ push, pull_request, workflow_dispatch ]
 
 jobs:
   build:
-    name: CI for Linux
+    name: CI for Linux AArch64
     runs-on: ubuntu-24.04-arm
     container: ubuntu:20.04
     steps:
