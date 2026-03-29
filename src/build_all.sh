@@ -57,6 +57,7 @@ elif [[ "$ARCH" == "aarch64" ]]; then
     export PKG_CONFIG_PATH=$ORIGIN/$LIBPATH/lib/pkg-config
     export LD_LIBRARY_PATH=$ORIGIN/$LIBPATH/lib
     export CONFIG_OPTS="--prefix=$PREFIX --build=$CHOST"
+    rm $AP/ctype.h
 else
     echo unknown arch $ARCH
     exit 1
