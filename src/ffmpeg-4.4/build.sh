@@ -6,7 +6,7 @@ else
     echo "Invalid arch: $ARCH"
     OPT=""
 fi
-./configure --extra-cflags="-fPIC $CFLAGS" \
+./configure --extra-cflags="$CFLAGS" \
     --enable-pic --enable-static --enable-gpl --disable-doc --disable-ffplay \
     --disable-ffprobe --disable-avdevice --disable-ffmpeg \
     --disable-postproc --disable-swresample --disable-avfilter \
