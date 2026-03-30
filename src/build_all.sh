@@ -12,6 +12,8 @@ cd $AP
 # Run the lines below to generate the new apsymbols.h
 #./buildlist.aarch64 || exit 1
 #cp ./apsymbols.h.aarch64 $OUTPUT/lib-aarch64/
+#./buildlist.x86_64 || exit 1
+#cp ./apsymbols.h.x86_64 $OUTPUT/lib-x86-64/
 #exit 0
 ./apinit || exit 1
 cd $ORIGIN
